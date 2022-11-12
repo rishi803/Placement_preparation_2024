@@ -22,7 +22,7 @@ public:
               int u=pq.top().second;
               pq.pop();
              
-             for(auto vec:adj[u])       // vec is vector containing v and w
+             for(auto &vec:adj[u])       // vec is vector containing v and w
                 {
                     int v=vec[0];
                     int w=vec[1];
