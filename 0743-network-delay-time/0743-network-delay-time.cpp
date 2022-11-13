@@ -1,10 +1,12 @@
+//Dijkstra’s Algorithm may or may not work when there is negative weight edge. But will definitely not work when there is a negative weight cycle.
+
 class Solution {
 public:
   int networkDelayTime(vector<vector<int>>& times, int n, int k) {
          vector<int>dis(n+1,INT_MAX);
-         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;  // pq(dist[u],weight(uv));
         
-        vector<vector<int>>adj[n+1];
+        vector<vector<int>>adj[n+1];     // 3d vector 
         
         for(int j=0;j<times.size();j++)   // Graph creation
             {
@@ -14,7 +16,7 @@ public:
                 adj[u].push_back({v,w});
           }
          
-         dis[k]=0;                          // Time from K to K is 0
+         dis[k]=0;                          // Time from K to K is 0  (mark source node dist as 0)
          pq.push({0,k});
         
          while(!pq.empty())
@@ -30,7 +32,7 @@ public:
                    if(dis[u]+w<dis[v])
                       {
                         pq.push({dis[u]+w,v});
-                        dis[v]=w+dis[u];
+                        dis[v]=w+dis[u]; 
                       }
                 }
           }
