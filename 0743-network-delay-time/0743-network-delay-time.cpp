@@ -1,48 +1,41 @@
-//Dijkstra’s Algorithm may or may not work when there is negative weight edge. But will definitely not work when there is a negative weight cycle.
+//  DIJIKSTRA---> (only for +ve weight, may work for -ve weigth also but definitely fails for -ve weight cycle)  single source shortest path
 
 class Solution {
 public:
-  int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-         vector<int>dis(n+1,INT_MAX);
-         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;  // pq(dist[u],weight(uv));
+    int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+        vector<int>dist(n+1,INT_MAX);         
+        vector<vector<int>>adj[n+1];          // 3d vector  adj
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;  // min heap (dist_of_node,node)
+        for(int i=0;i<times.size();i++){
+            int node=times[i][0];
+            int adjnode=times[i][1];
+            int weight=times[i][2];
+            adj[node].push_back({adjnode,weight});                // adj[node] = ({adjacent_node, weight})
+        }
+        dist[k]=0;
+        pq.push({0,k});
         
-        vector<vector<int>>adj[n+1];     // 3d vector 
-        
-        for(int j=0;j<times.size();j++)   // Graph creation
-            {
-                int u=times[j][0];
-                int v=times[j][1];
-                int w=times[j][2];
-                adj[u].push_back({v,w});
-          }
-         
-         dis[k]=0;                          // Time from K to K is 0  (mark source node dist as 0)
-         pq.push({0,k});
-        
-         while(!pq.empty())
-         {
-              int u=pq.top().second;
-              pq.pop();
-             
-             for(auto &vec:adj[u])       // vec is vector containing v and w
-                {
-                    int v=vec[0];
-                    int w=vec[1];
-                 
-                   if(dis[u]+w<dis[v])
-                      {
-                        pq.push({dis[u]+w,v});
-                        dis[v]=w+dis[u]; 
-                      }
+        while(!pq.empty()){
+            
+            int node=pq.top().second;
+            pq.pop();
+            
+            for(auto &adjnode_vector:adj[node]){             
+                int adjnode_of_node=adjnode_vector[0];
+                int adjnode_weight=adjnode_vector[1];
+                
+                if(dist[node]+adjnode_weight<dist[adjnode_of_node]){
+                    dist[adjnode_of_node]=dist[node]+adjnode_weight;
+                    pq.push({dist[adjnode_of_node],adjnode_of_node});
                 }
-          }
-	   
+            }
+        }
         int ans=0;
-        for(int i=1;i<=n;i++)
-            {
-              if(dis[i]==INT_MAX) return -1;
-              ans=max(ans,dis[i]);
-          }
-        return ans;
-     }
+            for(int i=1;i<=n;i++){
+                if(dist[i]==INT_MAX) return -1;
+                ans=max(ans,dist[i]);
+            }
+            return ans;
+        
+    }
 };
