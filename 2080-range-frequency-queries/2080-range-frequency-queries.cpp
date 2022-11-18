@@ -1,13 +1,17 @@
 class RangeFreqQuery {
-
-   unordered_map<int, vector<int>> mp;
 public:
+    unordered_map<int,vector<int>>mp;
     RangeFreqQuery(vector<int>& arr) {
-        for(int i = 0; i < size(arr); i++) mp[arr[i]].push_back(i);
+        for(int i=0;i<arr.size();i++){
+            mp[arr[i]].push_back(i);
+        }
     }
     
-    int query(int L, int R, int V) {
-        return upper_bound(begin(mp[V]), end(mp[V]), R) - lower_bound(begin(mp[V]), end(mp[V]), L); 
+    
+    int query(int left, int right, int value) {
+        int lidx=lower_bound(mp[value].begin(),mp[value].end(),left)-mp[value].begin();
+        int ridx=upper_bound(mp[value].begin(),mp[value].end(),right)-mp[value].begin();
+        return ridx-lidx;
     }
 };
 
