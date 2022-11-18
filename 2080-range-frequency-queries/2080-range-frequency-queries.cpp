@@ -9,9 +9,8 @@ public:
     
     
     int query(int left, int right, int value) {
-        int lidx=lower_bound(mp[value].begin(),mp[value].end(),left)-mp[value].begin();
-        int ridx=upper_bound(mp[value].begin(),mp[value].end(),right)-mp[value].begin();
-        return ridx-lidx;
+        return upper_bound(mp[value].begin(),mp[value].end(),right)- lower_bound(mp[value].begin(),mp[value].end(),left);
+        
     }
 };
 
