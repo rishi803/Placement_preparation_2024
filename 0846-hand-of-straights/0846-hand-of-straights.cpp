@@ -1,38 +1,24 @@
 class Solution {
 public:
-    bool isNStraightHand(vector<int>& nums, int k) {
-         int looping=(nums.size()/k);
-        if(looping*k!=nums.size()) return false;
-    
-        map<int,int>mp;
-       
-        for(int i=0;i<nums.size();i++){
-            mp[nums[i]]++;
-        }
-       int cnt=0,ans=0;
-        while(looping--){
-            int prev=-1;
-            for(auto &it:mp){
+    bool isNStraightHand(vector<int>& hand, int group_size) {
+         if(hand.size() % group_size != 0) return false;
+        map<int, int> mp;
+        for(auto i: hand) mp[i]++;  //nlogn operation
+        
+        while(mp.size()){
+            int first = mp.begin() -> first;  //first key of map
+
+            //target is the right limit of current group
+            int target = first + group_size - 1;
+            
+            for(int i = first; i <= target; i++){
+                //consecutive ele is not found so return false
+                if(mp.count(i) == 0) return false;  //log n operation
                 
-                if(it.second>0 and prev==-1){
-                    ans++;
-                   cnt++;
-                    prev=it.first;
-                    mp[it.first]--;
-                }
-               else  if(it.second>0 and prev!=-1 and prev+1==it.first){
-                    ans++;
-                   cnt++;
-                   prev=it.first;
-                    mp[it.first]--;
-                }
-                if(cnt==k){
-                    cnt=0;
-                    break;
-                }
-            }
+                else if(--mp[i] == 0) mp.erase(i);  //log n operation
+            }        
         }
-      
-        return ans==nums.size();
+        
+        return true;
     }
 };
