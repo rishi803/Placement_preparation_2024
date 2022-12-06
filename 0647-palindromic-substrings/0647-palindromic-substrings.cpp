@@ -1,20 +1,33 @@
 class Solution {
 public:
     int countSubstrings(string s) {
-        int res = 0, n = s.length();
-        for(int i = 0; i < n; i++){
-            for(int j = 0; i-j >= 0 && i+j < n && s[i-j] == s[i+j]; j++){
-               
-                 res++; //substring s[i-j, ..., i+j]
-            }
+       int count = 0;
     
-               
-            for(int j = 0; i-1-j >= 0 && i+j < n && s[i-1-j] == s[i+j]; j++){
-                
-                res++; //substring s[i-1-j, ..., i+j]
+    // Iterate over each character in the string
+    for (int i = 0; i < s.length(); i++) {
+        // Iterate over each possible length of the substring
+        for (int j = 1; i + j <= s.length(); j++) {
+            // Check if the characters at the beginning and end of the substring
+            // are the same
+            if (s[i] == s[i+j-1]) {
+                // Check if the substring starting at i and with length j
+                // is a palindrome
+                bool isPalindrome = true;
+                for (int k = 0; k < j / 2; k++) {
+                    if (s[i+k] != s[i+j-k-1]) {
+                        isPalindrome = false;
+                        break;
+                    }
+                }
+                // If it is, increment the counter
+                if (isPalindrome) {
+                    count++;
+                }
             }
-            
         }
-        return res;
+    }
+
+    // Return the total number of palindromes
+    return count;
     }
 };
