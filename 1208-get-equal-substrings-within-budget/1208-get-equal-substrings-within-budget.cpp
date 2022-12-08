@@ -6,10 +6,11 @@ public:
             cost=cost+abs(s[head]-t[head]);
             while(cost>maxCost){
                 cost=cost-abs(s[tail]-t[tail]);
+                len=max(len,head-tail);
                 tail++;
             }
-            len=max(len,head-tail+1);
+            len=max(len,head-tail);
         }
-        return len;
+        return max(len,head-tail);
     }
 };
