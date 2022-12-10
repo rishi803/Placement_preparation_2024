@@ -4,7 +4,7 @@ public:
     long total=0,ans=0,every_sub_tree_sum;
     int maxProduct(TreeNode* root) {
         total=total_sum_remain_tree(root);
-        total=total_sum_remain_tree(root);
+        total_sum_remain_tree(root);
         return ans% (int)(1e9+7);
     }
     
