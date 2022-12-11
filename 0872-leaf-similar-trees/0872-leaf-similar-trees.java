@@ -16,15 +16,10 @@ class Solution {
     
     public int dfs(Stack<TreeNode>st){
         while(true){
-            TreeNode curr = st.pop();
-            
-            TreeNode left = curr.left;
-            TreeNode right = curr.right;
-            
-            if(left==null && right==null) return curr.val;
-            
-            if(right!=null) st.push(right);
-            if(left!=null) st.push(left);
+            TreeNode node=st.pop();
+            if(node.right!=null) st.push(node.right);
+            if(node.left!=null) st.push(node.left);
+            if(node.left==null && node.right==null) return node.val;
         }
     }
 }
