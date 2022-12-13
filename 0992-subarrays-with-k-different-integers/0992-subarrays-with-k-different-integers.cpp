@@ -8,7 +8,7 @@ public:
         unordered_map<int, int> count;
         for (int j = 0; j < A.size(); ++j) {
             if (!count[A[j]]++) {
-                cout<<j<<" ";
+                // cout<<j<<" ";
                 K--;}
             while (K < 0) {
                 if (!--count[A[i]]) K++;
@@ -16,7 +16,7 @@ public:
             }
             
             res += j - i + 1;
-            
+            // cout<<res<<endl;
         }
         return res;
     }
