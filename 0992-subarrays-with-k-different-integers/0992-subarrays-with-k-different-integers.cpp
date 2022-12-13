@@ -7,11 +7,13 @@ public:
         int i = 0, res = 0;
         unordered_map<int, int> count;
         for (int j = 0; j < A.size(); ++j) {
-            if (!count[A[j]]++) {
+            if (!count[A[j]]) {
                 // cout<<j<<" ";
                 K--;}
+            count[A[j]]++;
             while (K < 0) {
-                if (!--count[A[i]]) K++;
+                count[A[i]]--;
+                if (!count[A[i]]) K++;
                 i++;
             }
             
