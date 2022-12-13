@@ -16,7 +16,7 @@ public:
             }
             
             res += j - i + 1;
-            cout<<res<<endl;
+            
         }
         return res;
     }
