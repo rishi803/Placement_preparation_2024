@@ -19,7 +19,7 @@ int f(int ind, int buy,vector<int>& prices,int cap,vector<vector<vector<int>>> &
     
 public:
     int maxProfit(int k,vector<int>& prices) {
-        if(k>=prices.size()) k=prices.size()-1;
+        
         vector<vector<vector<int>>> dp(prices.size(),vector<vector<int>>(2,vector<int>(k+1,-1)));
         // capacity is atmost 2 i.e 0,1,2       buy is 0,1
         return f(0,1,prices,k,dp);                                                                                               
