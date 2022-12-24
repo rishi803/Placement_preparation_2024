@@ -10,7 +10,7 @@ public:
         
         while(curr and curr->next){
             prev->next=curr->next;
-            curr->next=prev->next->next;
+            curr->next=curr->next->next;
             prev->next->next=curr;
             
             prev=curr;
