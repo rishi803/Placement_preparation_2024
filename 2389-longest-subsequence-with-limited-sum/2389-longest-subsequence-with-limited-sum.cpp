@@ -7,16 +7,8 @@ public:
         }
         vector<int>ans;
         for(int i=0;i<queries.size();i++){
-               if(queries[i]>=nums[nums.size()-1]) {ans.push_back(nums.size());
-                                                     continue;}
-            for(int j=0;j<nums.size();j++){
-                if(nums[j]>queries[i]){
-                    ans.push_back(j);
-                    break;
-                }
-              
-            }
-             
+           int index=upper_bound(nums.begin(),nums.end(),queries[i])-nums.begin();
+             ans.push_back(index);
         }
        
         return ans;
