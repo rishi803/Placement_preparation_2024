@@ -9,18 +9,31 @@ public:
         queue<int> q; q.push(0);
         int step = 0;
         while (!q.empty()) {
-            for (int size = q.size(); size > 0; --size) {
+            int sz=q.size();
+            while(sz--) {
                 int i = q.front(); q.pop();
                 if (i == n - 1) return step; // Reached to last index
-                vector<int>& next = indicesOfValue[arr[i]];
-                next.push_back(i - 1); next.push_back(i + 1);
-                for (int j : next) {
-                    if (j >= 0 && j < n && !visited[j]) {
-                        visited[j] = true;
-                        q.push(j);
-                    }
-                }
+                // indicesOfValue[arr[i]].push_back(i-1);                   // it is giving error 
+                // indicesOfValue[arr[i]].push_back(i+1);
+                // for(auto &it:indicesOfValue){
+                //     for(auto &itr:it.second){
+                //         if(itr>=0 and itr<n and visited[itr]==0){
+                //             visited[itr]=1;
+                //             q.push(itr);
+                //         }
+                //     }
+                // }
+                 vector<int>&ind=indicesOfValue[arr[i]];
+                ind.push_back(i-1);
+                ind.push_back(i+1);
+               
+                    for(auto &itr:ind){
+                        if(itr>=0 and itr<n and visited[itr]==0){
+                            visited[itr]=1;
+                            q.push(itr);
+                        }
                 indicesOfValue[arr[i]].clear(); // avoid later lookup indicesOfValue arr[i]
+            }
             }
             step++;
         }
