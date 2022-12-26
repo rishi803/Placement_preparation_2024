@@ -8,8 +8,8 @@ public:
         
         long long ans=INT_MAX;
         for(int i=idx+1;i<=idx+nums[idx];i++){
-             ans=min(ans,1+help(i,nums));
-        }
+             ans=min(ans,1+help(i,nums));              // we need minimum ans from root to leaf
+        }                                             // it give minimum ans at each root from all its below child
         
         return dp[idx]=ans;
     }
