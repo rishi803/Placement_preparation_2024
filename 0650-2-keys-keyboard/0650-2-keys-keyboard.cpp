@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    long long copy=1;
+   
     long long help(int n,long long value,long long copy){
         if(value>n) return INT_MAX;
         if(value==n) return 0;
