@@ -10,21 +10,21 @@ using namespace std;
 class Solution{   
 public:
   
-    
-    bool help(vector<int>&arr,int target,int st,vector<vector<int>> &dp){
+    vector<vector<int>> dp;
+    bool help(vector<int>&arr,int target,int st){
         
         if(target==0) {
           return 1;
         }
         if(st>=arr.size() or target<0) return 0;
         if(dp[target][st]!=-1) return dp[target][st];
-      return dp[target][st]=help(arr,target-arr[st],st+1,dp) or help(arr,target,st+1,dp);
+      return dp[target][st]=help(arr,target-arr[st],st+1) or help(arr,target,st+1);
     }
     bool isSubsetSum(vector<int>arr, int sum){
         int n=arr.size();
     //   vector<vector<int>> dp(n+1, vector<int>(sum+1, -1));
-      vector<vector<int>> dp(sum+1, vector<int>(n+1, -1));
-       return help(arr,sum,0,dp);
+        dp.resize(100001, vector<int>(100+1, -1));
+       return help(arr,sum,0);
         
         
     }
