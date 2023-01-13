@@ -12,23 +12,20 @@
 class Solution {
 public:
     
-    unordered_map<TreeNode*,vector<int>>dp;      
-    
-    int help(TreeNode* root,bool canrob){
-        if(!root) return 0;
-        if(dp.count(root) && dp[root][canrob] != -1) return dp[root][canrob];
-        dp[root] = {-1,-1};
-        int takeroot=0;
-            if(canrob)
-            takeroot=root -> val + help(root -> left, false) + help(root -> right, false);
+    pair<int,int> help(TreeNode* root){
         
-        int notroot= 0;
-          notroot=help(root->left,true)+help(root->right,true);
+        if(!root) return {0,0};                        // pair(include,exclude)
+        pair<int,int>leftans=help(root->left);
+        pair<int,int>rightans=help(root->right);
         
-        return dp[root][canrob]=max(takeroot,notroot);
+        int include_root=root->val+leftans.second+rightans.second;
+        int exclude_root=max(leftans.first,leftans.second)+max(rightans.first,rightans.second);
+        
+        return {include_root,exclude_root};
     }
+    
     int rob(TreeNode* root) {
-        return help(root,1);
-      
+        pair<int,int>ans=help(root);
+        return max(ans.first,ans.second);
     }
 };
