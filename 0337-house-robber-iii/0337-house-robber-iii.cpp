@@ -9,6 +9,8 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+// TEST CASE: [2,1,3,null,4],       [4,1,null,2,null,3]
 class Solution {
 public:
     
