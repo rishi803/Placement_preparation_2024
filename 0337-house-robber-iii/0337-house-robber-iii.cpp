@@ -18,11 +18,11 @@ public:
         if(!root) return 0;
         if(dp.count(root) && dp[root][canrob] != -1) return dp[root][canrob];
         dp[root] = {-1,-1};
-        int takeroot=-1;
+        int takeroot=0;
             if(canrob)
             takeroot=root -> val + help(root -> left, false) + help(root -> right, false);
         
-        int notroot= -1;
+        int notroot= 0;
           notroot=help(root->left,true)+help(root->right,true);
         
         return dp[root][canrob]=max(takeroot,notroot);
