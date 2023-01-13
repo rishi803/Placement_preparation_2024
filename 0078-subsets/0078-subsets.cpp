@@ -1,19 +1,23 @@
 class Solution {
 public:
-     vector<vector<int>>ans;
+    vector<vector<int>>ans;
     
-    //TEMPLATE
+   
     
     void help(vector<int>&nums,vector<int>&temp,int idx){
-        // CONDITION
-        ans.push_back(temp);
-        
-        // FOR LOOP
-        for(int i=idx;i<nums.size();i++){
-            temp.push_back(nums[i]);  // operation
-            help(nums,temp,i+1); // recursion
-            temp.pop_back();          // backtrack;
+     
+        if(idx==nums.size()) {
+              ans.push_back(temp);
+            return;
         }
+        
+        
+        
+        temp.push_back(nums[idx]);   // pick
+        help(nums,temp,idx+1);
+        temp.pop_back();         // backtrack
+        help(nums,temp,idx+1);     // not pick
+        
         
     }
     vector<vector<int>> subsets(vector<int>& nums) {
