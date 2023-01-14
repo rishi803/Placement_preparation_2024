@@ -11,7 +11,6 @@ public:
          if(isalpha(s[idx])){           // take
              s[idx]^=32;
              help(s,idx+1);
-             s[idx]^=32;
          }
          
          
