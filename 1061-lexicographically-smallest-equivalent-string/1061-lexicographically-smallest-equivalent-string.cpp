@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int>parent;
     int find(int x){
-        if(parent[x]!=x) return find(parent[x]);
+        if(parent[x]!=x) return parent[x]=find(parent[x]);
         else return x;
     }
     
