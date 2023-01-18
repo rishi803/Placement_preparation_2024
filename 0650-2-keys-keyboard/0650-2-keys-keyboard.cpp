@@ -14,7 +14,7 @@ public:
     
     int minSteps(int n) {
         if(n==1) return 0;
-        if(n==2) return 2;
+       
         return  1+help(n,1,1);
     }
 };
