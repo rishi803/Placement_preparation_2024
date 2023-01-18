@@ -17,7 +17,7 @@ public:
             }
             if(sum==fix) return fix;
             n=sum;
-            if(cnt<2) return n;
+            // if(cnt<2) return n;
         }
         return -1;
     }
