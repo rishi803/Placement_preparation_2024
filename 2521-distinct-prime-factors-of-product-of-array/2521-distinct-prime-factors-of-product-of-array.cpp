@@ -2,28 +2,19 @@ class Solution {
 public:
     int distinctPrimeFactors(vector<int>& nums) {
         
-        unordered_set<int>st;
-        int n=nums.size();
-        
-    for(int i=0;i<nums.size();i++){
-        
-        int prime=2;
-        
-        while(nums[i]>1){
+        set<int>st;
+        for(int i:nums){
             
-            if(nums[i]%prime==0){
-                st.insert(prime);
-                nums[i]/=prime;
-            }
-            else{
+            int prime=2;
+            while(i>1){
+                if(i%prime==0) {st.insert(prime);
+                i/=prime;}
+                else
                 prime++;
+                
             }
+            
         }
-       
-        
-    }
-        
-         return st.size();
-        
+        return st.size();
     }
 };
