@@ -1,51 +1,27 @@
 class Solution {
 public:
+   //  move UP and LEFT before DOWN and RIGHT to avoid "trapped" in 'z'. Add 'a' to string for initialization.
+
     string alphabetBoardPath(string target) {
-        
-        vector<string>alpha={"      "," abcde", " fghij", " klmno", " pqrst", " uvwxy", " z"};
-        string ans;
-        
-        int curr_row=1,curr_col=1;
-        
-        for(auto &character:target){
-            
-            int search_row= (ceil)((character-'a'+1)/5.0);
-            int search_col=((character-'a')%5)+1;
-            
-           
-            int y=(curr_col-search_col);
-            
-            if( search_row==6 and y!=0){
-                
-                ans+=string(abs(curr_row-5),'D');
-                curr_row=5;
-                ans+=string(curr_col-1,'L');
-                curr_col=1;
-                y=(curr_col-search_col);
-            }
-             int x=(curr_row-search_row);
-            
-        
-            if(x<0){
-                x*=-1;
-                ans+=string(x,'D');
-            }
-            else{
-                ans+=string(x,'U');
-            }
-            
-            if(y<0){
-                y*=-1;
-                ans+=string(y,'R');
-            }
-            else{
-                ans+=string(y,'L');
-            }
-            ans+='!';
-            
-            curr_row=search_row;
-            curr_col=search_col;
+        unordered_map<char, pair<int,int>> mp;
+        for(int i = 0; i < 26; ++i) {
+            mp[i+'a'] = {i/5, i%5};
         }
-        return ans;
+        target = 'a' + target;
+        string path;
+        int dx = 0, dy = 0;
+        for(int i = 1; i < target.size(); ++i) {
+            auto cur = mp[target[i]];
+            auto prev = mp[target[i-1]];
+            dx = cur.first - prev.first;
+            dy = cur.second - prev.second;
+            if(dx < 0) path += string(-dx, 'U');
+            if(dy < 0) path += string(-dy, 'L');
+          
+            if(dy > 0) path += string(dy, 'R');
+            if(dx > 0) path += string(dx, 'D');
+            path += '!';
+        }
+        return path;
     }
 };
