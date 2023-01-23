@@ -3,25 +3,29 @@ public:
    //  move UP and LEFT before DOWN and RIGHT to avoid "trapped" in 'z'. Add 'a' to string for initialization.
 
     string alphabetBoardPath(string target) {
-        unordered_map<char, pair<int,int>> mp;
-        for(int i = 0; i < 26; ++i) {
-            mp[i+'a'] = {i/5, i%5};
+       string res;
+        //for letter ?, the row index is (?-'a') / 5, the row index is (?- 'a') % 5.
+        int row1 = 0, col1 = 0;
+        for(int i = 0; i < target.size(); i++){
+            int row2 = (target[i] - 'a') / 5;
+            int col2 = (target[i] - 'a') % 5;
+            
+            if(col2 < col1){  
+                 res.append(string(col1 - col2, 'L'));
+            }
+            if(row2 > row1){                
+                 res.append(string(row2 - row1, 'D'));
+            }
+            if(row2 < row1){  
+                 res.append(string (row1 - row2, 'U'));
+            }
+            if(col2 > col1){   
+                 res.append(string (col2 - col1, 'R'));
+            }                        
+            res.push_back('!');
+            row1 = row2;
+            col1 = col2;
         }
-        target = 'a' + target;
-        string path;
-        int dx = 0, dy = 0;
-        for(int i = 1; i < target.size(); ++i) {
-            auto cur = mp[target[i]];
-            auto prev = mp[target[i-1]];
-            dx = cur.first - prev.first;
-            dy = cur.second - prev.second;
-            if(dx < 0) path += string(-dx, 'U');
-            if(dy < 0) path += string(-dy, 'L');
-          
-            if(dy > 0) path += string(dy, 'R');
-            if(dx > 0) path += string(dx, 'D');
-            path += '!';
-        }
-        return path;
+        return res;
     }
 };
