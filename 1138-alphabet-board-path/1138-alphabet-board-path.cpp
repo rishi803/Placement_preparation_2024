@@ -1,6 +1,6 @@
 class Solution {
 public:
-   //  move UP and LEFT before DOWN and RIGHT to avoid "trapped" in 'z'. Add 'a' to string for initialization.
+   //  move UP and LEFT before DOWN and RIGHT to avoid "trapped" in 'z'. Add 'a' to string for initialization.   (run for zdz)
 
     string alphabetBoardPath(string target) {
        string res;
@@ -11,16 +11,16 @@ public:
             int col2 = (target[i] - 'a') % 5;
             
             if(col2 < col1){  
-                 res.append(string(col1 - col2, 'L'));
+                 res+=(string(col1 - col2, 'L'));
             }
             if(row2 > row1){                
-                 res.append(string(row2 - row1, 'D'));
+                 res+=(string(row2 - row1, 'D'));
             }
             if(row2 < row1){  
-                 res.append(string (row1 - row2, 'U'));
+                 res+=(string (row1 - row2, 'U'));
             }
             if(col2 > col1){   
-                 res.append(string (col2 - col1, 'R'));
+                 res+=(string (col2 - col1, 'R'));
             }                        
             res.push_back('!');
             row1 = row2;
