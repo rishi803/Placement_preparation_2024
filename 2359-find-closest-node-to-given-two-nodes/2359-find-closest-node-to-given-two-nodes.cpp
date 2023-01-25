@@ -22,7 +22,7 @@ public:
         int n=edges.size();
         vector<bool>vis1(n,false),vis2(n,false);
        
-        vector<int>dist1(n,INT_MAX),dist2(n,INT_MAX);
+        vector<int>dist1(n,-1),dist2(n,-1);
         dist1[node1]=0;
         dist2[node2]=0;
         int ans=INT_MAX,idx=-1;
@@ -32,11 +32,12 @@ public:
         for(int i=0;i<n;i++){
             // cout<<dist1[i]<<" "<<dist2[i]<<endl;
             
+            if(dist1[i]!=-1 and dist2[i]!=-1){
                 int mx_val=max(dist1[i],dist2[i]);
                 if(ans>mx_val) {
                     ans=mx_val;
                     idx=i;}
-            
+            }
         }
         return idx;
     }
