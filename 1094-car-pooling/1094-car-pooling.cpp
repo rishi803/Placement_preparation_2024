@@ -8,11 +8,12 @@ public:
             mp[i[1]]+=i[0];
             mp[i[2]]+=-i[0];
             
-            for(auto &it:mp){
+           
+        }
+         for(auto &it:mp){
                 passenger+=it.second;
                 if(passenger>capacity) return false;
             }
-        }
         return true;
     }
 };
