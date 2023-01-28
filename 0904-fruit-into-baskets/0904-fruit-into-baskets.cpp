@@ -1,3 +1,6 @@
+// ditto similar https://leetcode.com/problems/subarrays-with-k-different-integers/
+// longest subarray with 2 different integers
+
 class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
