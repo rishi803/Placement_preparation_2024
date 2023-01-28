@@ -8,7 +8,7 @@ public:
             
             sum+=nums[head];
             
-            while(sum*(head-tail+1)>=k and tail<=head){
+            while(sum*(head-tail+1)>=k){
                
                 sum-=nums[tail];
                 tail++;
