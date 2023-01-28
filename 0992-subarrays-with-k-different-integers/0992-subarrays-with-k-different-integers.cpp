@@ -1,3 +1,5 @@
+// ditto similar https://leetcode.com/problems/fruit-into-baskets/
+// // longest subarray with k different integers
 class Solution {
 public:
     int subarraysWithKDistinct(vector<int>& A, int K) {
