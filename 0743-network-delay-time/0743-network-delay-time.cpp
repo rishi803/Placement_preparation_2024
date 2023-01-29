@@ -1,41 +1,36 @@
-//  DIJIKSTRA---> (only for +ve weight, may work for -ve weigth also but definitely fails for -ve weight cycle)  single source shortest path
-
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-        vector<int>dist(n+1,INT_MAX);         
-        vector<vector<int>>adj[n+1];          // 3d vector  adj
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;  // min heap (dist_of_node,node)
-        for(int i=0;i<times.size();i++){
-            int node=times[i][0];
-            int adjnode=times[i][1];
-            int weight=times[i][2];
-            adj[node].push_back({adjnode,weight});                // adj[node] = ({adjacent_node, weight})
+        int ans=0;
+        vector<vector<pair<int,int>>>adj(n+1);
+        for(auto &time:times){
+            adj[time[0]].push_back({time[1],time[2]});   // adj[from].push_back(to,weight)
         }
-        dist[k]=0;
-        pq.push({0,k});
+        
+        vector<int>dis(n+1,INT_MAX);
+        dis[k]=0;
+        
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;  // min heap (dist_of_node,node)
+        pq.push({k,0});      // pq({src,dis})
         
         while(!pq.empty()){
-            
-            int node=pq.top().second;
+            int node=pq.top().first;
+            int weight=pq.top().second;
             pq.pop();
             
-            for(auto &adjnode_vector:adj[node]){             
-                int adjnode_of_node=adjnode_vector[0];
-                int adjnode_weight=adjnode_vector[1];
-                
-                if(dist[node]+adjnode_weight<dist[adjnode_of_node]){
-                    dist[adjnode_of_node]=dist[node]+adjnode_weight;
-                    pq.push({dist[adjnode_of_node],adjnode_of_node});
+            for(auto &[child_node,child_weight]:adj[node]){
+                if(dis[node]+child_weight<dis[child_node]){
+                    dis[child_node]=dis[node]+child_weight;
+                     pq.push({child_node,dis[child_node]});
                 }
+               
             }
         }
-        int ans=0;
-            for(int i=1;i<=n;i++){
-                if(dist[i]==INT_MAX) return -1;
-                ans=max(ans,dist[i]);
-            }
-            return ans;
         
+        for(int i=1;i<dis.size();i++){
+            if(dis[i]==INT_MAX) return -1;
+            else ans=max(ans,dis[i]);
+        }
+        return ans;
     }
 };
