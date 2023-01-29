@@ -10,18 +10,17 @@ public:
         vector<int>dis(n+1,INT_MAX);
         dis[k]=0;
         
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;  // min heap (dist_of_node,node)
-        pq.push({k,0});      // pq({src,dis})
+        priority_queue<int,vector<int>,greater<int>>pq;  // min heap (dist_of_node,node)
+        pq.push(k);      // pq({src,dis})
         
         while(!pq.empty()){
-            int node=pq.top().first;
-            int weight=pq.top().second;
+            int node=pq.top();
             pq.pop();
             
             for(auto &[child_node,child_weight]:adj[node]){
                 if(dis[node]+child_weight<dis[child_node]){
                     dis[child_node]=dis[node]+child_weight;
-                     pq.push({child_node,dis[child_node]});
+                     pq.push(child_node);
                 }
                
             }
