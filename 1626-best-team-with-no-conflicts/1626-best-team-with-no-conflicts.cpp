@@ -6,8 +6,8 @@ public:
         if(dp[prev+1][idx]!=-1) return dp[prev+1][idx];
         int take=0,nottake=0;
         if(prev==-1||v[idx].second>=v[prev].second){
-        take=v[idx].second+help(v,idx,idx+1,dp);}
-        nottake=help(v,prev,idx+1,dp);
+        take+=v[idx].second+help(v,idx,idx+1,dp);}
+        nottake+=help(v,prev,idx+1,dp);
         
         return dp[prev+1][idx]=max(take,nottake);
     }
