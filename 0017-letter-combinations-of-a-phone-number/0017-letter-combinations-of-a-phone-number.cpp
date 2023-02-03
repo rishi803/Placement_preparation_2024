@@ -1,10 +1,10 @@
 class Solution {
 public:
     
-    void help(vector<string>&ans,string digits,vector<string>mp,int idx,string &temp){
+    void help(vector<string>&ans,string digits,vector<string>&mp,int idx,string &temp){
         
         if(idx==digits.size()){     // store the answer
-           ans.push_back(temp);
+          ans.push_back(temp);
             return;
         }
         
@@ -12,9 +12,12 @@ public:
         
         for(int i=0;i<mp[num].size();i++){  // always considering each mp[num] from 0 to its size
            
-            temp+=mp[num][i];           // operation
-            help(ans,digits,mp,idx+1,temp); // call
-            temp.pop_back(); // backtrack
+            temp.push_back(mp[num][i]);  // operation
+            
+            help(ans,digits,mp,idx+1,temp);
+            
+            temp.pop_back();
+            
         }
     }
     
