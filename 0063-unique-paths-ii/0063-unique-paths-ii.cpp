@@ -17,7 +17,7 @@ public:
         
         // grid[st][end]=-1;
         
-        cout<<st<<" "<<end<<" "<<right+bottom<<endl;
+        // cout<<st<<" "<<end<<" "<<right+bottom<<endl;
         
         return dp[st][end]=right+bottom;
     }
