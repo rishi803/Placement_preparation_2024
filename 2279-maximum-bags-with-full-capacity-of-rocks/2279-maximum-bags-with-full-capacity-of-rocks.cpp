@@ -18,7 +18,7 @@ public:
             int top=pq.top();
             pq.pop();
             
-            if( additionalRocks-top>=0){
+            if(additionalRocks-top>=0){
                 additionalRocks-=top;
                 top=0;
             }
@@ -27,12 +27,7 @@ public:
             
         }
         
-        while(!pq.empty()){
-            int i=pq.top();
-            pq.pop();
-            if(i==0) cnt_bags++;
-        }
-        
+       
         return cnt_bags;
     }
 };
