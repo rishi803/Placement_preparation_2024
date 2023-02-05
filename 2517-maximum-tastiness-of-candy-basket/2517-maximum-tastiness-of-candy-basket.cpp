@@ -1,6 +1,6 @@
 class Solution {
 public:
-      bool isans(vector<int>temp, int n, int k, int mn) {
+      bool isans(vector<int>&temp, int n, int k, int mn) {
       int cnt = 1;
       int last = temp[0];
       for (int i = 1; i < n; i++) {
