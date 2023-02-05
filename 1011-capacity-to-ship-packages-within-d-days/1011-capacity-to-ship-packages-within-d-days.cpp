@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int help(vector<int>weights,int wt,int days){
+    int help(vector<int>&weights,int wt,int days){
        int cnt=1;
         int sum=0;
         for(int i=0;i<weights.size();i++){
