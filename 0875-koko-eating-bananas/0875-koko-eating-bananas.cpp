@@ -1,27 +1,27 @@
 class Solution {
 public:
     
-    bool isvalid(int mid,vector<int>&piles,int h){
+    bool isvalid(int k,vector<int>&piles,int h){
         
-        long hr=0;
-        for(int i=0;i<piles.size();i++){
-            
-            int bananas=piles[i];
-            if(bananas<mid){
-                hr++;
-            }
-            else{
-                hr+=(bananas/mid);
-                if(mid>0 and bananas%mid!=0) hr++;
-            }
+        long hours = 0; // track count of hours
+        for(int pile : piles){
+            // performing claculation, take an example 
+            // k = 4
+            // pile = 10
+
+            // pile / k => 10 / 4 = 2
+            // pile % k => 2, so we need to have one more hour to eat remaining bananas left over as remainder 
+            // hours = 3;
+            int div = pile / k;
+            hours += div;
+            if(pile % k != 0) hours++; // if remainder value is not 0, we need to have an extra hour
         }
-        if(hr<=h) return true;
-        else return false;
+        return hours <= h;
     }
     int minEatingSpeed(vector<int>& piles, int h) {
         int ans=0;
         int low=1;
-        int high=1000000000;
+        int high=*max_element(piles.begin(),piles.end());
         
         
         while(low<=high){
