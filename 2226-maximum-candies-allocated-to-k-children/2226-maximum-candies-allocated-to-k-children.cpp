@@ -6,9 +6,8 @@ public:
         long long cnt=0;
         
         for(int i=0;i<candy.size();i++){
-            int distribute=candy[i];
-            if(mid!=0)
-             distribute=(candy[i]/mid);
+            
+            int distribute=(candy[i]/mid);
             cnt+=distribute;
         }
         if(cnt>=k) return true;
@@ -20,7 +19,7 @@ public:
         long long total=accumulate(candies.begin(),candies.end(),0ll);
         if((total/k)<=0) return 0;
         
-        int low=*min_element(candies.begin(),candies.end())/k;
+        int low=1;
         int high=*max_element(candies.begin(),candies.end());
         int ans=0;
         
