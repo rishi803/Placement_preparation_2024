@@ -5,11 +5,9 @@ public:
         int x=1;
         int sum=0,cnt=0;
         
-       unordered_map<int,int>mp;
-        for(auto &i:banned) mp[i]=1;
         
         for(int i=1;i<=n;i++){
-            if(mp[i]==1) continue;
+            if(find(banned.begin(),banned.end(),i)!=banned.end()) continue;
             else {
                 sum+=i;
                 if(sum>maxSum) break;
