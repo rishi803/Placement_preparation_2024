@@ -1,25 +1,22 @@
+// **1. GREEDY **
+
+
 class Solution {
 public:
-    
-    vector<int>dp;
-    
-    bool help(vector<int>&nums,int idx){
-        
-        if(idx==nums.size()-1) return true;
-        if(idx>=nums.size()) return false;
-        if(dp[idx]!=-1) return dp[idx];
-        
-        for(int i=1;i<=nums[idx];i++){
-            
-            if (help(nums,idx+i)) return dp[idx]=true;    
-        }
-        
-        return dp[idx]=false;
-    }
     bool canJump(vector<int>& nums) {
         
-        dp.resize(nums.size(),-1);
+        int can_reach_upto=0;
         
-        return help(nums,0);
+        for(int i=0;i<nums.size();i++){
+            
+            can_reach_upto=max(can_reach_upto,nums[i]+i);   // kha tak maximum tum jump kr skte ho current index se
+            
+            if(can_reach_upto==nums.size()-1) return true;  // already reached to answer return true;
+            
+            if(i>=can_reach_upto) return false;           // you can not reach the last index
+            
+        }
+        
+        return true;
     }
 };
