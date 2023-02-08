@@ -12,7 +12,7 @@ public:
             int valid_index=q.front();
             q.pop();
             
-            if(valid_index<0 or valid_index>=arr.size()) continue;
+            
             int stored=arr[valid_index];
             
             arr[valid_index]*=-1;             // make this element visited
