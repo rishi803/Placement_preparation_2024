@@ -15,9 +15,9 @@ return true;
 };
 ```
 ​
-**2. DP**
+**2. DP ( will take a very large amount of time )**
 ​
 ```
-​
-```
-​
+class Solution {
+public:
+vector<int>dp;
