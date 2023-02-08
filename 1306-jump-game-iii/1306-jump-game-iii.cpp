@@ -1,17 +1,37 @@
 class Solution {
 public:
-    
-    bool help(vector<int>&arr, int st){
-        if(st<0 or st>=arr.size() or arr[st]<0) return false;
-        if(arr[st]==0) return true;
-        arr[st]*=-1;                 // mark the index as visited and dont worry it will not effect below code
-                                     // beacause sign will interchange only which causes no effect below but very helpful 
-                                     // to mark it as visited that dont explore this path by next function because it only 
-                                     // ask for true or false not any integer answer.
+    bool canReach(vector<int>& arr, int start_index) {
         
-       return  help(arr,st+arr[st]) or help(arr,st-arr[st]);
-    }
-    bool canReach(vector<int>& arr, int start) {
-        return help(arr,start);
+        queue<int>q;
+        q.push(start_index);
+        
+        
+        
+        while(!q.empty()){
+            
+            int valid_index=q.front();
+            q.pop();
+            
+            if(valid_index<0 or valid_index>=arr.size()) continue;
+            int stored=arr[valid_index];
+            
+            arr[valid_index]*=-1;             // make this element visited
+            
+            // cout<<valid_index<<endl;
+            
+            if(arr[valid_index]==0){
+                return true;
+            }
+            if(valid_index + stored >=0 and valid_index + stored < arr.size() and arr[valid_index + stored] >= 0){
+                q.push(valid_index + stored);
+            }
+             if(valid_index - stored >=0  and valid_index - stored < arr.size() and arr[valid_index - stored]>= 0){
+                q.push(valid_index - stored);
+            }
+            
+            
+        }
+        
+        return false;
     }
 };
