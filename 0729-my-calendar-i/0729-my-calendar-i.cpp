@@ -8,21 +8,14 @@ public:
     
     bool book(int start, int end) {
         
-        mp[start]++;
-        mp[end]--;
+      auto it=mp.lower_bound(start);
         
-        int sum=0;
+      if(it!=mp.end() and it->second<end) return false;
         
-        for(auto &it:mp){
-            sum+=it.second;
-            
-            if(sum>1){
-                mp[start]--;
-                mp[end]++;
-                return false;
-            }
-        }
+       mp[end-1]=start;
+        
         return true;
+       
     }
 };
 
