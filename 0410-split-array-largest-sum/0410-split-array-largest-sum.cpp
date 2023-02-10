@@ -14,10 +14,10 @@ public:
            
                 cnt++;
                 sum=nums[i];
-                if(cnt>k) return true;
+               
             }
         }
-        return false;
+        return cnt<=k;
     }
     
     int splitArray(vector<int>& nums, int k) {
@@ -34,11 +34,11 @@ public:
             
             if(isValid(mid_sum,nums,k)){
                 ans=mid_sum;
-                low=mid_sum+1;
+                 high=mid_sum-1;
             }
             
             else{
-                high=mid_sum-1;
+              low=mid_sum+1;
             }
         }
         
