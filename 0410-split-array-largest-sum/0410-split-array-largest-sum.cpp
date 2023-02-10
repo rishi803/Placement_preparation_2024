@@ -7,10 +7,11 @@ public:
         int sum=0;
         
         for(int i=0;i<nums.size();i++){
+          
+            sum+=nums[i];
             
-            if(sum+nums[i]<=mid_sum) sum+=nums[i];
-            // sum+=nums[i];
-            else{
+            if(sum>mid_sum){
+           
                 cnt++;
                 sum=nums[i];
                 if(cnt>k) return true;
