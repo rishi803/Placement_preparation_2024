@@ -29,8 +29,8 @@ public:
                     int nx=x+direction[i];
                     int ny=y+direction[i+1];
                     
-            if(nx>=0 and nx<n and ny>=0 and ny<n and grid[nx][ny]==0){
-                grid[nx][ny]=1;
+            if(nx>=0 and nx<n and ny>=0 and ny<n and vis[nx][ny]==0){
+                vis[nx][ny]=1;
                 q.push({nx,ny});
             }
                 }
