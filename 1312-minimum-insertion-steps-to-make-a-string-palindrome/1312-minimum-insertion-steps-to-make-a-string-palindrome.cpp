@@ -1,16 +1,16 @@
 class Solution {
 public:
     
-    int longest_palindrom(string &s,int st,int end,vector<vector<int>>&dp){
+    int help(string &s,int st,int end,vector<vector<int>>&dp){
         
         if(st>end) return 0;
         if(dp[st][end]!=-1) return dp[st][end];
         
         if(s[st]==s[end]){
-            return dp[st][end]=(st==end)?1+longest_palindrom(s,st+1,end-1,dp):2+longest_palindrom(s,st+1,end-1,dp);
+            return dp[st][end]=help(s,st+1,end-1,dp);
         }
         else{
-            return dp[st][end]=max(longest_palindrom(s,st+1,end,dp),longest_palindrom(s,st,end-1,dp));
+            return dp[st][end]=1+min(help(s,st+1,end,dp),help(s,st,end-1,dp));
         }
         
     }
@@ -19,6 +19,6 @@ public:
        
         int n=s.size();
          vector<vector<int>>dp(n,vector<int>(n,-1));
-        return s.size()-longest_palindrom(s,0,n-1,dp);
+        return help(s,0,n-1,dp);
     }
 };
