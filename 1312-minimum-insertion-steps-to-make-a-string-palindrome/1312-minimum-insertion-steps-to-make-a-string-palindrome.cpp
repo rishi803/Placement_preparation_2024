@@ -3,12 +3,11 @@ public:
     
     int longest_palindrom(string &s,int st,int end,vector<vector<int>>&dp){
         
-        if(st==end) return 1;
         if(st>end) return 0;
         if(dp[st][end]!=-1) return dp[st][end];
         
         if(s[st]==s[end]){
-            return dp[st][end]=2+longest_palindrom(s,st+1,end-1,dp);
+            return dp[st][end]=(st==end)?1+longest_palindrom(s,st+1,end-1,dp):2+longest_palindrom(s,st+1,end-1,dp);
         }
         else{
             return dp[st][end]=max(longest_palindrom(s,st+1,end,dp),longest_palindrom(s,st,end-1,dp));
