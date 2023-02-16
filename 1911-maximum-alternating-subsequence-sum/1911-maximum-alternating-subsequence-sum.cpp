@@ -1,3 +1,6 @@
+// you have two choices always
+
+
 class Solution {
 public:
     vector<vector<long long>>dp;
@@ -9,12 +12,12 @@ public:
         long long take=0,nottake=0;
         
         if(flag){
-             take=nums[idx]+help(nums,idx+1,false);
-            nottake=help(nums,idx+1,true);
+             take=nums[idx]+help(nums,idx+1,false); // if prev element not added then add this
+            nottake=help(nums,idx+1,true);          // if prev not added and this also not added
         }
         else{
-            take=-nums[idx]+help(nums,idx+1,true);
-            nottake=help(nums,idx+1,false);
+            take=-nums[idx]+help(nums,idx+1,true); // if prev element is added then subtract this
+            nottake=help(nums,idx+1,false);        // if prev element is added then dont subtract this
         }
         
         return dp[idx][flag]=max(take,nottake);
