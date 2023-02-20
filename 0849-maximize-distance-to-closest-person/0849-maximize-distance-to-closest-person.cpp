@@ -17,7 +17,7 @@ public:
                     mn=min(mn,abs(i-temp[j]));
                      // cout<<mn<<endl;
                 }
-                 cout<<endl;
+                 // cout<<endl;
                 mx=max(mx,mn);
                
             }
