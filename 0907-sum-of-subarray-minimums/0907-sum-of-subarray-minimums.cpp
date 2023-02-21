@@ -41,7 +41,7 @@ public:
         // }
        long long ans = 0, mod = 1e9 +7;
     for(int i = 0; i < arr.size(); i++){
-      ans = (ans + arr[i]%mod * left_le[i]%mod * right_le[i]%mod)%mod;
+      ans = (ans + arr[i] * left_le[i]%mod * right_le[i]%mod)%mod;
     }
         return ans;
     }
