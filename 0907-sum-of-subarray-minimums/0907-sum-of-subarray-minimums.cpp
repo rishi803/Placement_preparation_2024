@@ -48,13 +48,13 @@ public:
             st2.push(i);
             
         }
-        for(int i=0;i<arr.size();i++){
-           cout<<left_le[i]<<" ";
-        }
-        cout<<endl;
-        for(int i=0;i<arr.size();i++){
-           cout<<right_le[i]<<" ";
-        }
+        // for(int i=0;i<arr.size();i++){
+        //    cout<<left_le[i]<<" ";
+        // }
+        // cout<<endl;
+        // for(int i=0;i<arr.size();i++){
+        //    cout<<right_le[i]<<" ";
+        // }
        long long ans = 0, mod = 1e9 +7;
     for(int i = 0; i < arr.size(); i++){
       ans = (ans + arr[i] * left_le[i]%mod * right_le[i]%mod)%mod; // to avoid overflow
