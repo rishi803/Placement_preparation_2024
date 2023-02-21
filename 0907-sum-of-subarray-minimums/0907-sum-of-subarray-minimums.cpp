@@ -1,3 +1,19 @@
+// main moto is to find previous less element of a given element and next less element of a
+// given element because that element will contribute in that range only
+
+// Your input
+// [5,3,1,2,4]
+
+// stdout
+// 1 1 3 2 1 
+// 1 2 3 1 1 
+
+// Output
+// 28
+
+// Expected
+// 28
+
 class Solution {
 public:
     int sumSubarrayMins(vector<int>& arr) {
@@ -32,16 +48,16 @@ public:
             st2.push(i);
             
         }
-        // for(int i=0;i<arr.size();i++){
-        //    cout<<left_le[i]<<" ";
-        // }
-        // cout<<endl;
-        // for(int i=0;i<arr.size();i++){
-        //    cout<<right_le[i]<<" ";
-        // }
+        for(int i=0;i<arr.size();i++){
+           cout<<left_le[i]<<" ";
+        }
+        cout<<endl;
+        for(int i=0;i<arr.size();i++){
+           cout<<right_le[i]<<" ";
+        }
        long long ans = 0, mod = 1e9 +7;
     for(int i = 0; i < arr.size(); i++){
-      ans = (ans + arr[i] * left_le[i]%mod * right_le[i]%mod)%mod;
+      ans = (ans + arr[i] * left_le[i]%mod * right_le[i]%mod)%mod; // to avoid overflow
     }
         return ans;
     }
