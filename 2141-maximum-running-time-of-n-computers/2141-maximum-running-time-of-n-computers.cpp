@@ -3,17 +3,16 @@ public:
     
     bool isValid(long long min,vector<int>&batteries,int n){
         long long sum=0;
-        
+        int cnt=0;
         for(int i=0;i<batteries.size();i++){
             sum+=batteries[i];
             if(sum>=min){
-                n--;
+                cnt++;
                 sum-=min;
             }
             
         }
-        if(n<=0) return true;
-        return false;
+       return cnt>=n;
     }
     long long maxRunTime(int n, vector<int>& batteries) {
         
