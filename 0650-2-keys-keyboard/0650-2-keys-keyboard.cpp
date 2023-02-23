@@ -1,20 +1,21 @@
 class Solution {
 public:
     
-   
-    long long help(int n,long long value,long long copy){
-        if(value>n) return INT_MAX;
+    long long help(int n, long long copy,long long value){
+        
+        if(value>n) return INT_MAX-2;
         if(value==n) return 0;
+    
+        long long  copy_paste=2+help(n,value,value+value);
+        long long paste= 1+help(n,copy,value+copy);
         
-     return  min(2+help(n,value+value,value),1+help(n,value+copy,copy));
-        
-        
+        return min(copy_paste,paste);
         
     }
     
     int minSteps(int n) {
+        
         if(n==1) return 0;
-       
-        return  1+help(n,1,1);
+        return 2+help(n,1,2);
     }
 };
