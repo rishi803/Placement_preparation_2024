@@ -4,7 +4,7 @@ public:
         unordered_map<int,int> lks;
         long long ans=0;
         for(int x : a){
-            for(int i=1;i<=(1<<29);i*=2){
+            for(long i=1;i<=(1<<30);i*=2){
                 if(lks.count(i-x)) ans+=lks[i-x];
             }
             lks[x]+=1;
