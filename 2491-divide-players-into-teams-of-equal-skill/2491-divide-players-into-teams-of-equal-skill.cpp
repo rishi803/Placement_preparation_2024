@@ -4,8 +4,8 @@ public:
         
         long long sum=accumulate(skill.begin(),skill.end(),0ll);
         sort(skill.begin(),skill.end());
-        
-        vector<pair<int,int>>v;
+         long long ans=0;
+        // vector<pair<int,int>>v;
         int team=skill.size()/2;
         long long target=sum/team;
         
@@ -14,7 +14,7 @@ public:
         while(i<j){
             if(skill[i]+skill[j]==target){
                 cnt++;
-                v.push_back({skill[i],skill[j]});
+                 ans+=(skill[i]*skill[j]);
                  i++;
                 j--;
             }
@@ -28,17 +28,12 @@ public:
             }
         }
         
-        long long ans=0;
-         if (cnt<skill.size()/2) return -1;
-        else{
-            for(int i=0;i<v.size();i++){
-                int first=v[i].first;
-                int sec=v[i].second;
-                // cout<<first<<" "<<sec<<endl;
-                ans+=(first*sec);
-            }
-        }
+       
+        
+        if (cnt<skill.size()/2) return -1;
+      
         return ans;
+        
         
     }
 };
