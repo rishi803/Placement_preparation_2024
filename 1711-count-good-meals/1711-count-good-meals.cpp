@@ -1,14 +1,15 @@
 class Solution {
 public:
-   int countPairs(vector<int>& a) {
-        unordered_map<int,int> lks;
+   int countPairs(vector<int>& arr) {
+        unordered_map<int,int> freq;
         long long ans=0;
-        for(int x : a){
-            for(long i=1;i<=(1ll<<31);i*=2){
-                if(lks.count(i-x)) ans+=lks[i-x];
+        for(int i=0;i<arr.size();i++){
+            for(int pow2=1;pow2<=(1<<21);pow2*=2){
+                if(freq.count(pow2-arr[i])) ans+=freq[pow2-arr[i]];
             }
-            lks[x]+=1;
+            freq[arr[i]]+=1;
         }
         return ans % (int)(1e9 + 7);
     }
+
 };
