@@ -7,8 +7,8 @@ public:
         
         if(st>end) return nullptr;
         
-        int pivot=st;
-        while(pre[idx]!=in[pivot]) pivot++;
+        int pivot=end;
+        while(pre[idx]!=in[pivot]) pivot--;
         idx++;
         
         TreeNode* node=new TreeNode (in[pivot]);
