@@ -1,3 +1,14 @@
+//   Easier Version
+
+// if you are on ith element then max element on left of ith element should be less that min element of right of ith element
+
+//    [5, 0, 3, 8, 6]
+
+//   [5]      [0,3,8,6]    max(5)=5     and    min(0,3,8,6)=0    (5>0)  cnt++
+//   [5,0]    [3,8,6]      max(5,0)=5   and    min(3,8,6)=3      (5>3)   cnt++
+//   [5,0,3]  [8,6]        max (5,0,3)  and    min(8,6)=6        (5<6)   break;  we got the valid subarray
+
+
 class Solution {
 public:
     int partitionDisjoint(vector<int>& nums) {
