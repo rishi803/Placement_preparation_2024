@@ -60,16 +60,16 @@ public:
                 // if(cur_cost>cost[cur_node]) continue;
                 
                 // cost[cur_node]=cur_cost;
-                for(auto &child : graph[cur_node]) {
+                for(auto &child : graph[cur_node]) {                  // TRAVERSING EACH CHILD OF CUR NODE
                     // if(child.second+cur_cost>ans) continue;
                    
                     // cout<<child.first<<" "<<child.second+cur_cost<<endl;
-                    if(child.second+cur_cost<cost[child.first]){
+                    if(child.second+cur_cost<cost[child.first]){             // DIJIKSTRA ALGORITHM
                         cost[child.first]=child.second+cur_cost;
                         q.push({child.first, cost[child.first]});
                     }
                     
-                     if(child.first==dst) ans=min(ans, cost[child.first]);
+                     if(child.first==dst) ans=cost[child.first];  // IF REACHED DESTINATION
                     
                 }
                 
