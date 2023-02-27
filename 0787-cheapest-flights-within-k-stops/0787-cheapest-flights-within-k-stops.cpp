@@ -46,6 +46,7 @@ public:
         }
         int ans=INT_MAX;
         vector<int> cost(n, INT_MAX);
+        cost[src]=0;
         queue<pair<int, int>> q;                       
         q.push({src, 0});                      // q<pair<dest,initial_cost>>
         int stops=0;
@@ -56,13 +57,20 @@ public:
                 int cur_cost=q.front().second;
                 q.pop();
                 
-                if(cur_cost>cost[cur_node]) continue;
-                cost[cur_node]=cur_cost;
+                // if(cur_cost>cost[cur_node]) continue;
+                
+                // cost[cur_node]=cur_cost;
                 for(auto &child : graph[cur_node]) {
-                    if(child.second+cur_cost>ans) continue;
-                    if(child.first==dst) ans=min(ans, child.second+cur_cost);
+                    // if(child.second+cur_cost>ans) continue;
+                   
                     // cout<<child.first<<" "<<child.second+cur_cost<<endl;
-                    q.push({child.first, child.second+cur_cost});
+                    if(child.second+cur_cost<cost[child.first]){
+                        cost[child.first]=child.second+cur_cost;
+                        q.push({child.first, cost[child.first]});
+                    }
+                    
+                     if(child.first==dst) ans=min(ans, cost[child.first]);
+                    
                 }
                 
                 // for(auto &child:graph[cur_node]){      perform same task as above
