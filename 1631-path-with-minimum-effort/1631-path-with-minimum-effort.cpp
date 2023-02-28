@@ -18,6 +18,8 @@ public:
 
     std::vector<vector<int>> efforts(m, vector<int>(n, INT_MAX));
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        
+    unordered_map<int,int>vis;
 
     pq.emplace(0, 0); // First item is effort, second is row * 100 + col
     while (!pq.empty()) {
@@ -27,11 +29,13 @@ public:
 
       if (effort >= efforts[x][y]) continue;
       efforts[x][y] = effort;
-
+       vis[x*100+y]++;
       for (int i = 0; i < 4; i++) {
         int nx = x + dirs[i], ny = y + dirs[i + 1];
-        if (nx < 0 || nx >= m || ny < 0 || ny >= n) continue;
+        if (nx < 0 || nx >= m || ny < 0 || ny >= n || vis.count(nx*100+ny)) continue;
+          
         int n_effort = max(effort, abs(heights[x][y] - heights[nx][ny]));
+          // cout<<n_effort<<" nx= "<<nx<<" ny= "<<ny<<endl;
         pq.emplace(n_effort, nx * 100 + ny);
       }
     }
