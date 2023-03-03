@@ -19,7 +19,7 @@ public:
     std::vector<vector<int>> efforts(m, vector<int>(n, INT_MAX));
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         
-    unordered_map<int,int>vis;
+    unordered_map<int,int>vis;   // if a coordinate is already visited don't visit it again
 
     pq.emplace(0, 0); // First item is effort, second is row * 100 + col
     while (!pq.empty()) {
@@ -27,7 +27,7 @@ public:
       int x = pq.top().second / 100, y = pq.top().second % 100;
       pq.pop();
 
-      if (effort >= efforts[x][y]) continue;
+      if (effort >= efforts[x][y]) continue;     // lever of problem
       efforts[x][y] = effort;
        vis[x*100+y]++;
       for (int i = 0; i < 4; i++) {
