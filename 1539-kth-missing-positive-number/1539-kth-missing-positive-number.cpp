@@ -9,7 +9,7 @@ public:
             
             int mid=low+(high-low)/2;
             
-            if(arr[mid]-(mid+1)<k){
+            if(arr[mid]-(mid+1)<k){     // hona chahiye the (mid+1) value us index par h arr[mid]
                 low=mid+1;
             }
             else{
@@ -17,6 +17,6 @@ public:
             }
         }
         
-        return low+k;
+        return high+k+1;
     }
 };
