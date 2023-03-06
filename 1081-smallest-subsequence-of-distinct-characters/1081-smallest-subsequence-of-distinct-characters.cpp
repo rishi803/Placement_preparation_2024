@@ -1,19 +1,18 @@
-// test case :  abba , "cbaacabcaaccaacababa" , "addbbcbdaadbdaadcaabbab" , "accaccbbcc"
+// test case :  abba , "cbaacabcaaccaacababa" , "addbbcbdaadbdaadcaabbab" , "accaccbbcc" , "bcbcbcababa"
 
 class Solution {
 public:
     string smallestSubsequence(string s) {
         string ans;
-        // set<string>res;
         vector<int>availabel(26);
         vector<bool>include(26);
-        unordered_map<char,int>mp;
-        for(auto &i:s) availabel[i-'a']++,mp[i]++;
+    
+        for(auto &i:s) availabel[i-'a']++;
         
         for(int i=0;i<s.size();i++){
+            
             availabel[s[i]-'a']--;
             
-            // if(ans.back()=='d' and s[i]=='c') cout<<availabel[3]<<" ";
             if(include[s[i]-'a']==true) continue;
             
             while(ans.size() and availabel[ans.back()-'a']>0 and ans.back()>s[i]){
@@ -26,7 +25,8 @@ public:
             }
            
               // cout<<i<<" "<<ans<<endl;
-            // if(ans.size()==mp.size()) res.insert(ans);
+            // availabel[s[i]-'a']--;            (failing test case: "bcbcbcababa")
+            
         }
         return ans;
     }
