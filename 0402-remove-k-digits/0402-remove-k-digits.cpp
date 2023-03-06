@@ -1,15 +1,21 @@
 class Solution {
 public:
     string removeKdigits(string num, int k) {
-        string ans="";
-        for(auto it:num){
-            while(k and ans.size() and it<ans.back()){
+        
+        string ans;
+        
+        for(auto &i:num){
+            
+            while(ans.size() and k and ans.back()>i){
                 ans.pop_back();
                 k--;
             }
-           if(ans.size() or it!='0') ans+=it;
+            if(ans.size() or i!='0') ans+=i;            // to avoid leading zero (short circuit concept)
         }
-         while(k-- and ans.size()) ans.pop_back();
-        return ans.size()==0?"0":ans;
+        
+        while(k and ans.size()) ans.pop_back(),k--;
+        
+        return ans==""?"0":ans;
+        
     }
 };
