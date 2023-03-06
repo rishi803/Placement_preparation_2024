@@ -19,6 +19,8 @@ public:
         
         for(int i=0;i<nums.size();i++){
             
+           
+            
             if(nums[i]-(i+1)==k){
                 idx=i;                   
                 flag=nums[i]; // don't need prev element this current element is last 
@@ -44,8 +46,7 @@ public:
             long long tsum=(flag*(flag+1))/2;
             long long sum=0;
             for(int i=0;i<=idx;i++){
-                
-                
+               
                 sum+=nums[i];
             }
             
@@ -61,6 +62,7 @@ public:
             long long tsum=(copy*(copy+1))/2;
             k-=miss;
             for(int i=0;i<nums.size();i++){
+              
                 tsum-=nums[i];
             }
             
