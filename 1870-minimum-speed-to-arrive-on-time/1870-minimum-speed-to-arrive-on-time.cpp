@@ -5,7 +5,7 @@
 class Solution {
 public:
     
-    bool isValid(vector<int>&dist,double hour,long long speed){
+    bool isValid(vector<int>&dist,double hour,int speed){
         
         double res=0;
         
@@ -28,14 +28,14 @@ public:
     }
     int minSpeedOnTime(vector<int>& dist, double hour) {
         
-      long long low=1;
-      long long high=1e7;
+      int low=1;
+      int high=1e7;
         
-        long long ans=-1;
+        int ans=-1;
         
         while(low<=high){
             
-            long long mid=low+(high-low)/2;
+            int mid=low+(high-low)/2;
             if(isValid(dist,hour,mid)){
                 ans=mid;
                 high=mid-1;
