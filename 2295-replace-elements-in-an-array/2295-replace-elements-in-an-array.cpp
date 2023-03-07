@@ -20,9 +20,11 @@ public:
             
             int ind=freq[val.first];
             
-    
+            freq.erase(nums[ind]);
             nums[ind]=val.second;
-            freq[val.second]=ind;
+            freq[val.second]=ind;    // after updating value save that value index
+            
+// ex- after updating 1 to 3 now also save 3 ka index as 1 ka index
             
         }
         
