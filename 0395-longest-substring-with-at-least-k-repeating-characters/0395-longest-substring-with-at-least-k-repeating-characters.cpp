@@ -2,8 +2,6 @@ class Solution {
 public:
     int longestSubstring(string s, int k) {
         
-        if(k>s.size()) return 0;
-        
         unordered_map<char,int>mp;
         
         for(auto &i:s){
