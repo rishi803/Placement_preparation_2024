@@ -11,12 +11,12 @@ public:
         
         for(int i=0;i<dist.size();i++){
             
-            double temp=double(dist[i])/double(speed);
+            double temp=double(dist[i])/double(speed);  // find the hour for ith train
            
             
             
             if(i<dist.size()-1){  // har train ek integer val par depart hogi isliye agar temp ki value decimal me h to usko next integer me convert kro sivay last train ke
-                // if(ceil(temp)>hour) return false;  // agar yhi val hour se bdi hui to problem h
+                if(ceil(temp)>hour) return false;  // agar yhi val hour se bdi hui to problem h (can skip also)
                  res+=(ceil(temp));  
             }
            
@@ -29,7 +29,7 @@ public:
     int minSpeedOnTime(vector<int>& dist, double hour) {
         
       long long low=1;
-      long long high=1e14;
+      long long high=1e7;
         
         long long ans=-1;
         
