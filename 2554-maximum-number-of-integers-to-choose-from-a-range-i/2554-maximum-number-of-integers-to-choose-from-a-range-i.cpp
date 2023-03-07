@@ -1,17 +1,16 @@
 class Solution {
 public:
     int maxCount(vector<int>& banned, int n, int maxSum) {
-       sort(banned.begin(),banned.end());
-        int x=1;
-        int sum=0,cnt=0;
         
+        unordered_map<int,int>mp;
+        for(auto &i:banned) mp[i]++;
+        long long sum=0,cnt=0;
         
         for(int i=1;i<=n;i++){
-            if(find(banned.begin(),banned.end(),i)!=banned.end()) continue;
-            else {
-                sum+=i;
-                if(sum>maxSum) break;
+            
+            if(mp[i]==0 and sum+i<=maxSum){
                 cnt++;
+                sum+=i;
             }
         }
         return cnt;
