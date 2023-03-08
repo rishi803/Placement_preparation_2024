@@ -1,40 +1,37 @@
 class Solution {
 public:
     
-    bool isvalid(int k,vector<int>&piles,int h){
+    bool isValid(vector<int>&piles,int h,int  speed){
         
-        long hours = 0; // track count of hours
-        for(int pile : piles){
-            // performing claculation, take an example 
-            // k = 4
-            // pile = 10
-
-            // pile / k => 10 / 4 = 2
-            // pile % k => 2, so we need to have one more hour to eat remaining bananas left over as remainder 
-            // hours = 3;
-            int div = pile / k;
-            hours += div;
-            if(pile % k != 0) hours++; // if remainder value is not 0, we need to have an extra hour
+        long hour=0;
+        
+        for(int i=0;i<piles.size();i++){
+            
+            if(piles[i]<speed) hour++;
+            else
+            hour+=ceil(double(piles[i])/speed);
         }
-        return hours <= h;
-    }
-    int minEatingSpeed(vector<int>& piles, int h) {
-        int ans=0;
-        int low=1;
-        int high=*max_element(piles.begin(),piles.end());
+        // cout<<speed<<" "<<hour<<endl;
         
+        return hour<=h;
+    }
+    
+    int minEatingSpeed(vector<int>& piles, int h) {
+        
+        int low=1,ans=-1;
+        int high=*max_element(piles.begin(),piles.end());
         
         while(low<=high){
             
-            int mid=low+(high-low)/2;
+            int speed=low+(high-low)/2;
             
-            if(isvalid(mid,piles,h)){  // kya vo mid banana kha skta h within h hours
-                ans=mid;            // phle is mid banana ko store kr lo sayad yhi ans ho
-                high=mid-1;         // agar ha to use aur kam banana offer krke dekho
+            if(isValid(piles,h,speed)){
+                ans=speed;
+                high=speed-1;
             }
             
             else{
-                low=mid+1;  // agr nhi to banana ka amount badhao
+                low=speed+1;
             }
         }
         
