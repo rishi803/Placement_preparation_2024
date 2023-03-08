@@ -7,7 +7,9 @@ public:
         // for(int i = 2; i < stones.size(); i+=2) res = max(res, stones[i]-stones[i-2]); // even path
         // return res;
         
-         int ans=stones[1]-stones[0];
+        if(stones.size()==2) return stones[1]-stones[0];
+        
+         int ans=0;
         
         for(int i=2;i<stones.size();i++){
             ans=max(ans,stones[i]-stones[i-2]);           
