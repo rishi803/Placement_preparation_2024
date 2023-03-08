@@ -7,8 +7,7 @@ public:
         
         for(int i=0;i<piles.size();i++){
             
-            if(piles[i]<speed) hour++;
-            else
+           
             hour+=ceil(double(piles[i])/speed);
         }
         // cout<<speed<<" "<<hour<<endl;
