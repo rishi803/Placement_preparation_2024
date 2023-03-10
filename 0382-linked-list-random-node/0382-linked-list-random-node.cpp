@@ -17,21 +17,21 @@ public:
     
     int getRandom() {
         
-        int ans;
+        ListNode* ans;
         ListNode* t=temp;
         int len=1;
         
         while(t){
             
             if(rand()%len==0){
-                ans=t->val;
+                ans=t;
             }
             
            t=t->next;
             len++;
         }
         
-        return ans;
+        return ans->val;
     }
 };
 
