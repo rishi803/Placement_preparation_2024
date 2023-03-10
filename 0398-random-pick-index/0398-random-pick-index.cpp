@@ -10,9 +10,9 @@ public:
     }
     
     int pick(int target) {
-       vector<int>temp=mp[target];
+       // vector<int>temp=mp[target];
         
-        return temp[rand()%temp.size()];
+        return mp[target][rand()%mp[target].size()];
     }
 };
 
