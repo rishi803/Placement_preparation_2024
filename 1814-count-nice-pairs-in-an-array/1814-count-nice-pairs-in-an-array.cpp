@@ -20,7 +20,7 @@ public:
         reverse(stemp.begin(),stemp.end());
         int extract=stoi(stemp);
         
-            if(mp.find(nums[i]-extract)!=mp.end()) ans+=mp[nums[i]-extract];
+            if(mp[(nums[i]-extract)]>0) ans+=mp[nums[i]-extract];
             
             mp[nums[i]-extract]++;
             
