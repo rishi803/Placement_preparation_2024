@@ -1,3 +1,5 @@
+// find mid node each time (by Fast and Slow pointer)
+// MOST IMP:  separate list in two parts each time by (prev of mid->next= null or 0); (mid is slow pointer)
 
 class Solution {
 public:
@@ -6,9 +8,10 @@ public:
             if(!head->next) return new TreeNode(head->val);
             
             // fast/slow pointer to find the midpoint
-            auto slow = head;
-            auto fast = head;
-            auto pre = head;
+            ListNode* slow = head;
+            ListNode* fast = head;
+            ListNode* pre = head;
+         
             while(fast && fast->next) {
                 pre = slow;
                 slow = slow->next;
