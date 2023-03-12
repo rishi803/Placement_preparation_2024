@@ -5,7 +5,7 @@ class Solution {
     public: 
     
  int findMinValUsingDP(vector<vector<int>>& costs,int X,int Y,int T,vector<vector<int>>&dp){
-        if(costs.size()==T&&!X&&!Y)return 0;
+        if(costs.size()==T)return 0;
         if(dp[X][Y]!=INT_MAX)return dp[X][Y];
         int minVal = INT_MAX;
         if(X)
