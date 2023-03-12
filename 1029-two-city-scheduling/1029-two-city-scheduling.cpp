@@ -2,26 +2,20 @@
 
 class Solution {
     
-int memoization(int n,int m,vector<vector<int>> &dp,vector<vector<int>> &costs){
-        if(n == 0 and m == 0) return 0;
-        if(dp[n][m] != -1) return dp[n][m];
-        
-        int a = 1e9;
-        int b = 1e9;
-
-        if(n > 0) a = memoization(n - 1,m,dp,costs) + costs[n + m - 1][0];
-        if(m > 0) b = memoization(n,m - 1,dp,costs) + costs[n + m - 1][1];
-        
-        return dp[n][m] = min(a,b);
-    }
+    public: 
     
-public:
-    int twoCitySchedCost(vector<vector<int>>& costs) {
-        
-        int n = costs.size()/2;
-		
-        vector<vector<int>> dp(n + 1,vector<int>(n + 1,-1));
-        return memoization(n,n,dp,costs);
-        
+ int findMinValUsingDP(vector<vector<int>>& costs,int X,int Y,int T,vector<vector<int>>&dp){
+        if(costs.size()==T&&!X&&!Y)return 0;
+        if(dp[X][Y]!=INT_MAX)return dp[X][Y];
+        int minVal = INT_MAX;
+        if(X)
+            minVal = costs[T][0]+findMinValUsingDP(costs,X-1,Y,T+1,dp);
+        if(Y)
+            minVal = min(minVal,costs[T][1]+findMinValUsingDP(costs,X,Y-1,T+1,dp));
+        return dp [X][Y] = minVal;
+    }
+    int twoCitySchedCost(vector<vector<int>>& costs){
+        vector<vector<int>>dp(costs.size()/2+1,vector<int>(costs.size()/2+1,INT_MAX));
+        return findMinValUsingDP(costs,costs.size()/2,costs.size()/2,0,dp);
     }
 };
