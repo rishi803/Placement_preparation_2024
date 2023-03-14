@@ -2,17 +2,25 @@ class Solution {
 public:
     int longestSubstring(string s, int k) {
         
-        unordered_map<char,int>mp;
+        // base case 
+        if(s.size()==0) return 0;
+        
+        int map[26]={};
         
         for(int i=0;i<s.size();i++){
-            mp[s[i]]++;
+            map[s[i]-'a']++;
         }
         
         int i=0;
-        while(mp[s[i]]>=k) i++;
+        
+        while(i<s.size() and map[s[i]-'a']>=k) i++;
         
         if(i==s.size()) return s.size();
         
-        return max(longestSubstring(s.substr(0,i),k),longestSubstring(s.substr(i+1),k));
+        int left=longestSubstring(s.substr(0,i),k);
+        int right=longestSubstring(s.substr(i+1),k);
+        
+        return max(left,right);
+      
     }
 };
