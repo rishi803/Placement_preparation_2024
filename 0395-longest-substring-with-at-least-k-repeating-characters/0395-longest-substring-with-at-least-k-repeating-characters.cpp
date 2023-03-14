@@ -4,19 +4,15 @@ public:
         
         unordered_map<char,int>mp;
         
-        for(auto &i:s){
-            mp[i]++;
+        for(int i=0;i<s.size();i++){
+            mp[s[i]]++;
         }
         
-        int ind=0;
+        int i=0;
+        while(mp[s[i]]>=k) i++;
         
-        while(ind<s.size() and mp[s[ind]]>=k) ind++;
+        if(i==s.size()) return s.size();
         
-        if(ind==s.size()) return s.size();
-        
-        int left=longestSubstring(s.substr(0,ind),k);
-        int right=longestSubstring(s.substr(ind+1),k);
-        
-        return max(left,right);
+        return max(longestSubstring(s.substr(0,i),k),longestSubstring(s.substr(i+1),k));
     }
 };
