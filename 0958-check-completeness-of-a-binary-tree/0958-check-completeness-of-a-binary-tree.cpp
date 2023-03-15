@@ -16,18 +16,12 @@ public:
             
             if(!f->left) flag=false; 
             
-            if(flag==false and f->left) return false;
-            
-            if(flag==false and f->right) return false;
-            
-            
+            if(flag==false and f->right or flag==false and f->left) return false;
             if(f->left) q.push(f->left);
             
-            if(!f->right) flag=false;
-            
-            
-            
             if(f->right) q.push(f->right);
+            
+            if(!f->right) flag=false;
          
         }
     
