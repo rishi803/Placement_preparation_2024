@@ -1,7 +1,6 @@
 class DataStream {
 public:
     int val,lastk,cnt=0;
-    vector<int>v;
     
     DataStream(int value, int k) {
         val=value;
@@ -13,7 +12,7 @@ public:
         if(num==val) cnt++;
         else cnt=0;
         
-        if(cnt>=lastk) return true;
+        if(cnt>=lastk) return true;   // check whether  last k integers are equal to value
         else return false;
         
     }
