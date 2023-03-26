@@ -35,6 +35,7 @@ public:
         
         for(int i=0;i<sz;i++){
             
+            if(edges[i]==-1) continue;
             
             if(!vis[i]){
                
