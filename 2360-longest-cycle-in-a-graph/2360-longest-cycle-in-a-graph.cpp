@@ -1,3 +1,9 @@
+// GYAN-->  agar directed graph h to cycle detect krne ke liye visited ke sath current recursion call me bhi visited dekhna hota hai 
+
+// isliye har recurison call ke liye ek inRecursion visited array bnao aur recursion khtm ke sath use reset krte rho baki recursion call ke liye
+
+// PRE LOGIC--> detect cycle in directed graph 
+
 class Solution {
 public:
     
@@ -8,12 +14,12 @@ public:
         if(i==-1) return;
         cnt++;
         
-        if(vis[i]==1 and inRecursion[i]==1){
+        if(vis[i]==1 and inRecursion[i]==1){ // cycle detected  and logic to calculate no. of nodes participating in cycle
             dp[i]=cnt-dp[i];
             mx=max(dp[i],mx);
             return;
         }
-        if(vis[i]==1) return;
+        if(vis[i]==1) return;  // cycle nhi aur vo phle se hi visited h node tb bhi vapas jao
         
         dp[i]=cnt;
         
