@@ -3,46 +3,44 @@ public:
     
     int mx=-1;
     
-    void help(int i,vector<int>&edges,vector<int>&dp,vector<bool>&vis,int prev,vector<bool>&inRecursion){
+    void help(int i,vector<int>&edges,vector<int>&dp,int &cnt,vector<int>&vis,vector<bool>&inRecursion){
         
-        if(i==-1){
-        return;}
+        if(i==-1) return;
+        cnt++;
         
-        
-        if(inRecursion[i]==1){       // cycle found
-            dp[i]=dp[prev]-dp[i]+1;
+        if(vis[i]==1 and inRecursion[i]==1){
+            dp[i]=cnt-dp[i];
             mx=max(dp[i],mx);
             return;
         }
         if(vis[i]==1) return;
         
-        
-        if(prev!=-1)
-        dp[i]=dp[prev]+1;
+        dp[i]=cnt;
         
         vis[i]=1;
         inRecursion[i]=1;
+        
              
-         help(edges[i],edges,dp,vis,i,inRecursion);
+         help(edges[i],edges,dp,cnt,vis,inRecursion);
         inRecursion[i]=0;
+        
     }
     
     int longestCycle(vector<int>& edges) {
         
         int sz=edges.size();
-        vector<bool>vis(sz);
-        vector<int>dp(sz,1);
-         vector<bool>inRecursion(sz);
+        vector<int>vis(sz);
+         vector<int>dp(sz);
+        vector<bool>inRecursion(sz);
         
         for(int i=0;i<sz;i++){
             
-            if(edges[i]==-1) continue;
             
             if(!vis[i]){
                
-                
-                help(i,edges,dp,vis,-1,inRecursion);
-       
+                int cnt=0;
+                help(i,edges,dp,cnt,vis,inRecursion);
+                if(sz-(cnt+i)<=mx) break;
             }
         }
         
