@@ -3,13 +3,13 @@ public:
     
     int mx=-1;
     
-    void help(int i,vector<int>&edges,vector<int>&dp,vector<int>&vis,int prev,vector<bool>&inRecursion){
+    void help(int i,vector<int>&edges,vector<int>&dp,vector<bool>&vis,int prev,vector<bool>&inRecursion){
         
         if(i==-1){
         return;}
         
         
-        if(vis[i]==1 and inRecursion[i]==1){
+        if(inRecursion[i]==1){       // cycle found
             dp[i]=dp[prev]-dp[i]+1;
             mx=max(dp[i],mx);
             return;
@@ -30,7 +30,7 @@ public:
     int longestCycle(vector<int>& edges) {
         
         int sz=edges.size();
-        vector<int>vis(sz);
+        vector<bool>vis(sz);
         vector<int>dp(sz,1);
          vector<bool>inRecursion(sz);
         
