@@ -41,7 +41,7 @@ public:
                
                 int cnt=0;
                 help(i,edges,dp,cnt,vis,inRecursion);
-                if(sz-(cnt+i)<=mx) break;
+                // if(sz-(cnt+i)<=mx) break;
             }
         }
         
