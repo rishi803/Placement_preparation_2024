@@ -1,25 +1,23 @@
 class Solution {
 public:
+    
+    long  help(vector<vector<int>>&grid,int row,int col,int st,int end,vector<vector<int>>&dp){
+      
+        if(st==row-1 and end==col-1) return grid[st][end];
+          if(st>=row or end>=col) return  INT_MAX;
+       if(dp[st][end]!=-1) return dp[st][end];
+        
+        long right=grid[st][end]+help(grid,row,col,st+1,end,dp);
+        long down=grid[st][end]+help(grid,row,col,st,end+1,dp);
+        return dp[st][end]=min(right,down);
+    }
+    
     int minPathSum(vector<vector<int>>& grid) {
+        int row=grid.size();
+        int col=grid[0].size();
         
-        for(int i=0;i<grid.size();i++){
-            for(int j=0;j<grid[0].size();j++){
-                if(i==0 and j>0){
-                    grid[i][j]+= grid[i][j-1];
-                }
-                if(j==0 and i>0){
-                    grid[i][j]+= grid[i-1][j];
-                }
-                
-            }
-        }
-        
-        for(int i=1;i<grid.size();i++){
-            for(int j=1;j<grid[0].size();j++){
-               
-                grid[i][j]+=min(grid[i-1][j],grid[i][j-1]);
-            }
-        }
-        return grid[grid.size()-1][grid[0].size()-1];
+        vector<vector<int>>dp(row,vector<int>(col,-1));
+       
+        return help(grid,row,col,0,0,dp);
     }
 };
