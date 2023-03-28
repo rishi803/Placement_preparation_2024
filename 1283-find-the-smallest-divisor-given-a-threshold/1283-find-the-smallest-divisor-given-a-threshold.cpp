@@ -6,9 +6,11 @@ public:
         int cnt=0;
         for(int i=0;i<nums.size();i++){
             
-            cnt+=nums[i]/mid;
+//             cnt+=nums[i]/mid;
             
-            if((nums[i]/mid)*mid!=nums[i]) cnt++;
+//             if((nums[i]/mid)*mid!=nums[i]) cnt++;
+            
+           cnt+=((nums[i]-1)/mid)+1;        // this is trick for above two line
         }
         return cnt<=threshold;
     }
