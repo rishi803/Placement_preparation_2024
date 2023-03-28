@@ -9,7 +9,6 @@ public:
             cnt+=nums[i]/mid;
             
             if((nums[i]/mid)*mid!=nums[i]) cnt++;
-            if(cnt>threshold) return false;
         }
         return cnt<=threshold;
     }
