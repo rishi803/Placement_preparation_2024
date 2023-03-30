@@ -13,24 +13,18 @@ public:
         if(mp.find(key)!=mp.end()) return mp[key];
         
         
-       bool result=false;
+        bool isswap=false,swapped=false,result=false;
         int n=s1.size();
         
         for(int i=1;i<n;i++){
             
-           bool not_swapped= isScramble(s1.substr(0,i),s2.substr(0,i)) and isScramble(s1.substr(i,n-i),s2.substr(i,n-i));
+            isswap= isScramble(s1.substr(0,i),s2.substr(0,i)) and isScramble(s1.substr(i,n-i),s2.substr(i,n-i));
             
-             if(not_swapped) { //if we find they are scrambled, we don't need to check further
-                result = true;
-                break;
-            }
+            swapped= isScramble(s1.substr(i,n-i),s2.substr(0,n-i)) and isScramble(s1.substr(0,i),s2.substr(n-i,i));
             
-         bool   swapped= isScramble(s1.substr(i,n-i),s2.substr(0,n-i)) and isScramble(s1.substr(0,i),s2.substr(n-i,i));
-            
-           if(swapped) { //if we find they are scrambled, we don't need to check further
-                result = true;
-                break;
-            }
+             if(isswap or swapped) {
+            result=true;
+        }
         }
         
        
