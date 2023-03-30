@@ -23,7 +23,7 @@ public:
             swapped= isScramble(s1.substr(i,n-i),s2.substr(0,n-i)) and isScramble(s1.substr(0,i),s2.substr(n-i,i));
             
              if(isswap or swapped) {
-            result=true;
+            return true;
         }
         }
         
