@@ -20,15 +20,17 @@ public:
             
             isswap= isScramble(s1.substr(0,i),s2.substr(0,i)) and isScramble(s1.substr(i,n-i),s2.substr(i,n-i));
             
+            if(isswap) return true;
+            
             swapped= isScramble(s1.substr(i,n-i),s2.substr(0,n-i)) and isScramble(s1.substr(0,i),s2.substr(n-i,i));
             
-             if(isswap or swapped) {
-            return true;
-        }
+            if(swapped) return true;
+            
+             
         }
         
        
         
-        return mp[key]=result;
+        return mp[key]=false;
     }
 };
