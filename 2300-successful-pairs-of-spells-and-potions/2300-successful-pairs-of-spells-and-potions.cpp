@@ -3,16 +3,16 @@ public:
     
     int lowerbound(long long target,vector<int>&nums,int l,int h){
         
-        
+        int mid=l+(h-l)/2;
         
         while(l<=h){
-         int mid=l+(h-l)/2;
+         
          
           if(nums[mid]>=target){
-              h=mid-1;
+             return lowerbound(target,nums,l,mid-1);
           }
          else if(nums[mid]<target){
-             l=mid+1;
+           return  lowerbound(target,nums,mid+1,h);
          }
         }
         return l;
