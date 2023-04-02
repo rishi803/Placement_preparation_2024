@@ -4,7 +4,7 @@ public:
         vector<int>ans;
         sort(potions.begin(),potions.end());
         for(int i=0;i<spells.size();i++){
-            long long target=ceil(floor(success)/spells[i]);
+            long long target=((success-1)/spells[i])+1;
             int lb=lower_bound(potions.begin(),potions.end(),target)-potions.begin();
             ans.push_back(potions.size()-lb);
         }
