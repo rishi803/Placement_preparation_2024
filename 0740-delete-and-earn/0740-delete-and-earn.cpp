@@ -1,25 +1,40 @@
 class Solution {
 public:
+    vector<int>mp;
+    vector<int>dp;
+    
+    int help(vector<int>&mp,int idx){
+        
+        if(idx>=mp.size()) return 0;
+        if(dp[idx]!=-1) return dp[idx];
+        
+        int takethis=idx*mp[idx]+help(mp,idx+2);
+        int nottake=help(mp,idx+1);
+        
+        
+        // cout<<idx<<" "<<takethis<<" "<<nottake<<endl;
+        
+        return dp[idx]=max(takethis,nottake);
+    }
+    
+    
     
     int deleteAndEarn(vector<int>& nums) {
-        int n = 10001;
     
-	//take the total sum by each number
-    vector<int> sum(n, 0);
-    vector<int> dp(n, 0);
-    
-    for(auto num: nums){
-        sum[num] += num;
-    }
-    
-    dp[0] = 0;
-    dp[1] = sum[1];
-    //now apply the house robbing concept
-    for(int i=2; i<n; i++){
-        dp[i] = max(dp[i-2] + sum[i], dp[i-1]);
-    }
-    
-    return dp[n-1];
+     sort(nums.begin(),nums.end());
+      int sz=nums.size();
+      int mx=nums[sz-1];
+      mp.resize(mx+1,0);
+      for(int i:nums){
+          mp[i]++;
+          
+      }
+        int mxsz=mp.size();
+     // for(auto i:mp) cout<<i.first<<" "<<i.second<<endl;
+     // sort(nums.begin(),nums.end());
+     nums.erase(unique(nums.begin(),nums.end()),nums.end());
+     dp.resize(mxsz+1,-1);
+    return help(mp,0);
         
     }
 };
