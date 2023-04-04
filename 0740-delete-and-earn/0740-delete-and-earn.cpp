@@ -21,20 +21,17 @@ public:
     
     int deleteAndEarn(vector<int>& nums) {
     
-     sort(nums.begin(),nums.end());
+     
       int sz=nums.size();
-      int mx=nums[sz-1];
+      int mx=*max_element(nums.begin(),nums.end());
       mp.resize(mx+1,0);
       for(int i:nums){
           mp[i]++;
           
       }
-        int mxsz=mp.size();
-     // for(auto i:mp) cout<<i.first<<" "<<i.second<<endl;
-     // sort(nums.begin(),nums.end());
-     nums.erase(unique(nums.begin(),nums.end()),nums.end());
+     int mxsz=mp.size();
      dp.resize(mxsz+1,-1);
-    return help(mp,0);
+     return help(mp,0);
         
     }
 };
