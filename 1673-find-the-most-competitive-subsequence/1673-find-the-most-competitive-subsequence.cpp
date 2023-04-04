@@ -9,7 +9,7 @@ public:
         
         for(auto i=0;i<nums.size();i++){
             
-            while(st.size() and k and st.top()>nums[i] and nums.size()-i>k-st.size() ){
+            while(st.size() and st.top()>nums[i] and nums.size()-i>k-st.size() ){
                 st.pop();
             }
             if(st.size()<k)
