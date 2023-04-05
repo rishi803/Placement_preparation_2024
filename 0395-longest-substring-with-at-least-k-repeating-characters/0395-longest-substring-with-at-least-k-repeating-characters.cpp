@@ -1,26 +1,31 @@
 class Solution {
 public:
-    int longestSubstring(string s, int k) {
+    
+    
+    
+    int help(string s,int k,int idx){
         
-        // base case 
-        if(s.size()==0) return 0;
-        
-        int map[26]={};
-        
+        vector<int>mp(26);
         for(int i=0;i<s.size();i++){
-            map[s[i]-'a']++;
+            mp[s[i]-'a']++;
         }
         
-        int i=0;
         
-        while(i<s.size() and map[s[i]-'a']>=k) i++;
         
-        if(i==s.size()) return s.size();
+        while(idx<s.size() and mp[s[idx]-'a']>=k) idx++;
         
-        int left=longestSubstring(s.substr(0,i),k);
-        int right=longestSubstring(s.substr(i+1),k);
+        if(idx==s.size()) return s.size();
         
+        int left=help(s.substr(0,idx),k,0);
+        int right=help(s.substr(idx+1),k,0);
+        cout<<left<<right;
+         
         return max(left,right);
-      
+        
+    }
+    
+    int longestSubstring(string s, int k) {
+        
+        return help(s,k,0);
     }
 };
