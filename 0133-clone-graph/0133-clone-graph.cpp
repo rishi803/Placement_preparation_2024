@@ -1,9 +1,4 @@
-/*
-public:
-    int val;
-    vector<Node*> neighbors;
-};
-*/
+
 
 class Solution {
 public:
@@ -13,7 +8,7 @@ public:
         if(!node) return nullptr;
         
          unordered_map<Node*,Node*>mp;
-         Node *reference=new Node(node->val,{});
+         Node *reference=new Node(node->val);
          mp[node]=reference;
         
         queue<Node*>q;
@@ -23,13 +18,13 @@ public:
             q.pop();
             
             for(auto child:curnode->neighbors){
-                if(mp.find(child)==mp.end()){
-                    Node *reference=new Node (child->val,{});
+                if(mp.find(child)==mp.end()){   // if not present in map insert it
+                    Node *reference=new Node (child->val);
                     mp[child]=reference;
                     q.push(child);
                 }
                 
-                mp[curnode]->neighbors.push_back(mp[child]);
+                mp[curnode]->neighbors.push_back(mp[child]);  // directly use from map
             }
         }
         
