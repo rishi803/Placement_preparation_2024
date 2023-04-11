@@ -1,0 +1,1 @@
+https://leetcode.com/problems/minimum-number-of-frogs-croaking/discuss/586653/C%2B%2B-Python-Java-Lucid-code-with-documened-comments-%2B-Visualization
