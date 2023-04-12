@@ -1,26 +1,23 @@
 class Solution {
 public:
     int findMinArrowShots(vector<vector<int>>& points) {
+      
         sort(points.begin(),points.end());
-        
-        vector<int>ans=points[0];
-        
-        int cnt=1;
+        int arrow=1;
+        int prevend=points[0][1];
         
         for(int i=1;i<points.size();i++){
             
-            vector<int>temp=points[i];
-            
-            if(ans[1]>=temp[0]){
-                ans[0]=max(ans[0],temp[0]);
-                ans[1]=min(ans[1],temp[1]);
-                // cout<<ans[0]<<" "<<ans[1]<<endl;
+            if(points[i][0]<=prevend){
+                prevend=min(prevend,points[i][1]);
             }
+            
             else{
-                ans=temp;
-                cnt++;
+                arrow++;
+                prevend=points[i][1];
             }
         }
-        return cnt;
+        
+        return arrow;
     }
 };
