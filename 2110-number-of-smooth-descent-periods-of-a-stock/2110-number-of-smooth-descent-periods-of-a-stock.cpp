@@ -11,9 +11,10 @@ public:
         for(head=1;head<nums.size();head++){
             
             
-            while(head<nums.size() and nums[head]-nums[head-1]==-1)  ans+=(head-tail+1),head++;
+            while(head<nums.size() and nums[head]-nums[head-1]==-1) {
+                ans+=(head-tail),head++;
+            } 
             
-            ans-=head-tail-1;
             tail=head;
         }
         
