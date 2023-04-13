@@ -6,7 +6,8 @@ public:
         for(int &child:adj[cur]){
             if(child==parent) continue;
             
-            int time_from_child=dfs(child,hasApple,adj,cur);
+            int time_from_child=0;
+                time_from_child=dfs(child,hasApple,adj,cur);
             
             if(time_from_child>0 or hasApple[child]){
                 time+=time_from_child+2;
