@@ -1,34 +1,37 @@
 class Solution {
 public:
-    // unordered_map<int,int>cant_visit;
+    vector<int>cant_go;
     int cnt=0;
-    void help(int parent,vector<int> adj[],vector<bool>&vis){
+    
+    void help(int parent,vector<int> adj[]){
         
-        vis[parent]=true;
+       cant_go[parent]=1;
         cnt++;
         for(auto child:adj[parent]){
-            if(vis[child]) continue;
+            if(cant_go[child]) continue;
             
             else{
-                help(child,adj,vis);
+                help(child,adj);
             }
         }
         
+        
     }
     int reachableNodes(int n, vector<vector<int>>& edges, vector<int>& restricted) {
-        
+        cant_go.resize(n,false);
         vector<int> adj[n]; // adjency list
         for (int i = 0; i < edges.size(); i++)
         {
             adj[edges[i][0]].push_back(edges[i][1]);
             adj[edges[i][1]].push_back(edges[i][0]);
         }
-      vector<bool>vis(n);
+      
         for(int i:restricted){
-            vis[i]=true;
+            cant_go[i]=1;
         }
         
-     help(0,adj,vis);
+       help(0,adj);
         return cnt;
+       
     }
 };
