@@ -9,12 +9,13 @@ public:
         if(l==r) return 1;
         if(l>r) return 0;
         if(dp[l][r]) return dp[l][r];
+        int option1=0,option2=0;
         if(s[l]==s[r] )
-            dp[l][r]=2 + longPalinSub(l+1,r-1, s,dp);
+            option1=2 + longPalinSub(l+1,r-1, s,dp);
             else
-            dp[l][r]=max(longPalinSub(l+1,r, s,dp),longPalinSub(l,r-1, s,dp)); 
+            option2=max(longPalinSub(l+1,r, s,dp),longPalinSub(l,r-1, s,dp)); 
         
-        return dp[l][r];
+        return dp[l][r]=max(option1,option2);
         
     }
 };
