@@ -1,47 +1,29 @@
 class Solution {
 public:
-    
-    bool isValid(int mid_sum,vector<int>&nums,int k){
-        
-        int cnt=1;
-        int sum=0;
-        
-        for(int i=0;i<nums.size();i++){
-          
-            sum+=nums[i];
-            
-            if(sum>mid_sum){
-           
-                cnt++;
-                sum=nums[i];
-               
-            }
+    int dp[1001][51];
+    int solve(vector<int>& nums,int idx,int k)
+    {
+        if(idx==nums.size() && k==0)
+        {
+            return 0;
         }
-        return cnt<=k;
+        if(idx==nums.size() || k==0)
+            return INT_MAX;
+        if(dp[idx][k]!=-1)
+            return dp[idx][k];
+        int res=INT_MAX,cnt=0;
+        for(int i=idx;i<nums.size();i++)
+        {
+            cnt+=nums[i];
+            int p=solve(nums,i+1,k-1);
+            int ans=max(cnt,p);
+            res=min(res,ans);
+        }
+        return dp[idx][k]=res;
     }
-    
-    int splitArray(vector<int>& nums, int k) {
-        
-        int n=nums.size();
-        int ans=0;
-        
-        int low=*max_element(nums.begin(),nums.end());
-        int high= accumulate(nums.begin(),nums.end(),0);
-        
-        while(low<=high){
-            
-            int mid_sum=low+(high-low)/2;
-            
-            if(isValid(mid_sum,nums,k)){
-                ans=mid_sum;
-                 high=mid_sum-1;
-            }
-            
-            else{
-              low=mid_sum+1;
-            }
-        }
-        
-        return low;
+    int splitArray(vector<int>& nums, int m) 
+    {
+          memset(dp,-1,sizeof(dp));
+        return solve(nums,0,m);
     }
 };
