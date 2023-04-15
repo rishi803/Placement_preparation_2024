@@ -25,8 +25,8 @@ int ans = INT_MAX;
     int distributeCookies(vector<int>& nums, int k) { // nums is the cookies vector
         int n = nums.size();
         vector<int> v(k,0); // v is to store each sum of the k subsets
-         // v[0]+=nums[0] ;   // n>=2     
-        solve(0,nums,v,k);
+         v[0]+=nums[0] ;   // n>=2   
+        solve(1,nums,v,k);
         return ans;
     }
 };
