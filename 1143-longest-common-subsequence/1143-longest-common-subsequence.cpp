@@ -5,8 +5,19 @@ public:
     {
         if(i<0 || j<0)    return 0;
         if(dp[i][j] != -1)  return dp[i][j];
-        if(text1[i] == text2[j])    return dp[i][j] = 1+lcs(i-1,j-1,text1,text2,dp);  // if character matches
-        return dp[i][j] = max(lcs(i-1,j,text1,text2,dp), lcs(i,j-1,text1,text2,dp)); // if character not matches
+        
+        int op1=0,op2=0;
+        
+        if(text1[i] == text2[j]) 
+        {
+          op1 = 1+lcs(i-1,j-1,text1,text2,dp);  // if character matches 
+        }  
+        else{
+            op2 = max(lcs(i-1,j,text1,text2,dp), lcs(i,j-1,text1,text2,dp)); // if character not matches
+        }
+        
+        return dp[i][j]=max(op1,op2);
+       
     }
     int longestCommonSubsequence(string text1, string text2) {
         
