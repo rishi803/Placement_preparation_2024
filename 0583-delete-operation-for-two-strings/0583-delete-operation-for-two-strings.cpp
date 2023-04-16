@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[502][502];
+    char dp[502][502];
     int help(int id1,int id2,string word1,string word2){
      
         if(id1==0) return id2;
@@ -19,6 +19,6 @@ public:
     
     int minDistance(string word1, string word2) {
         memset(dp,-1,sizeof(dp));
-        return help(word1.size(),word2.size(),word1,word2);
+        return abs(help(word1.size(),word2.size(),word1,word2));
     }
 };
