@@ -12,6 +12,6 @@
 # row02 = 'm'. So, sex = 'm'. We'll now find 'm' in 'fm' and will replace it with ''. So, the result is 'f'.
 
 UPDATE salary 
-SET sex = REPLACE ('ffm', sex, '');
+SET sex = REPLACE ('fm', sex, '');
 
 
