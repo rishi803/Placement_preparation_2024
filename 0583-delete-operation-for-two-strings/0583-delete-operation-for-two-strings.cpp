@@ -5,12 +5,16 @@ public:
         if(n==0) return m;
         if(m==0) return n;
         if(dp[m][n]!=-1) return dp[m][n];
+        int op1=INT_MAX,op2=INT_MAX;
+        
         if(word1[n-1]==word2[m-1]){
-            return dp[m][n]= help(word1,n-1,word2,m-1);
+            op1= help(word1,n-1,word2,m-1);
         }
         else{
-            return dp[m][n]= 1+min(help(word1,n-1,word2,m),help(word1,n,word2,m-1));
+            op2= 1+min(help(word1,n-1,word2,m),help(word1,n,word2,m-1));
         }
+        
+        return dp[m][n]=min(op1,op2);
     }
     
     int minDistance(string word1, string word2) {
