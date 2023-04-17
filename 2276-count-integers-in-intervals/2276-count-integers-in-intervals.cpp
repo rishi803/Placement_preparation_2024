@@ -13,7 +13,7 @@ public:
             ++it;
         }
         
-        while(it != st.end() && it->first <= right) {
+        while(it != st.end() and it->first<=right) {
             left = min(left, it->first);
             right = max(right, it->second);
             
