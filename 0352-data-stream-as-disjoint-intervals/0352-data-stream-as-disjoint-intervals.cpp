@@ -16,26 +16,21 @@ public:
         vector<vector<int>>ans;
         vector<int>temp;
         
-        for(int i=0; i<=maxi+1;i++)
+        for(int i=0;i<=maxi;i++)    // maxi+1 so that 
         {
-            if(v[i]==1)
-            {
-                while(v[i]==1)
-                temp.push_back(i++);
-                i--;
-                
-            }
-            else if(temp.size())
-            {
-                ans.push_back({temp.front(), temp.back()});
-                temp={};
-                
-            }
-           
-        // return {};
             
+          while(v[i]==1){
+              temp.push_back(i);
+              i++;
+          }
             
-        } return ans;
+          if(temp.size()){
+              ans.push_back({temp.front(),temp.back()});
+              temp.clear();
+          } 
+            
+        } 
+        return ans;
     }
 };
 
