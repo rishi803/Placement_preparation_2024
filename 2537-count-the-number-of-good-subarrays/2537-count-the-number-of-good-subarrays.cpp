@@ -14,6 +14,8 @@ public:
             mp[nums[head]]++;
             cnt += mp[nums[head]] - 1;            // calculating subarrays
             
+                 // ------------- if(cnt>=k go inside while loop) -----  (this right part will also be our answer since it also satisfy cnt>=k, inside while loop shift tail pointer forward to check whether it still satisfying the cnt>=k then left part is the answer but right remaining part will also contribute to the answer)
+            
 			while(tail < head and cnt >= k){
 				ans += n - head;
 				mp[nums[tail]]--;
