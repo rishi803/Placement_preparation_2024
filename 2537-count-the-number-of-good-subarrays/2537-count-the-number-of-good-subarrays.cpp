@@ -1,5 +1,4 @@
-//  [3,3,4,3,2,2,4,3]
-//  2
+
 
 class Solution {
 public:
@@ -11,8 +10,10 @@ public:
        
         for(head=0;head<nums.size();head++){
             
+            
+            cnt += mp[nums[head]]  ;        // calculating subarrays
             mp[nums[head]]++;
-            cnt += mp[nums[head]] - 1;            // calculating subarrays
+            
             
                  // ------------- if(cnt>=k go inside while loop) -----  (this right part will also be our answer since it also satisfy cnt>=k, inside while loop shift tail pointer forward to check whether it still satisfying the cnt>=k then left part is the answer but right remaining part will also contribute to the answer)
             
