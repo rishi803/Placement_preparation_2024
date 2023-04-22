@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    int dp[71][8000];
+    int dp[71][5000];
     
     int help(vector<vector<int>>&mat,int row,int col,int currow,int target,int sum){
         
