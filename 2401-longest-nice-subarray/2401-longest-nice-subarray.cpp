@@ -11,6 +11,7 @@ public:
             ans|=nums[head];
             
             result=max(result,head-tail+1);
+            cout<<head-tail+1<<" "<<head<<endl;
             
         }
         return result;
