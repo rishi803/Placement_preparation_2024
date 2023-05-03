@@ -1,27 +1,39 @@
 class Solution {
 public:
-    int help(vector<int>&days,vector<int>&costs,int idx,vector<int>&dp){
-        
+    
+    int dp[366];
+    
+    int help(vector<int>&days,vector<int>&costs,int idx){
         if(idx>=days.size()) return 0;
-        
-        int cost_days=costs[0]+help(days,costs,idx+1,dp);
         if(dp[idx]!=-1) return dp[idx];
+        int cost1day=INT_MAX;
+        int cost7day=INT_MAX;
+        int cost30day=INT_MAX;
         
-        int st_idx=idx;
         
-        while(st_idx<days.size() and days[st_idx]<days[idx]+7) st_idx++;
+        cost1day=costs[0]+help(days,costs,idx+1);
         
-        int cost_week=costs[1]+help(days,costs,st_idx,dp);
         
-        while(st_idx<days.size() and days[st_idx]<days[idx]+30) st_idx++;
+        int i=idx;
         
-        int cost_month=costs[2]+help(days,costs,st_idx,dp);
+        while(i<days.size() and days[i]<=days[idx]+6) i++;
         
-        return dp[idx]=min({cost_days,cost_week,cost_month});
+        cost7day=costs[1]+help(days,costs,i);
+        
+        int j=idx;
+        
+        while(j<days.size() and days[j]<=days[idx]+29) j++;
+        
+        cost30day=costs[2]+help(days,costs,j);
+        
+        return dp[idx]=min({cost1day,cost7day,cost30day});
+        
+        
     }
     
     int mincostTickets(vector<int>& days, vector<int>& costs) {
-        vector<int>dp(days.size()+1,-1);
-        return help(days,costs,0,dp);
+        
+        memset(dp,-1,sizeof(dp));
+        return help(days,costs,0);
     }
 };
