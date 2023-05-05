@@ -1,26 +1,20 @@
 class Solution {
 public:
-    bool isvowel(char c){
-        return c=='a' or c=='e' or c=='o' or c=='i' or c=='u';
+    bool isv(char a){
+        return a=='a' or a=='e' or a=='i' or a=='o' or a=='u';
     }
-    
     int maxVowels(string s, int k) {
-        
-        int head=0,tail=0,ans=0,cnt=0;
-        
+     int temp=0,mx=0,head=0,tail=0;
         for(head=0;head<k;head++){
-            if(isvowel(s[head])) cnt++;
+            if(isv(s[head])) temp++;
         }
-        ans=max(ans,cnt);
-        
-        for(head=k;head<s.size();head++){
-            
-            if(isvowel(s[head-k])) cnt--;
-            if(isvowel(s[head])) cnt++;
-            
-            ans=max(ans,cnt);
-        }
-        
-        return ans;
+        mx=max(mx,temp);
+      for(head=k;head<s.size();head++){
+          if(isv(s[tail])) temp--;
+          if(isv(s[head])) temp++;
+          mx=max(mx,temp);
+          tail++;
+      }  
+        return mx;
     }
 };
