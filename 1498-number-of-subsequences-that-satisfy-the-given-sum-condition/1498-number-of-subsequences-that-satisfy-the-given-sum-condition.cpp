@@ -13,7 +13,7 @@ public:
     }
     int numSubseq(vector<int>& nums, int target) {
         sort(nums.begin(),nums.end());
-        long ans=0;
+        int ans=0;
         
         for(int i=0;i<nums.size();i++){
             
