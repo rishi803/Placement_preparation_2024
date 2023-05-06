@@ -17,12 +17,12 @@ public:
         
         for(int i=0;i<nums.size();i++){
             
-            int ub=upper_bound(nums.begin(),nums.end(),target-nums[i])-nums.begin();
+            int ub=upper_bound(nums.begin()+i,nums.end(),target-nums[i])-nums.begin();
             
             ub--;
             
             if(ub>=i)
-            ans=(ans+(power(2,ub-i)%mod))%mod;
+            ans=(ans+(power(2,ub-i)))%mod;
               // cout<<i<<" "<<ub<<" "<<power(2,ub-i)<<endl;
         }
     
