@@ -5,16 +5,16 @@ public:
         
         unordered_map<int,int>mp;
         
-        for(auto i:nums){
+        for(auto &i:nums){
             mp[i%space]++;
         }
         int mx=0;
         
-        for(auto it:mp){
+        for(auto &it:mp){
             mx=max(mx,it.second);
         }
         
-        for(auto i:nums){
+        for(auto &i:nums){
             if(mp[i%space]==mx) return i;
         }
         
