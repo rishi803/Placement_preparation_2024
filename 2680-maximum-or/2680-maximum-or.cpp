@@ -15,11 +15,11 @@ public:
         pre[i + 1] = pre[i] | nums[i];
     }
 
-    cout<<"Prefix is: ";
-    for(auto i:pre){
-        cout<<i<<" ";
-    }
-    cout<<endl;
+    // cout<<"Prefix is: ";
+    // for(auto i:pre){
+    //     cout<<i<<" ";
+    // }
+    // cout<<endl;
         
     // Calculate suffix bitwise OR values
     for (int i = n - 1; i >= 0; i--) {
@@ -27,11 +27,11 @@ public:
     }
         
    cout<<"Suffix is: ";
-    for(auto i:suf){
-        cout<<i<<" ";
-    }
-    cout<<endl;
-    cout<<"P= "<<p<<endl;
+    // for(auto i:suf){
+    //     cout<<i<<" ";
+    // }
+    // cout<<endl;
+    // cout<<"P= "<<p<<endl;
 
     // Find the maximum result by iterating through the numbers
     for (int i = 0; i < n; i++) {
