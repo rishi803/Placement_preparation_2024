@@ -1,47 +1,24 @@
 class Solution {
 public:
-    
-    bool isValid(int mid_sum,vector<int>&nums,int k){
+    int dp[1001][51];
+    int help(vector<int>&nums,int cut,int idx){
+        if(idx==nums.size() and cut==0) return 0;
+        if(idx==nums.size() or cut==0) return INT_MAX;
+        if(dp[idx][cut]!=-1)
+            return dp[idx][cut];
+        int currsum=0,ans=INT_MAX,nextsum=0;
         
-        int cnt=1;
-        int sum=0;
-        
-        for(int i=0;i<nums.size();i++){
-          
-            sum+=nums[i];
+        for(int i=idx;i<nums.size();i++){
+            currsum+=nums[i];
+            nextsum=help(nums,cut-1,i+1);
             
-            if(sum>mid_sum){
-           
-                cnt++;
-                sum=nums[i];
-               
-            }
+            ans=min(ans,max(currsum,nextsum));
         }
-        return cnt<=k;
+        
+        return dp[idx][cut]= ans;
     }
-    
     int splitArray(vector<int>& nums, int k) {
-        
-        int n=nums.size();
-        int ans=0;
-        
-        int low=*max_element(nums.begin(),nums.end());
-        int high= accumulate(nums.begin(),nums.end(),0);
-        
-        while(low<=high){
-            
-            int mid_sum=low+(high-low)/2;
-            
-            if(isValid(mid_sum,nums,k)){
-                ans=mid_sum;
-                 high=mid_sum-1;
-            }
-            
-            else{
-              low=mid_sum+1;
-            }
-        }
-        
-        return low;
+           memset(dp,-1,sizeof(dp));
+        return help(nums,k,0);
     }
 };
