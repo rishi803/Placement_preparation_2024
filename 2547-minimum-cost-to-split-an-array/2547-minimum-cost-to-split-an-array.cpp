@@ -1,3 +1,5 @@
+// split array largest sum dp version
+
 class Solution {
 public:
     
@@ -7,7 +9,7 @@ public:
         if(dp[idx]!=-1) return dp[idx];
         
         int ans=INT_MAX;
-        vector<int>freq(nums.size());
+        unordered_map<int,int>freq;
         int trimmed=0;
         
         for(int i=idx;i<nums.size();i++){
