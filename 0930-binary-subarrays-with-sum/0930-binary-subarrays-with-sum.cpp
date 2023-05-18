@@ -1,6 +1,5 @@
 class Solution {
 public:
-
     int atmost(vector<int>&nums,int g){
 
         long long head=0,tail=0,sum=0,ans=0;
@@ -18,6 +17,8 @@ public:
     }
     
     int numSubarraysWithSum(vector<int>& nums, int goal) {
+    
+        cout<< atmost(nums,goal)<<" "<<atmost(nums,goal-1);
         return atmost(nums,goal)-atmost(nums,goal-1);
         
     }
