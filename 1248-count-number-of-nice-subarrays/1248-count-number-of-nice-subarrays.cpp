@@ -9,10 +9,7 @@ public:
         int head=0,tail=0,ans=0;
         
         for(head=0;head<nums.size();head++){
-            if(nums[head]%2!=0){
-                k--;
-            }
-            
+           if(nums[head]%2!=0) k--;
             
             while(k<0){
                 if(nums[tail]%2!=0) k++;
