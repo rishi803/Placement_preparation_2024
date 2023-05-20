@@ -17,7 +17,7 @@ public:
             for(auto it = hm.begin(); it!=hm.end(); it++){
                 for(auto it2 = hm.begin(); it2!=hm.end(); it2++){
                     if(it == it2) continue;
-                    if(it->first.second == it2->first.first && it->first.first != it2->first.second){
+                    if(it->first.second == it2->first.first){
                         hm[{it->first.first,it2->first.second}] = it->second * it2->second;
                         hm[{it2->first.second,it->first.first}] = 1/(it->second * it2->second);
                     }
