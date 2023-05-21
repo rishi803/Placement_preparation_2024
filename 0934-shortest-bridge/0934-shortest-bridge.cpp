@@ -12,7 +12,7 @@ public:
        dfs(row,col,i+1,j,grid),dfs(row,col,i,j+1,grid),dfs(row,col,i,j-1,grid),dfs(row,col,i-1,j,grid);
     }
     
-    int bfs(int row,int col,int i,int j,vector<vector<int>>&grid){
+    int bfs(int row,int col,vector<vector<int>>&grid){
         
         vector<int>dir={-1,0,1,0,-1};
         
@@ -27,13 +27,12 @@ public:
                     int newy=y+dir[idx+1];
                     
                     if(newx<row and newx>=0 and newy<col and newy>=0  and grid[newx][newy]==1) return dist;
-                    if(newx<row and newx>=0 and newy<col and newy>=0 and grid[newx][newy]==0 and vis[newx][newy]!=1){
+                    if(newx<row and newx>=0 and newy<col and newy>=0 and grid[newx][newy]==0){
                         q.push({newx,newy});
                         grid[newx][newy]=2;
-                        vis[newx][newy]=1;
+                        // vis[newx][newy]=1;
                     }
-                }
-                
+                } 
             }
             dist++;
         }
@@ -57,14 +56,6 @@ public:
             if(flag) break;
         }
             
-           for(int i=0;i<row;i++){
-            for(int j=0;j<col;j++){
-                if(grid[i][j]==2){
-                  return bfs(row,col,i,j,grid);
-                }
-            }
-        }
-        
-        return -1;
+         return bfs(row,col,grid);
     }
 };
