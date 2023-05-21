@@ -2,14 +2,19 @@ class Solution {
 public:
     queue<pair<int,int>>q;
     int dist=0;
-    vector<vector<int>>vis;
+    // vector<vector<int>>vis;
     
     void dfs(int row,int col,int i,int j,vector<vector<int>>&grid){
        if(i>=row or i<0 or j>=col or j<0 or grid[i][j]!=1) return;
         
-       grid[i][j]=2;
-       q.push({i,j});
-       dfs(row,col,i+1,j,grid),dfs(row,col,i,j+1,grid),dfs(row,col,i,j-1,grid),dfs(row,col,i-1,j,grid);
+             grid[i][j]=2;
+             q.push({i,j});
+        
+                                dfs(row,col,i+1,j,grid),
+        
+dfs(row,col,i,j+1,grid),                                            dfs(row,col,i,j-1,grid),
+        
+                                dfs(row,col,i-1,j,grid);
     }
     
     int bfs(int row,int col,vector<vector<int>>&grid){
@@ -30,7 +35,6 @@ public:
                     if(newx<row and newx>=0 and newy<col and newy>=0 and grid[newx][newy]==0){
                         q.push({newx,newy});
                         grid[newx][newy]=2;
-                        // vis[newx][newy]=1;
                     }
                 } 
             }
@@ -43,7 +47,7 @@ public:
         int row=grid.size();
         int col=grid[0].size();
         bool flag=false;
-        vis.resize(row,vector<int>(col,0));
+        // vis.resize(row,vector<int>(col,0));
         
         for(int i=0;i<row;i++){
             for(int j=0;j<col;j++){
