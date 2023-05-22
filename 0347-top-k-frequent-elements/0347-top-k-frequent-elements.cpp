@@ -2,10 +2,10 @@ class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
         unordered_map<int,int>mp;
-        for(auto i:nums) mp[i]++;
+        for(auto &i:nums) mp[i]++;
         
         multimap<int,int,greater<int>>freq;
-        for(auto [x,y]:mp) freq.insert(pair<int, int>(y, x));
+        for(auto &[x,y]:mp) freq.insert(pair<int, int>(y, x));
         
         vector<int>ans;
         
