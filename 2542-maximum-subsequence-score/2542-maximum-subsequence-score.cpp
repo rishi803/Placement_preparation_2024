@@ -2,11 +2,11 @@ class Solution {
 public:
     long long maxScore(vector<int>& nums1, vector<int>& nums2, int k) {
        
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>minheap;
+        priority_queue<int,vector<int>,greater<int>>minheap;
         vector<pair<int,int>>v;
         
         for(int i=0;i<nums1.size();i++){
-            v.push_back({nums1[i],nums2[i]});
+            v.push_back({nums2[i],nums1[i]});
         }
         
         sort(v.begin(),v.end(),greater<pair<int,int>>());
@@ -14,19 +14,19 @@ public:
         long long sum=0,ans=0;
         
         for(int i=0;i<k;i++){
-            sum+=v[i].first;
-            minheap.push({v[i].second,v[i].first});
+            sum+=v[i].second;
+            minheap.push(v[i].second);
         }
         
-        ans=(minheap.top().first*sum);
+        ans=(v[k-1].first*sum);
         
         for(int i=k;i<nums1.size();i++){
-            sum-=minheap.top().second;
+            sum-=minheap.top();
             minheap.pop();
-          
-            sum+=v[i].first;
-            minheap.push({v[i].second,v[i].first});
-            ans=max(ans,sum*minheap.top().first);
+           
+            sum+=v[i].second;
+            minheap.push(v[i].second);
+            ans=max(ans,sum*v[i].first);
         }
         return ans;
         
