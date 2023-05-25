@@ -1,3 +1,5 @@
+// exactly same as https://leetcode.com/problems/intervals-between-identical-elements/
+
 class Solution {
 public:
     vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
