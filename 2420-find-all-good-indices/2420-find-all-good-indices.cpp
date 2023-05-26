@@ -1,3 +1,5 @@
+// very much similar to https://leetcode.com/problems/find-good-days-to-rob-the-bank/
+
 class Solution {
 public:
     vector<int> goodIndices(vector<int>& nums, int time) {
