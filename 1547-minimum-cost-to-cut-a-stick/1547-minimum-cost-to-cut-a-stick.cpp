@@ -1,27 +1,27 @@
 class Solution {
 public:
     
-    int help(vector<int>&cuts,int leftidx,int rightidx,int st,int end,vector<vector<int>>&dp){
+
+    int help(int st,int end,vector<int>&cuts,int leftidx,int rightidx,vector<vector<int>>&dp){
         
-        if(st>end) return 0;
-        if(dp[st][end]!=-1) return dp[st][end];
+        if(leftidx>rightidx) return 0;
+        if(dp[leftidx][rightidx]!=-1) return dp[leftidx][rightidx];
         
         int ans=INT_MAX;
         
-        for(int i=st;i<=end;i++){
+        for(int i=leftidx;i<=rightidx;i++){
+            int leftcost=help(st,cuts[i],cuts,leftidx,i-1,dp);
+            int rightcost=help(cuts[i],end,cuts,i+1,rightidx,dp);
             
-            int leftcost=help(cuts,leftidx,cuts[i],st,i-1,dp);
-            int rightcost=help(cuts,cuts[i],rightidx,i+1,end,dp);
-            
-            ans=min(ans,rightidx-leftidx+leftcost+rightcost);
+            ans=min(ans,end-st+leftcost+rightcost);
         }
         
-        return dp[st][end]=ans;
+        return dp[leftidx][rightidx]=ans;
     }
     int minCost(int n, vector<int>& cuts) {
         
-        vector<vector<int>>dp(cuts.size()+1,vector<int>(cuts.size(),-1));
+        vector<vector<int>>dp(cuts.size(),vector<int>(cuts.size(),-1));
         sort(cuts.begin(),cuts.end());
-        return help(cuts,0,n,0,cuts.size()-1,dp);
+        return help(0,n,cuts,0,cuts.size()-1,dp);
     }
 };
