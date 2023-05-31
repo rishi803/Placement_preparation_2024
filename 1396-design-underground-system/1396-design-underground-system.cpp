@@ -19,14 +19,11 @@ public:
        string hash=prevst+"#"+currentst;
        int time=t-prevtime;
        
-        if(temp[hash].first>0){
             auto &[key,val]=temp[hash];
             key+=time;
             val+=1;
-        }
-        else{
-            temp[hash]={time,1};
-        }
+       
+        mp.erase(id);
         
     }
     
