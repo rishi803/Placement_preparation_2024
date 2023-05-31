@@ -2,7 +2,7 @@ class UndergroundSystem {
 public:
     
     unordered_map<int,pair<int,string>>mp;
-    map<string,pair<int,int>>temp;
+    unordered_map<string,pair<int,int>>temp;
     
     UndergroundSystem() {
         
