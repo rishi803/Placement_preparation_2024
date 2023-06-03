@@ -1,26 +1,32 @@
 class Solution {
 public:
     
-    vector<vector<int>>dp;
-    
-    int help(vector<vector<int>>&dungeon,int row,int col,int i,int j){
-        if(i>=row or j>=col) return INT_MIN+1000;
-        if(dp[i][j]!=-1) return dp[i][j];
-        if(i==row-1 and j==col-1) return dungeon[i][j]>=0?0:dungeon[i][j];
-            
-         int right=dungeon[i][j]+help(dungeon,row,col,i,j+1);
-         int down=dungeon[i][j]+help(dungeon,row,col,i+1,j);
+    long health=0;
+    int dp[201][201];
+    long help(vector<vector<int>>&dungeon,int i,int j,int row,int col){
+         if(i>=row or j>=col) return INT_MIN;
+         if(dp[i][j]!=-1001) return dp[i][j];
+         if(i==row-1 and j==col-1) return dungeon[i][j]>=0?0:dungeon[i][j];
         
-       int minhealth=max(right,down);
-        if(minhealth>=0) minhealth=0;
+         long right=dungeon[i][j]+help(dungeon,i+1,j,row,col);
+         long down=dungeon[i][j]+help(dungeon,i,j+1,row,col);
         
-        return dp[i][j]=minhealth;
+         health=max(right,down);
+         if(health>=0) health=0;
+        
+          return dp[i][j]=health;
     }
+    
     int calculateMinimumHP(vector<vector<int>>& dungeon) {
         
-        int row=dungeon.size();
-        int col=dungeon[0].size();
-        dp.resize(row,vector<int>(col,-1));
-        return abs(help(dungeon,row,col,0,0))+1;
+        int row=dungeon.size(),col=dungeon[0].size();
+        
+        for(auto i=0;i<201;i++){
+            for(auto j=0;j<201;j++){
+                dp[i][j]=-1001;
+            }
+        }
+        return abs(help(dungeon,0,0,row,col))+1;
+        
     }
 };
