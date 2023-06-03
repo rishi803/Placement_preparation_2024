@@ -19,7 +19,22 @@ public:
             }
         }
         
-        dfs(headID,adj,n,0,informTime);
+        // dfs(headID,adj,n,0,informTime);
+        
+        queue<pair<int,int>>q;
+        q.push({headID,0});
+        
+        while(!q.empty()){
+           
+            int sz=q.size();
+            while(sz--){
+                auto [node,time]=q.front();
+                q.pop();
+                 ans=max(ans,time+informTime[node]);
+                for(auto child:adj[node]) q.push({child,time+informTime[node]});
+            }
+            
+        }
         return ans;
     }
 };
