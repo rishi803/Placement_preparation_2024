@@ -16,7 +16,7 @@ public:
                 if(cnt1==0) ans++;
             }
             else{
-                ans+=cnt1;
+                if(cnt1!=0) ans+=cnt1;
             }
             // cout<<"a= "<<ans<<endl;;
         }
