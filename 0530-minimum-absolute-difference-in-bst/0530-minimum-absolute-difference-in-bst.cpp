@@ -11,7 +11,7 @@ int diff = INT_MAX;
         // if we find at least a node before, we update diff
        if (prev) {
             
-            cout<<root->val<<" "<<prev->val<<endl;
+            // cout<<root->val<<" "<<prev->val<<endl;
             diff = min(diff, abs(prev->val - root->val));
         }
                prev = root;
