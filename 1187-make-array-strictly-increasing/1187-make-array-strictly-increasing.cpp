@@ -4,7 +4,8 @@ public:
     long long help(vector<int>&arr1,vector<int>&arr2,int idx,int prev, map<pair<int, int>, int>&dp){
         
         if(idx==arr1.size()) return 0;
-if(dp.find({idx, prev}) != dp.end()) {
+        
+        if(dp[{idx,prev}] >0 ) {
             return dp[{idx, prev}];
         }
         
