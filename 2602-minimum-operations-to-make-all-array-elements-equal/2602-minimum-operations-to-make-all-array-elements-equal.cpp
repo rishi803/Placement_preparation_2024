@@ -16,8 +16,8 @@ public:
             if(idx>=nums.size()) ans.push_back (abs(pre[sz-1]-q*(idx)));
            else if(idx==0) ans.push_back(abs(pre[sz-1]-(q*(sz))));
             else{
-                long long left=abs(pre[idx-1]-(q*(idx)*1LL));
-                long long right=abs(pre[sz-1]-pre[idx-1]-(q*(sz-idx)*1LL));
+                long long left=abs(pre[idx-1]-(q*(idx)));
+                long long right=abs(pre[sz-1]-pre[idx-1]-(q*(sz-idx)));
                ans.push_back(left+right);
             }
             
