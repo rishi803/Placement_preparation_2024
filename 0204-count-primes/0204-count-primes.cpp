@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    vector<int>v;
+    vector<bool>v;
     int cnt=0;
     
     void seive(int n){
