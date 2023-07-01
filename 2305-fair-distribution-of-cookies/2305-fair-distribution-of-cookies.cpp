@@ -1,32 +1,34 @@
 class Solution {
 public:
     
-int ans = INT_MAX;
-    void solve(int start, vector<int>& nums, vector<int>& v, int k){
-        if(start==nums.size()){
-            int maxm = INT_MIN;
-            for(int i=0;i<k;i++){
-                // cout<<v[i]<<" ";
-                maxm = max(maxm,v[i]);
+    vector<int>v;
+    int ans=INT_MAX;
+    
+    void help(vector<int>&cookies,int k,int idx){
+    
+        
+        if(idx==cookies.size()) {
+            // cout<<v[0]<<" "<<v[1]<<endl;
+            int mxans=0;
+            for(int i=0;i<v.size();i++){
+                mxans=max(mxans,v[i]);
+               
             }
-            // cout<<endl;
-            // cout<<" max= "<<maxm<<endl;
-            ans = min(ans,maxm);
+            // cout<<mxans<<endl;
+            ans=min(mxans,ans);
             return;
         }
-        // cout<<endl;
         for(int i=0;i<k;i++){
-            v[i] += nums[start];
-            solve(start+1,nums,v,k);
-            v[i] -= nums[start];
+            v[i]+=cookies[idx];
+            help(cookies,k,idx+1);
+            v[i]-=cookies[idx];
         }
     }
     
-    int distributeCookies(vector<int>& nums, int k) { // nums is the cookies vector
-        int n = nums.size();
-        vector<int> v(k,0); // v is to store each sum of the k subsets
-         v[0]+=nums[0] ;   // n>=2   
-        solve(1,nums,v,k);
+    int distributeCookies(vector<int>& cookies, int k) {
+        
+      v.resize(k);
+      help(cookies,k,0);
         return ans;
     }
 };
