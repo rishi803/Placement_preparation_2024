@@ -1,1 +1,1 @@
-https://leetcode.com/problems/fair-distribution-of-cookies/discuss/2140978/C%2B%2B-or-Backtracking-or-Binary-Search-or-Next-Permutation
+​
