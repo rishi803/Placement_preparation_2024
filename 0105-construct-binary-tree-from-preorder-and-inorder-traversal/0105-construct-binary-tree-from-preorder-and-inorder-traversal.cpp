@@ -1,26 +1,26 @@
 
 class Solution {
 public:
+    
     int idx=0;
     
-    TreeNode* help(vector<int>&pre,vector<int>&in,int st,int end){
-        
+    TreeNode* help(vector<int>&preorder,vector<int>&inorder,int st,int end){
+         
         if(st>end) return nullptr;
         
-        int pivot=end;
-        while(pre[idx]!=in[pivot]) pivot--;
+       
+        int temp=end;
+        while(preorder[idx]!=inorder[temp]) temp--;
         idx++;
+         TreeNode* root= new TreeNode(inorder[temp]);
+        root->left=help(preorder,inorder,st,temp-1);
+        root->right=help(preorder,inorder,temp+1,end);
         
-        TreeNode* node=new TreeNode (in[pivot]);
-        node->left= help(pre,in,st,pivot-1);
-        node->right=help(pre,in,pivot+1,end);
-            
-        return node;
-        
+        return root;
     }
     
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        
+       
         return help(preorder,inorder,0,preorder.size()-1);
     }
 };
