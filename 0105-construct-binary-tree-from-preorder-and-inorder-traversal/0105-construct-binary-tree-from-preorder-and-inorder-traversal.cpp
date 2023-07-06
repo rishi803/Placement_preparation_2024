@@ -9,8 +9,8 @@ public:
         if(st>end) return nullptr;
         
        
-        int temp=end;
-        while(preorder[idx]!=inorder[temp]) temp--;
+        int temp=st;
+        while(preorder[idx]!=inorder[temp]) temp++;
         idx++;
          TreeNode* root= new TreeNode(inorder[temp]);
         root->left=help(preorder,inorder,st,temp-1);
