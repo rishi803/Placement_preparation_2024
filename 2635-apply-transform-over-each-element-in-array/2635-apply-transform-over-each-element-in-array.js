@@ -1,12 +1,11 @@
-/**
- * @param {number[]} arr
- * @param {Function} fn
- * @return {number[]}
- */
-var map = function(arr, fn) {
- const result = [];
- for(var i=0;i<arr.length;i++){
-     result.push((fn(arr[i],i)));
- }
-  return result;
+
+var filter = function(arr, fn) {
+   
+    var ans=[];
+    for(var i=0;i<arr.length;i++){
+        if(fn(arr[i],i)){
+            ans.push(arr[i]);
+        }
+    }
+    return ans;
 };
