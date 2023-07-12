@@ -9,7 +9,7 @@ public:
         
         for(auto child:graph[node]){
          if(pathvis[child]==false && help(graph,vis,child,pathvis,idx)){
-                return true;
+                return false;
             }
             else if(vis[child]==true){
             return true;
@@ -29,8 +29,8 @@ public:
         
         for(int i=0;i<graph.size();i++){
             
-           if(!vis[i]){
-               
+           if(!pathvis[i]){
+               // cout<<i<<endl;
              help(graph,vis,i,pathvis,i);
            }
                
