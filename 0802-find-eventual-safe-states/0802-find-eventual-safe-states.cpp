@@ -29,7 +29,8 @@ public:
         
         for(int i=0;i<graph.size();i++){
             
-           if(!pathvis[i]){
+           if(!vis[i]){
+               
              help(graph,vis,i,pathvis,i);
            }
                
