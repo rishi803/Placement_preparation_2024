@@ -1,31 +1,31 @@
 class Solution {
 public:
-    bool canFinish(int numCourses, vector<vector<int>>& pre) {
+    
+    bool cycle(vector<int>adj[],int node,vector<bool>&vis,vector<bool>&inrec){
+        vis[node]=true;
+        inrec[node]=true;
+        for(auto child:adj[node]){
+            if(!vis[child] and cycle(adj,child,vis,inrec)) return true;
+            else if(inrec[child]==true) return true;
+        }
         
-        vector<int>adj[numCourses];
-        vector<int>indegree(numCourses);
-        queue<int>q;
+        inrec[node]=false;
+        return false;
+    }
+    
+    bool canFinish(int n, vector<vector<int>>& pre) {
         
+        vector<int>adj[n];
         for(auto vec:pre){
-           adj[vec[1]].push_back(vec[0]);
-           indegree[vec[0]]++;
+            adj[vec[1]].push_back(vec[0]);
         }
         
-        for(int i=0;i<numCourses;i++){
-            if(indegree[i]==0) q.push(i);
-        }
+        vector<bool>vis(n),inrec(n);
         
-        while(!q.empty()){
-            int cource=q.front();
-            q.pop();
-            
-            for(auto adjcourse:adj[cource]){
-                indegree[adjcourse]--;
-                if(indegree[adjcourse]==0) q.push(adjcourse);
+        for(auto i=0;i<n;i++){
+            if(!vis[i]){
+                if(cycle(adj,i,vis,inrec)) return false;
             }
-        }
-        for(int i=0;i<numCourses;i++){
-            if(indegree[i]!=0) return false;
         }
         
         return true;
