@@ -1,22 +1,20 @@
 
 class Solution {
 public:
-    TreeNode* helper(vector<int>&arr,int s,int e){
-     
-        if(s<=e){
-            int mid=s+(e-s)/2;
-            
-            TreeNode* node=new TreeNode(arr[mid]);
-            node->left=helper(arr,s,mid-1);
-            node->right=helper(arr,mid+1,e);
-            
-            return node;
-        }
-        else return nullptr;
+    
+    TreeNode* help(vector<int>&nums,int st,int end){
         
+        if(st>end) return nullptr;
+        
+        int mid=st+(end-st)/2;
+        
+        TreeNode* root=new TreeNode(nums[mid]);
+        root->left= help(nums,st,mid-1);
+        root->right= help(nums,mid+1,end);
+        
+        return root;
     }
     TreeNode* sortedArrayToBST(vector<int>& nums) {
-        int n=nums.size();
-        return helper(nums,0,n-1);
+        return help(nums,0,nums.size()-1);
     }
 };
