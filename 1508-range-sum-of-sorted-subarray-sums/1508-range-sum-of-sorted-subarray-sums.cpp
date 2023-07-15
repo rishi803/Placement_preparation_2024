@@ -6,15 +6,16 @@ public:
         vector<long>pre(n);
         pre[0]=nums[0];
         vector<long>ans;
-        ans.push_back(pre[0]);
+        // ans.push_back(pre[0]);
         for(int i=1;i<nums.size();i++){
             pre[i]=pre[i-1]+nums[i];
-            ans.push_back(pre[i]);
+            // ans.push_back(pre[i]);
         }
         for(int i=0;i<n;i++){
-            for(int j=i+1;j<n;j++){
-                pre[j]=pre[j]-nums[i];
-                ans.push_back(pre[j]);
+            int sum=0;
+            for(int j=i;j<n;j++){
+                sum+=nums[j];
+               ans.push_back(sum);
             }
         }
         sort(ans.begin(),ans.end());
