@@ -9,9 +9,21 @@ public:
         int leftsum= help(root->left);
         int rightsum=help(root->right);
         
-        ans=max({ans,root->val+leftsum,root->val+rightsum,root->val,root->val+leftsum+rightsum});
-        // cout<<leftsum<<" "<<rightsum<<" "<<ans<<endl;
-        return max({root->val+leftsum,root->val+rightsum,root->val});
+       ans=max({
+           ans,
+           root->val,
+           // leftsum, 
+           // rightsum,
+           root->val+leftsum,
+           root->val+rightsum,
+           root->val+leftsum+rightsum
+       });
+        
+        return max({
+            root->val,
+            root->val+leftsum,
+            root->val+rightsum
+        });
     }
     int maxPathSum(TreeNode* root) {
         if(!root) return 0;
