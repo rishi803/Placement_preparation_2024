@@ -9,7 +9,7 @@ public:
            double temp= double(dist[i])/midspeed;
             
             if(i!=dist.size()-1){
-                if(ceil(temp)>hour) return false;
+                // if(ceil(temp)>hour) return false;
                 totaltime+=ceil(temp);
             }
             else
