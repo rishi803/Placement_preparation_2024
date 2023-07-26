@@ -4,7 +4,7 @@ public:
     int ans=-1e4;
     
     int help(TreeNode* root){
-        if(!root) return -1e4;
+        if(!root) return 0;
         
         int leftsum= help(root->left);
         int rightsum=help(root->right);
