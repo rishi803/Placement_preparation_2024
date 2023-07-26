@@ -1,3 +1,4 @@
+////// CONVERT IN GRAPH, THEN SIMPLY FIND NODE AT DISTANCE K
 
 class Solution {
 public:
@@ -8,9 +9,10 @@ public:
         if(vis[node]) return;
         if(k==0){
             ans.push_back(node);
+            return;
         }
         vis[node]=true;
-        
+        // cout<<k<<endl;
         for(auto child:mp[node]){
             help(mp,child,k-1);
         }
