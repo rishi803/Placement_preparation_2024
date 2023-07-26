@@ -4,7 +4,7 @@ public:
     int ans=-1e4;
     
     int help(TreeNode* root){
-        if(!root) return 0;
+        if(!root) return -1e4;
         
         int leftsum= help(root->left);
         int rightsum=help(root->right);
@@ -12,8 +12,8 @@ public:
        ans=max({
            ans,
            root->val,
-           // leftsum, 
-           // rightsum,
+           leftsum,      
+           rightsum,
            root->val+leftsum,
            root->val+rightsum,
            root->val+leftsum+rightsum
