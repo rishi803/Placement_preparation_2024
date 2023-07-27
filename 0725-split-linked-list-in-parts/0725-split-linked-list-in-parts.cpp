@@ -32,7 +32,7 @@ public:
                 --extra_nodes;
             }
 
-            result[i] = curr;
+            // result[i] = curr;
             ListNode *prev = nullptr;
             // traverse the no. of nodes that will be assigned
             while(remaining--) {
@@ -40,8 +40,12 @@ public:
                 curr = curr->next;
             }
             // end the list
-            if(prev)
+            if(prev){
+                result[i]=root;
                 prev->next = nullptr;
+                root=curr;
+            }
+                
         }    
         
         return result;
