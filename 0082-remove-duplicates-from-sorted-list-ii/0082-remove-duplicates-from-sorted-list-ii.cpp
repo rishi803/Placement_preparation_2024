@@ -11,7 +11,9 @@ public:
         while(curr and curr->next){
             bool flag=false;
             while(curr and curr->next and curr->val==curr->next->val){
+                ListNode* temp=curr;
                 curr=curr->next;
+                delete(temp);      // to avoid memory leak delete curr
                 flag=true;
             }
             if(flag){
