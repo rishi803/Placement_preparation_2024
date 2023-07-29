@@ -1,3 +1,18 @@
+```
+class Solution {
+public:
+int partition(vector<int>&nums,int low,int end){
+int pivot=nums[low];       // choosing first element as pivot
+int left=low+1;            // check from next elment of pivot
+int right=end;             // one pointer at right most
+while(true){
+while(left<=right and pivot>=nums[left]){  // if nums[left] chota than pivot then ok
+left++;
+}
+while(left<=right and pivot<nums[right]){  // if nums[right] bada than pivot then ok
+right--;
+}
+if(left>right) break;    // left right crosses then pivot is already at right pos
 swap(nums[left],nums[right]); // swap left right and again check with pivot
 }
 swap(nums[low],nums[right]); // place pivot at its correct place
