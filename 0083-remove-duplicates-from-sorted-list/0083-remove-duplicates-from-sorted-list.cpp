@@ -10,7 +10,9 @@ public:
             if(prev->val==curr->val){
                 // cout<<"h";
                 while(curr){
-                   curr=curr->next; 
+                    ListNode* temp = curr;
+                    curr = curr->next;
+                    delete temp; // Free the memory for the duplicate node
                     if(curr and curr->val!=prev->val) break;
                 }
                 prev->next=curr;
