@@ -1,6 +1,7 @@
 class Solution {
 public:
-    void merge(vector<int>&nums,int st,int mid,int end){
+    
+    void mergesort(vector<int>&nums,int st,int mid,int end){
         int leftsz=mid-st+1;
         int rightsz=end-mid;
         
@@ -10,40 +11,47 @@ public:
             left[i]=nums[st+i];
         }
         for(int i=0;i<rightsz;i++){
-            right[i]=nums[mid+1+i];
+            right[i]=nums[mid+i+1];
         }
         
         int i=0,j=0,k=st;
         
         while(i<leftsz and j<rightsz){
             if(left[i]<=right[j]){
-                nums[k++]=left[i];
+               nums[k]=left[i];
                 i++;
+                k++;
             }
-            else {
-                nums[k++]=right[j];
+            else{
+                nums[k]=right[j];
                 j++;
+                k++;
             }
         }
+        
         while(i<leftsz){
             nums[k++]=left[i++];
         }
+        
         while(j<rightsz){
             nums[k++]=right[j++];
         }
+        
     }
     
-    void mergesort(vector<int>&nums,int st,int end){
+    void help(vector<int>&nums,int st,int end){
         
         if(st>=end) return;
         int mid=st+(end-st)/2;
-        mergesort(nums,st,mid);
-        mergesort(nums,mid+1,end);
-        merge(nums,st,mid,end);
+        help(nums,st,mid);
+        help(nums,mid+1,end);
+        mergesort(nums,st,mid,end);
+        
     }
     
     vector<int> sortArray(vector<int>& nums) {
-        mergesort(nums,0,nums.size()-1);
+        
+        help(nums,0,nums.size()-1);
         return nums;
     }
 };
