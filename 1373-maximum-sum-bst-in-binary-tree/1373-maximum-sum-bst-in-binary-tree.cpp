@@ -1,34 +1,34 @@
 
 class Solution {
     
+    int ans=0;
+    
     struct rishi{
         public:
-        bool isbst;
-        int mn,mx,sum;
+          int sum,mx,mn;
+          bool isbst;
     };
     
-    rishi helper(TreeNode* root,int &ans){
-        if(!root) return {true,INT_MAX,INT_MIN,0};
+    rishi help(TreeNode* root){
+        if(!root) return {0,INT_MIN,INT_MAX,true};
         
-        rishi left= helper(root->left,ans);
-        rishi right= helper(root->right,ans);
+        rishi left=     help(root->left);
+        rishi right=    help(root->right);
         
-        if(left.isbst and right.isbst and root->val>left.mx and root->val<right.mn){
-            int sum=left.sum+right.sum+root->val;
+        if(root->val > left.mx and root->val < right.mn and left.isbst and right.isbst){
+            
+            int sum= root->val + left.sum + right.sum;
             ans=max(ans,sum);
             
-            return {true,min(left.mn,root->val),max(right.mx,root->val),sum};
+            return {sum,max(root->val,max(left.mx,right.mx)),min(root->val,min(right.mn,left.mn)),true};
         }
-        else{
-            return {false,0,0,0};
-        }
+        else return {0,INT_MAX,INT_MIN,false};
+        
     }
     
 public:
     int maxSumBST(TreeNode* root) {
-        int ans=0;
-        if(!root) return 0;
-        helper(root,ans);
+        help(root);
         return ans;
     }
 };
