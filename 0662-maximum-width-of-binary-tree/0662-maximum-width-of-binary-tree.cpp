@@ -3,16 +3,16 @@ class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
         
-        typedef unsigned long long __int128_t;
+        // typedef unsigned long long __int128_t;
         
-        queue<pair<TreeNode*,__int128_t>>q;
-        __int128_t ans=0;
+        queue<pair<TreeNode*,unsigned long long>>q;
+        unsigned long long ans=0;
         q.push({root,0});
         
         while(!q.empty()){
             
-           __int128_t first=q.front().second;
-            __int128_t last=q.back().second;
+           unsigned long long first=q.front().second;
+            unsigned long long last=q.back().second;
             
             ans=max(ans,last-first+1);
             int sz=q.size();
