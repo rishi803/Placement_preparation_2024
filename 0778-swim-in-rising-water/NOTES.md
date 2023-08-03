@@ -1,3 +1,5 @@
+MINIMIZE THE MAX ANSWER (GOING IN ALL 4 DIRECTIONS)
+​
 if(i<0 || j<0 || i>=grid.size() || j>=grid[0].size() || vis[i][j])
 return INT_MAX;
 if(i==grid.size()-1 && j==grid[0].size()-1)
