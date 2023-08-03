@@ -1,25 +1,32 @@
 class Solution {
 public:
-    vector<vector<int>>dp;
-    int help(vector<int>&nums,int idx,bool canrob){
-        
-        if(idx>=nums.size()) return 0;
-        if(dp[idx][canrob]!=-1) return dp[idx][canrob];
-        int rob=0,notrob=0;
-        
-        if(canrob){
-            rob=nums[idx]+help(nums,idx+1,false);
-            notrob=help(nums,idx+1,true);
+   
+    vector<int>memo;
+    
+    
+   int help(vector<int>& nums, int idx) {
+           if (idx >= nums.size()) {
+            return 0;
         }
-        else{
-           notrob= help(nums,idx+1,true);
+
+        if (memo[idx] != -1) {
+            return memo[idx];
         }
-        
-        return dp[idx][canrob]=max(rob,notrob);
+
+        int money = 0;
+
+        for (int i = idx; i < nums.size(); ++i) {
+            int current = nums[i] + help(nums, i + 2);
+            money = std::max(money, current);
+        }
+
+        memo[idx] = money;
+        return money;
     }
     
     int rob(vector<int>& nums) {
-        dp.resize(nums.size(),vector<int>(2,-1));
-        return help(nums,0,true);
+        memo.resize(nums.size(),-1);
+      return  help(nums,0);
+      
     }
 };
