@@ -7,7 +7,7 @@ public:
             return INT_MAX;
         
         if(i==grid.size()-1 && j==grid[0].size()-1)
-            return time+max(0,grid[i][j]-time);
+            return max(time,grid[i][j]);
         
         if(dp[i][j][time]!=-1)
             return dp[i][j][time];
@@ -17,9 +17,9 @@ public:
         long long op1,op2,op3,op4;
         
         op1=rec(grid,i+1,j,max(time,grid[i][j]),row,col,vis);
-        op2=rec(grid,i-1,j,time+max(0,grid[i][j]-time),row,col,vis);
-        op3=rec(grid,i,j+1,time+max(0,grid[i][j]-time),row,col,vis);
-        op4=rec(grid,i,j-1,time+max(0,grid[i][j]-time),row,col,vis);
+        op2=rec(grid,i-1,j,max(time,grid[i][j]),row,col,vis);
+        op3=rec(grid,i,j+1,max(time,grid[i][j]),row,col,vis);
+        op4=rec(grid,i,j-1,max(time,grid[i][j]),row,col,vis);
         
         vis[i][j]=0;
         
