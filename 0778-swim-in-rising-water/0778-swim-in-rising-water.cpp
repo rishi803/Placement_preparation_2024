@@ -16,7 +16,7 @@ public:
         
         long long op1,op2,op3,op4;
         
-        op1=rec(grid,i+1,j,time+max(0,grid[i][j]-time),row,col,vis);
+        op1=rec(grid,i+1,j,max(time,grid[i][j]),row,col,vis);
         op2=rec(grid,i-1,j,time+max(0,grid[i][j]-time),row,col,vis);
         op3=rec(grid,i,j+1,time+max(0,grid[i][j]-time),row,col,vis);
         op4=rec(grid,i,j-1,time+max(0,grid[i][j]-time),row,col,vis);
