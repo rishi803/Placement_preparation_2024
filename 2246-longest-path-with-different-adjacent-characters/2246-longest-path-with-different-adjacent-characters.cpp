@@ -31,8 +31,6 @@ public:
         });
         
         return max({
-            longest,
-            secondlongest,
             1+longest,
             1+secondlongest
         });
