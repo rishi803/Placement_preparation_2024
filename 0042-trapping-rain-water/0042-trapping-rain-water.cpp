@@ -1,35 +1,34 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
-        int sz=height.size();
-        int mxleft=height[0];
-        int mxright=height[sz-1];
-        int left=1,right=sz-2;
+        
+        int mxleft=height[0],mxright=height[height.size()-1];
+        int left=0, right= height.size()-2;
         int ans=0;
         
-        while(left<=right){
-            
-            if(mxleft<mxright){       // water must store according to left height
-                if(height[left]>mxleft){
-                    mxleft=height[left];
-                }
-                else {
-                    ans += (mxleft-height[left]);
-                }
-                left++;
-            }
-            
-            else{                    // water must store according to right height
-                if(height[right]>mxright){
-                    mxright=height[right];
-                }
-                else{
-                    ans += (mxright-height[right]);
-                }
-                right--;
-            }
-            
-        }
+       while(left<=right)
+       {
+           if(mxleft < mxright){   // water will trap according to left vala bar
+               
+               if(height[left] > mxleft) {
+                   mxleft= height[left];
+               }
+               else{
+                   ans+= (mxleft - height[left]);
+               }
+               left++;
+           }
+           
+           else{          // water will trap according to right vala bar
+               if(height[right] > mxright) {
+                   mxright= height[right];
+               }
+               else{
+                   ans+= (mxright-height[right]);
+               }
+               right--;
+           }
+       }
         return ans;
     }
 };
