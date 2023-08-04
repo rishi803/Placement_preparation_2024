@@ -1,30 +1,31 @@
 class Solution {
 public:
     int minExtraChar(string s, vector<string>& dictionary) {
-    unordered_map<string,int> d;
-
-    for (const string& word : dictionary) {
-        d[word]=1;
-    }
-
-    int n = s.length();
-    vector<int> dp(n + 1);
-    for (int i = 1; i <= n; i++) {
-        dp[i] = dp[i - 1] + 1;
         
-        for (int j = i; j >= 1; j--) {
-            string sub = s.substr(j - 1, i - j+1);
-             // cout<<dp[i]<<" i= "<<i<<" j= "<<j<<" "<<sub<<" ";
-            if (d[sub] > 0) {
-                // cout<<dp[j-1]<<" dp[i]= "<< min(dp[i], dp[j - 1])<<endl;;
-                dp[i] = min(dp[i], dp[j - 1]);
-                
-            }
-            // cout<<endl;
+        unordered_map<string,int>mp;
+        for(auto str: dictionary){
+            mp[str] = 1;
         }
-        // cout<<endl<<endl;
-    }
-
-    return dp[n];
+        
+        vector<int>dp(s.size()+1);
+        dp[0]=1;
+        
+        for(int i=0; i<s.size(); i++){
+            if(i!=0) dp[i] = 1 + dp[i-1];
+            
+         for(int j=i; j>=0; j--){
+             
+             string str= s.substr(j, i-j+1);
+             if(mp[str] > 0){
+                 
+                 if(j==0) dp[i]=0;
+                 else
+                 dp[i]= min(dp[i] , dp[j-1]);
+             }
+         }
+            
+       }
+        
+        return dp[s.size()-1];
     }
 };
