@@ -3,7 +3,7 @@ public:
     
     vector<string>ans;
     
-    void help(int open, int close, string temp){
+    void help(int open, int close, string &temp){
         if(close < open) return;
         
         if(open==0 and close==0){
@@ -12,11 +12,15 @@ public:
         }
        
         if(open > 0){
-            help(open-1, close, temp+'(');
+            temp+='(';
+            help(open-1, close, temp);
+            temp.pop_back();
         }
         
         if(close > 0){
-            help(open, close-1, temp+')');
+            temp+=')';
+            help(open, close-1, temp);
+            temp.pop_back();
         }
     }
     vector<string> generateParenthesis(int n) {
