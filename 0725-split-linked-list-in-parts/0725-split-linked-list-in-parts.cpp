@@ -32,18 +32,18 @@ public:
                 --extra_nodes;
             }
 
-            // result[i] = curr;
+            result[i] = curr;      // you can also insert curr/root here it will break afterwards by prev
             ListNode *prev = nullptr;
-            // traverse the no. of nodes that will be assigned
-            while(remaining--) {
+          
+            while(remaining--) {    // traverse the no. of nodes that will be assigned
                 prev = curr;
                 curr = curr->next;
             }
             // end the list
             if(prev){
-                result[i]=root;
+                // result[i]=root;              // root to prev is separated to insert
                 prev->next = nullptr;
-                root=curr;
+                // root=curr;                  // update root to curr list started after separator
             }
                 
         }    
