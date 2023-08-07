@@ -1,21 +1,27 @@
 
 class Solution {
 public:
-    bool flag=true;
+    
+    bool \U0001f6a9= true;
+    
     int help(TreeNode* root){
+       
         if(!root) return 0;
-        int lefth=1+help(root->left);
-        int righth=1+help(root->right);
-        // cout<<lefth<<" "<<righth<<endl;
-        if (abs(lefth-righth)>1) {               // we have got the unbalanced height
-            flag=false;
-            return 1e5;                        
+        
+        int lh= 1 + help(root->left);
+        int rh= 1 + help(root->right);
+        
+        if(abs(lh - rh) > 1) {
+            \U0001f6a9= false;
         }
-        else return max(lefth,righth);      // send max height from left sub and right sub
+        
+        return max(lh,rh);
     }
     bool isBalanced(TreeNode* root) {
-        if(!root) return true;
-          help(root);
-        return flag;
+       
+      if(!root) return true;
+        help(root);
+        return \U0001f6a9;
+        
     }
 };
