@@ -2,43 +2,35 @@
 class Solution {
 public:
     
-    
-    ListNode* mergesort(ListNode* first,ListNode* second){
-        if(!first and !second) return nullptr;
-        if(first and !second) return first;
-        if(!first and second) return second;
+    ListNode* sort(ListNode* l1, ListNode* l2){
         
-        if(first->val<=second->val){
-            first->next= mergesort(first->next,second);
-            return first;
+        if(!l1 and !l2) return nullptr;
+        if(!l1 and l2) return l2;
+        if(!l2 and l1) return l1;
+        
+        if(l1->val <= l2->val){
+            l1->next= sort(l1->next, l2);
+            return l1;
         }
         else{
-            second->next= mergesort(first,second->next);
-            return second;
+            l2->next= sort(l1, l2->next);
+            return l2;
         }
     }
     
-   ListNode*  partition(vector<ListNode*>&lists,int st,int end){
+    ListNode* help(vector<ListNode*>& lists, int st, int end){
+        if(st > end) return nullptr;
+        if(st == end) return lists[st];
         
-       
-        if(st==end) return lists[st]?lists[st]:nullptr;
-       
-       int mid= st + (end-st)/2;
-       ListNode* first=  partition(lists,st,mid);
-       ListNode* second=  partition(lists,mid+1,end);
-       
-       return mergesort(first,second);
-     
+        int mid= st + (end-st)/2;
+        
+        ListNode* l1= help(lists, st, mid);
+        ListNode* l2= help(lists, mid+1, end);
+        
+        return sort(l1, l2);
     }
-    
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         
-        int sz=lists.size();
-        if(sz==0) return nullptr;
-        
-        return partition(lists,0,sz-1);
-        
-        
-        
+        return help(lists, 0, lists.size()-1);
     }
 };
