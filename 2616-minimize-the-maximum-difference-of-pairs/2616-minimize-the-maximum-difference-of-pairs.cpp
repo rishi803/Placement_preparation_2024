@@ -21,11 +21,12 @@ public:
         
     }
     int minimizeMax(vector<int>& nums, int p) {
-        int l=0;
-        int h=*max_element(nums.begin(),nums.end());
+
         int ans=0;
      
         sort(nums.begin(),nums.end());
+        
+        int l=0,h=nums[nums.size()-1] - nums [0];
         
         while(l<=h){
             int mid=l+(h-l)/2;
