@@ -1,21 +1,28 @@
 class Solution {
 public:
-    vector<vector<int>>dp;
     
-    int help(vector<int>&coins,int target,int idx){
+    int dp[301][5001];
+    
+    int help(vector<int>&coins, int target, int idx){
         
-        if(target<0 or idx<0) return 0;
-        if(target==0) return 1;
-        if(dp[target][idx]!=-1) return dp[target][idx];
+        if(target == 0) return 1;
+        if(idx == coins.size()) return 0;
+        if(target < 0) return 0;
+        if(dp[idx][target] != -1) return dp[idx][target];
         
-        int pick=help(coins,target-coins[idx],idx);
-        int notpick=help(coins,target,idx-1);
+        int ans=0;
         
-        return dp[target][idx]=pick+notpick;
+        for(int i=idx; i<coins.size(); i++){
+            // cout<<"i ="<<i<<" "<<target<<" ";
+            ans+= help(coins, target-coins[i], i);
+        }
+        // cout<<endl;
+        
+        return dp[idx][target]= ans;
     }
+    
     int change(int amount, vector<int>& coins) {
-        dp.resize(amount+1,vector<int>(coins.size(),-1));
-        
-        return help(coins,amount,coins.size()-1);
+        memset(dp, -1, sizeof(dp));
+        return help(coins, amount, 0);
     }
 };
