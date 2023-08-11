@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    int dp[301][5001];
+      vector<vector<int>>dp;
     
     int help(vector<int>&coins, int target, int idx){
         
@@ -22,7 +22,7 @@ public:
     }
     
     int change(int amount, vector<int>& coins) {
-        memset(dp, -1, sizeof(dp));
+        dp.resize(coins.size(), vector<int>(amount+1,-1));
         return help(coins, amount, 0);
     }
 };
