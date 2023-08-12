@@ -1,30 +1,35 @@
 class Solution {
 public:
-    vector<vector<int>>dp;
     
-    int help(vector<vector<int>>&grid,int row,int col,int st,int end){
+    int dp[101][101];
+    
+    int help(vector<vector<int>>&grid, int x, int y, int row, int col){
         
-        if(st>=row or end>=col or grid[st][end]==-1 or grid[st][end]==1) return 0;
+        if(x<0 or y<0 or x>=row or y>=col or grid[x][y]==1 or grid[x][y]==-1) return 0;
         
-        if(st==row-1 and end==col-1) return 1;
+        if(x== row-1 and y==col-1) return 1;
         
-        if(dp[st][end]!=-1) return dp[st][end];
+        if(dp[x][y] != -1) return dp[x][y];
         
-        // grid[st][end]=-1;
+             grid[x][y]*=-1;
         
-        int right = help(grid,row,col,st,end+1);
-        int bottom =help(grid,row,col,st+1,end);
+             int right= help(grid, x, y+1, row, col);
+             int down=  help(grid, x+1, y, row, col);
         
-        // grid[st][end]=-1;
+            grid[x][y]*=-1;
         
-        // cout<<st<<" "<<end<<" "<<right+bottom<<endl;
+        return dp[x][y]= (right + down);
         
-        return dp[st][end]=right+bottom;
+        
+            
     }
-    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
-        int row=obstacleGrid.size();
-        int col=obstacleGrid[0].size();
-        dp.resize(row,vector<int>(col,-1));
-        return help(obstacleGrid,row,col,0,0);
+    
+    int uniquePathsWithObstacles(vector<vector<int>>& obGrid) {
+        
+        memset(dp, -1, sizeof(dp));
+        int row= obGrid.size();
+        int col= obGrid[0].size();
+        
+        return help(obGrid, 0, 0, row, col);
     }
 };
