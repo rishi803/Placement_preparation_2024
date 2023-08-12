@@ -21,7 +21,7 @@ public:
        
         int row= grid.size();
         int col= grid[0].size();
-        dp.resize(row + 1, vector<vector<int>>(col + 1, vector<int>(51, -1)));
+        dp.resize(row + 1, vector<vector<int>>(col + 1, vector<int>(k, -1)));
 
         return help(grid, 0, 0, k, row, col, 0);
     }
