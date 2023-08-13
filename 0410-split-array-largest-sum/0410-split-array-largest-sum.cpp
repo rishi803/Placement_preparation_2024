@@ -1,24 +1,29 @@
 class Solution {
 public:
-    int dp[1001][51];
-    int help(vector<int>&nums,int cut,int idx){
-        if(idx==nums.size() and cut==0) return 0;
-        if(idx==nums.size() or cut==0) return INT_MAX;
-        if(dp[idx][cut]!=-1)
-            return dp[idx][cut];
-        int currsum=0,ans=INT_MAX,nextsum=0;
+    
+    vector<vector<int>>dp;
+    
+    int help(vector<int>&nums, int k, int idx){
         
-        for(int i=idx;i<nums.size();i++){
-            currsum+=nums[i];
-            nextsum=help(nums,cut-1,i+1);
+        if(k < 0) return INT_MAX;
+        if(idx >= nums.size() and k==0) return 0;
+        if(idx >= nums.size()) return INT_MAX;
+        if(dp[idx][k] != -1) return dp[idx][k];
+        
+        int ans= INT_MAX, currsum= 0;
+        
+        for(int i=idx; i<nums.size(); i++){
+            currsum+= nums[i];
+            int nextsum= help(nums, k-1, i+1);
             
-            ans=min(ans,max(currsum,nextsum));
+            ans= min(ans, max(currsum, nextsum));
         }
         
-        return dp[idx][cut]= ans;
+        return dp[idx][k]= ans;
     }
     int splitArray(vector<int>& nums, int k) {
-           memset(dp,-1,sizeof(dp));
-        return help(nums,k,0);
+        
+        dp.resize(nums.size(), vector<int>(k+1,-1));
+         return help(nums, k, 0);
     }
 };
