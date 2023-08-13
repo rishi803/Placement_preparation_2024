@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    vector<vector<int>>dp;
+    int dp[1001][51];
     
     int help(vector<int>&nums, int k, int idx){
         
@@ -23,7 +23,8 @@ public:
     }
     int splitArray(vector<int>& nums, int k) {
         
-        dp.resize(nums.size(), vector<int>(k+1,-1));
+        // dp.resize(nums.size(), vector<int>(k+1,-1));
+        memset(dp, -1, sizeof(dp));
          return help(nums, k, 0);
     }
 };
