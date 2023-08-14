@@ -4,8 +4,9 @@ class Solution {
 public:
     
     int dp[2001][4];
-    
    int paldp[2001][2001];
+    
+    
     bool ispal(string &s, int i, int j)
     {
         if(i>=j) return paldp[i][j] = true;
@@ -20,17 +21,19 @@ public:
         if(cut < 0 or idx >= s.size()) return false;
         if( dp[idx][cut] != -1) return dp[idx][cut];
         
-        bool ans= false;
+        // bool ans= false;
         
         for(int i= idx; i<s.size(); i++){
             
              if( ispal (s, idx, i) ){
-                 ans= ans | (help(s, i+1, cut-1));
+                 // ans= ans | (help(s, i+1, cut-1));
+                 if(help(s, i+1, cut-1)) return dp[idx][cut]= true;
              }
             
         }
         
-        return dp[idx][cut]= ans;
+        // return dp[idx][cut]= ans;
+           return dp[idx][cut]= false;
         
     }
     
