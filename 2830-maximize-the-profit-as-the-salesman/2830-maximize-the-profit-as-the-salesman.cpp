@@ -11,8 +11,8 @@ public:
         if(dp[currhouse] != -1) return dp[currhouse];
         
         int take=0, nottake=0;
-        vector<int>v(3,1e9);
-       v[0]= offers[currhouse][1];
+        vector<int>v(3,1e6);
+        v[0]= offers[currhouse][1];
         
         int nexthouse= lower_bound(offers.begin(),offers.end(), v) - offers.begin();
       
