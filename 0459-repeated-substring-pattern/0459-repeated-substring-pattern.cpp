@@ -7,7 +7,9 @@ public:
         
         for(int i=0; i<s.size(); i++){
             
-           string temp= "a",temp2="b";
+            if(s.size() % (i+1)==0){
+                
+                 string temp= "a",temp2="b";
             
             for(j=i+1; j<s.size()-i; j+=i+1){
                 
@@ -23,6 +25,9 @@ public:
             if(j==s.size() and temp == temp2) return true;
             // cout<<endl;
         }
+    }
+            
+          
         
         return ans;
     }
