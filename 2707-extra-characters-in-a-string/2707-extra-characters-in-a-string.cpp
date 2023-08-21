@@ -13,14 +13,14 @@ public:
         
         for(int current= 0; current<sz; current++){
             
-            if(current != 0) dp[current]= dp[current-1] + 1;
+           if(current != 0) dp[current]= dp[current-1] + 1;
             
             for(int start= current; start>=0; start--){
                 
                 string substr= s.substr(start, current-start+1);
                 
                 if(hash[substr] > 0){
-                    
+                    // cout<<substr<<endl;
                     if(start == 0){
                         dp[current]= 0;
                     }
@@ -30,7 +30,7 @@ public:
                         
                     }
                 }
-               
+                
                 // cout<<start<<" "<<substr<<dp[current]<<endl;
             }
             // cout<<dp[current]<<endl;
