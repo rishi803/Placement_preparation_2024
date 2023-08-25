@@ -3,7 +3,7 @@ class Solution {
     
     int ans=0;
     
-    struct rishi{
+    class rishi{
         public:
           int sum,mx,mn;
           bool isbst;
