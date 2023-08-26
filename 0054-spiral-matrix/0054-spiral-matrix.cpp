@@ -3,40 +3,42 @@ public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
        int n=matrix.size();
         int m=matrix[0].size();
-        int left=0,right=m-1,bottom=n-1,top=0;
-        int direction=1;
-        vector<int> v;
-        while(left<=right && top<=bottom)
-        {
-            if(direction==1)
-            {
-                for(int i=left;i<=right;i++) v.push_back(matrix[top][i]);
-                direction=2;
-                top++;
-            }
-            
-            else if(direction==2)
-            {
-                for(int i=top;i<=bottom;i++) v.push_back(matrix[i][right]);
-                direction=3;
-                right--;
-            }
-            
-            else if(direction==3)
-            {
-                for(int i=right;i>=left;i--) v.push_back(matrix[bottom][i]);
-                direction=4;
-                bottom--;
-            }
-            
-            else if(direction==4)
-            {
-                for(int i=bottom;i>=top;i--) v.push_back(matrix[i][left]);
-                direction=1;
-                left++;
-            }
-        }
-        return v;
+        int rowup=0, rowb= n-1, colleft=0, colright= m-1;
+    int dir= 0;
+    vector<int>ans;
+
+    while(rowup <= rowb and colleft <= colright){
+         if(dir == 0 ){
+               for(int i= colleft; i<= colright; i++){
+                   ans.push_back(matrix[rowup][i]);
+               }
+               rowup++;
+               dir= 1;
+         }
+         else if(dir == 1){
+             for(int i= rowup; i<= rowb; i++){
+                 ans.push_back(matrix[i][colright]);
+             }
+             colright--;
+             dir= 2;
+         }
+
+         else if(dir == 2){
+             for(int i= colright; i>= colleft; i--){
+                 ans.push_back(matrix[rowb][i]);
+             }
+             rowb--;
+             dir= 3;
+         }
+         else if(dir == 3){
+             for(int i= rowb; i>=rowup; i--){
+                 ans.push_back(matrix[i][colleft]);
+             }
+             colleft++;
+             dir= 0;
+         }
+    }
+    return ans;
         
     }
 };
