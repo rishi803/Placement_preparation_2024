@@ -2,39 +2,35 @@
 class Solution {
 public:
     
-    TreeNode* help(string &traversal,int level,int &idx){
-        if(idx==traversal.size()) return nullptr;
+    TreeNode* help(string traversal, int &idx, int level){
         
-        int currlevel=0;
-        while(idx+currlevel<traversal.size() and traversal[idx+currlevel]=='-'){
-            currlevel++;         // no. of dashes showing current level
-        }
-        
-        if(currlevel==level){
-            
-             idx+=currlevel;   // jump over dashes so idx is on digit and it update idx only if level matches                                      // means if and only if we have used this idx for currlevel
-            
-            int currvalue=0;
-            
-            while(traversal[idx]>='0' and traversal[idx]<='9'){
-                currvalue=currvalue*10 + traversal[idx]-'0';
-                idx++;  // after end of while loop this will be at '-'
-            }
-             
-            
-            TreeNode* root= new TreeNode(currvalue); // this is root node
-             root->left=help(traversal,level+1,idx); // increase level temporary and idx permanently
-             root->right=help(traversal,level+1,idx);// update idx from left passed here
-            return root;
-        }
-        
-        return nullptr;    
+        if(idx >= traversal.size()) return nullptr;
        
+        int cntdash= 0;
+        
+        while(traversal[idx+cntdash] == '-') cntdash++;
+        
+        if(cntdash == level){
+            idx+=cntdash;
+            
+            int digit= 0;
+            
+            while(traversal[idx] >= '0' and traversal[idx] <= '9') digit= digit*10 + traversal[idx++]-'0';
+            
+            TreeNode* root= new TreeNode(digit);
+            root->left=  help(traversal, idx, level+1);
+            root->right= help(traversal, idx, level+1);
+             
+            return root;
+         
+        }
+        else
+        return nullptr;
     }
     
     TreeNode* recoverFromPreorder(string traversal) {
-            
+        
         int idx=0;
-        return help(traversal,0,idx);
+        return help(traversal, idx, 0);
     }
 };
