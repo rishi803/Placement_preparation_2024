@@ -2,7 +2,7 @@
 class Solution {
 public:
     
-    TreeNode* help(string traversal, int &idx, int level){
+    TreeNode* help(string &traversal, int &idx, int level){
         
         if(idx >= traversal.size()) return nullptr;
        
