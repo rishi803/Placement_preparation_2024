@@ -7,14 +7,21 @@ public:
     int help(TreeNode* root){
         if(!root) return 0;
         
-        root->val+= help(root->left);
-        root->val+=help(root->right);
+//         root->val+= help(root->left);
+//         root->val+=help(root->right);
         
-        int remain= root->val - 1;
+//         int remain= root->val - 1;
         
-        ans+= abs(remain);
+//         ans+= abs(remain);
         
-        return remain;
+//         return remain;
+        
+        int left= help(root->left);
+        int right= help(root->right);
+        
+        ans+= abs(left) + abs(right);
+        
+        return root->val + left + right - 1;
         
     }
     
