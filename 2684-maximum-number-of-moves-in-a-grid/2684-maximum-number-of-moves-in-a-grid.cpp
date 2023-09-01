@@ -1,25 +1,33 @@
 class Solution {
 public:
-        int dfs(int i, int j, int n, int m, vector<vector<int>> &grid, vector<vector<int>> &dp) {
-       
-        if(dp[i][j] != -1) return dp[i][j];
-        
-        int op1 = 0, op2 = 0, op3 = 0;
-        if(i>=1 and j<m-1 and grid[i][j] < grid[i - 1][j + 1]) op1 = 1 + dfs(i - 1, j + 1, n, m, grid, dp);
-        if(j<m-1 and grid[i][j] < grid[i][j + 1]) op2 = 1 + dfs(i, j + 1, n, m, grid, dp);
-        if(i<n-1 and j<m-1 and grid[i][j] < grid[i + 1][j + 1]) op3 = 1 + dfs(i + 1, j + 1, n, m, grid, dp);
     
-        return dp[i][j] = max({op1, op2, op3});
+    int row,col;
+    vector<vector<int>>dp;
+    
+    int help(vector<vector<int>>&grid, int x, int y, int prev){
+        if(x < 0 or y<0 or x >= row or y >= col or grid[x][y] <= prev ) return -1;
+        if(dp[x][y] != -1) return dp[x][y];
+        
+        int op1=1+ help(grid, x-1, y+1, grid[x][y]);
+        int op2=1+ help(grid, x, y+1, grid[x][y]);
+        int op3=1+ help(grid, x+1, y+1, grid[x][y]);
+        
+        return dp[x][y]= max({op1, op2, op3});
     }
-public:
+    
     int maxMoves(vector<vector<int>>& grid) {
-        int n = grid.size(), m = grid[0].size(), ans = 0;
-        vector<vector<int>> dp(n, vector<int>(m, -1));
+       
+        row= grid.size();
+        col= grid[0].size();
+        dp.resize(row,vector<int>(col,-1));
         
-        for(int j=0; j<n; j++) {  // because given that we can start to any cell in first column
-            ans = max(ans, dfs(j, 0, n, m, grid, dp)); // so take max of all those cell from 1st column
+        int mx= -1;
+        
+        for(int i=0; i<row; i++){
+            mx= max(mx, help(grid, i, 0, -1));
         }
-        return ans;
         
+        return mx;
+         
     }
 };
