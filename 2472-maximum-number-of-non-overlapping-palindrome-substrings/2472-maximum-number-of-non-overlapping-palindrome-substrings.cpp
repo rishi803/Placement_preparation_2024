@@ -2,16 +2,20 @@ class Solution {
 public:
     
     int dp[2001];
+    int palin[2003][2003];
     
     bool ispalin(string &s, int st, int end){
         
+        int stt=st,endt=end;
+        
+        if(palin[st][end] != -1) return palin[st][end];
         // cout<<st<<" "<<end;
         while(st <= end){
             // cout<<s[st];
-            if(s[st++] != s[end--]) return false;
+            if(s[st++] != s[end--]) return palin[st][end]= false;
         }
     // cout<<endl;
-        return true;
+        return palin[stt][endt]= true;
     }
     int help(string &s, int k, int idx){
          if(idx >= s.size()) return 0;
@@ -35,6 +39,7 @@ public:
     
     int maxPalindromes(string s, int k) {
         
+        memset(dp, -1, sizeof(palin));
         memset(dp, -1, sizeof(dp));
         return help(s, k, 0);
     }
