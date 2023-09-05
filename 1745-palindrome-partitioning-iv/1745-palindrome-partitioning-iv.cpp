@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    vector<vector<int>>dp;
+    int dp[2001][3];
     int paldp[2001][2001];
     
     bool ispalin(string &s, int i, int j){
@@ -31,7 +31,7 @@ public:
     
     bool checkPartitioning(string s) {
         
-        dp.resize(s.size(), vector<int>(3,-1));
+        memset(dp, -1, sizeof(dp));
         memset(paldp, -1, sizeof(paldp));
         return help(s, 0, 2);
     }
