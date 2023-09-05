@@ -20,3 +20,4 @@ return dp[idx]= ans;
 int minCut(string s) {
 }
 };
+​
