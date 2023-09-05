@@ -1,31 +1,43 @@
 class Solution {
 public:
     
-   
-    bool ispalin(string &s , int st, int end){
-       while(st<=end){
-           if(s[st++]!=s[end--]) return false;
-       }
+    int dp[2001];
+    
+    bool ispalin(string &s, int st, int end){
+        // int end= s.size()-1;
+        // int st= 0;
+        while(st <= end){
+            if(s[st] != s[end]) return false;
+            st++;
+            end--;
+        }
+     
         return true;
     }
     
-    int help(string &s, int idx,vector<int>&dp){
-        if(idx==s.size()) return -1;
-        if(dp[idx]!=-1) return dp[idx];
+    int help(string &s, int idx){
+        if(idx >= s.size()) return 0;
+        if(dp[idx] != -1) return dp[idx];
         
         int ans=INT_MAX;
         
-        for(int i=idx;i<s.size();i++){
+        for(int i=idx; i<s.size(); i++){
+            // string sub= s.substr(idx, i+1);
+            if(ispalin(s,idx,s.size()-1)) return 0;
+           
             if(ispalin(s,idx,i)){
-                ans=min(ans,1+help(s,i+1,dp));
+                 // cout<<sub<<endl;
+                ans= min(ans, 1+help(s,i+1));
             }
         }
-       return dp[idx]= ans;
+        
+        return dp[idx]= ans;
         
     }
-    
     int minCut(string s) {
-        vector<int>dp(s.size()+1, -1);
-       return help(s, 0, dp);
+        
+        memset(dp, -1, sizeof(dp));
+        return help(s, 0);
+        
     }
 };
