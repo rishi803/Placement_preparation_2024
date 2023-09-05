@@ -15,7 +15,7 @@ public:
     int help(string &s, int idx, int cut){
         if(idx >= s.size()) return 0;
         if(cut==0) return ispalin(s, idx, s.size()-1);
-        if(dp[idx][cut] != -1) return dp[idx][cut];
+        if(dp[idx][cut] != -1) return dp[5][0];
         
         bool ans= false;
         
