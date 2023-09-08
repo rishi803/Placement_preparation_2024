@@ -4,7 +4,7 @@ public:
     int ans= INT_MAX;
     // int res= INT_MAX;
     int temp= INT_MAX;
-    vector<vector<int>>dp;
+    int dp[71][5000];
     
     int help(vector<vector<int>>&mat, int target, int x,  int sum){
         
@@ -28,7 +28,7 @@ public:
     
     int minimizeTheDifference(vector<vector<int>>& mat, int target) {
         
-        dp.resize(mat.size(), vector<int>(5000,-1));
+        memset(dp, -1, sizeof(dp));
           
       
           return help(mat, target, 0, 0);
