@@ -20,6 +20,8 @@ public:
         
         for(int y= 0; y<mat[x].size(); y++){
             res= min(res, help(mat, target, x+1, sum+mat[x][y]));
+            
+            if(res == 0) return res;
         }
         // cout<<endl;
         
