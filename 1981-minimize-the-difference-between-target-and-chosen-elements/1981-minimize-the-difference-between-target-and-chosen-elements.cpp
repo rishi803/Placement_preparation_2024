@@ -6,7 +6,7 @@ public:
     int temp= INT_MAX;
     vector<vector<int>>dp;
     
-    int help(vector<vector<int>>&mat, int target, int x, int y, int sum){
+    int help(vector<vector<int>>&mat, int target, int x,  int sum){
         
         if(x >= mat.size()){
          
@@ -18,8 +18,8 @@ public:
         
         int res= INT_MAX;
         
-        for(int i= 0; i<mat[x].size(); i++){
-            res= min(res, help(mat, target, x+1, i,sum+mat[x][i]));
+        for(int y= 0; y<mat[x].size(); y++){
+            res= min(res, help(mat, target, x+1, sum+mat[x][y]));
         }
         // cout<<endl;
         
@@ -30,12 +30,8 @@ public:
         
         dp.resize(mat.size(), vector<int>(5000,-1));
           
-        for(int j=0; j<mat[0].size(); j++){
-              // cout<<mat[0][j]<<" ";
-            ans= min(ans,help(mat, target, 0, j, 0));
-          
-        }
-        
-        return ans;
+      
+          return help(mat, target, 0, 0);
+ 
     }
 };
