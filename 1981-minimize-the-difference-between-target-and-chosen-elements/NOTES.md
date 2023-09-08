@@ -1,3 +1,9 @@
+return;
+}
+if(ans<=abs(sum-target)) return;
+for(int i=0;i<mat[currow].size();i++){
+sum+=mat[currow][i];
+help(mat,row,col,currow+1,target,sum);
 sum-=mat[currow][i];
 // cout<<endl;
 }
