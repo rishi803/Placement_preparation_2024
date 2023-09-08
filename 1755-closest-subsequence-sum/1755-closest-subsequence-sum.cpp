@@ -47,7 +47,7 @@ public:
             int current_diff = abs(s1 + s2 - goal);
             min_abs_diff = min(min_abs_diff, current_diff);
 
-            if (s2 < target) {
+            if (s2 <= target) {
                 left = mid + 1;
             } else {
                 right = mid - 1;
