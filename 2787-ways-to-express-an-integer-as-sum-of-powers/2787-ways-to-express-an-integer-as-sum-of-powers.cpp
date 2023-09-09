@@ -9,7 +9,7 @@ public:
        
         if(sum == n) return 1;
         if(sum > n) return 0;
-         if(idx > n) return 0;
+         if(pow(idx,x) > n) return 0;
         
         if(dp[sum][idx] != -1) return dp[sum][idx];
         
