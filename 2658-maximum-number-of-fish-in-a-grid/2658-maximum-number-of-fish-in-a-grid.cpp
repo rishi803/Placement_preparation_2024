@@ -5,20 +5,31 @@ public:
     int ans= 0;
     
     void help(vector<vector<int>>&grid, int i, int j, int &fish){
-           if(i<0 or j<0 or i>=grid.size() or j>=grid[0].size() or grid[i][j] == 0) return;
-        
            
         
-              fish+= grid[i][j];
-              grid[i][j]= 0;
+           queue<pair<int,int>>q;
+            q.push({i,j});
         
-        for(auto it=0; it<4; it++){
+        while(!q.empty()){
+            auto [i,j]= q.front();
+            q.pop();
+            
+             fish+= grid[i][j];
+              grid[i][j]= 0;
+            
+             for(auto it=0; it<4; it++){
             int x= i+ dir[it];
             int y= j+ dir[it+1];
             
-            
-            help(grid, x, y, fish);
+             if(x<0 or y<0 or x>=grid.size() or y>=grid[0].size() or grid[x][y] == 0) continue;
+                 else
+            q.push({x,y});
         }
+        }
+        
+             
+        
+       
         
         
     }
