@@ -1,23 +1,35 @@
-// map+greedy
-
 class Solution {
 public:
     int minDeletions(string s) {
-  int ans = 0;
-  // count each char
-  unordered_map<char, int> char_counts;
-  for (const char& c : s) char_counts[c]++;
-  unordered_set<int> seen;
-
-  for (auto[k, v] : char_counts) {
-    // if we've seen it, decrement it until we haven't
-    while (seen.find(v) != seen.end()) {
-      v--;
-      ans++;
+        
+        int arr[26]= {0};
+        
+        for(auto i:s){
+            arr[i-'a']++;
+        }
+        
+        map<int,int,greater<int>>mp;
+        
+        for(int i=0; i<26; i++){
+            if(arr[i] != 0)
+            mp[arr[i]]++;
+        }
+        // for(auto [x,y]:mp) cout<<x<<" "<<y<<endl;
+        
+        int deletion= 0;
+        
+        for(auto [x,y] : mp){
+            // cout<<x<<" "<<y<<endl;
+            
+            while(mp[x] > 1){
+                mp[x]--;
+                if(x-1 != 0){
+                     mp[x-1]++;
+                }
+               
+                deletion++;
+            }
+        }
+        return deletion;
     }
-    if (v > 0) seen.insert(v);
-  }
-
-  return ans;
-}
 };
