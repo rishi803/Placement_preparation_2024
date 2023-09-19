@@ -1,43 +1,38 @@
 class Solution {
 public:
     long long matrixSumQueries(int n, vector<vector<int>>& queries) {
-         long sum = 0;
-         int row = n, col = n;
         
-         unordered_set<int>Rowvis;
-         unordered_set<int>Colvis;
-
-    for (int i = queries.size() - 1; i >= 0; i--) {
+        vector<int>visrow(n),viscol(n);
         
-        int type=queries[i][0];
-        int idx=queries[i][1];
-        int value=queries[i][2];
+        reverse(queries.begin(), queries.end());
         
-        if (type==0) {
-            if (Rowvis.find(idx)!=Colvis.end()) {            // because this index is already calculated
-                continue;
-            } 
-            else {                     
+        int row=n, col= n;
+        long long sum= 0;
+        
+        for(int i=0; i<queries.size(); i++){
+            
+            int type= queries[i][0];
+            int idx= queries[i][1];
+            
+            if(type == 0 and visrow[idx] == 0){        
                
-                sum += col* value;
-                Rowvis.insert(idx);
-                row --;
-              
+                int value= queries[i][2];
+                
+                sum+= row * value;
+                visrow[idx] = 1;              // this row is changed so dont visit it again
+                col--;
             }
-        } else {
-            if (Colvis.find(idx)!=Colvis.end()) {        // because this index is already calculated
-                continue;
-            }
-            else {
+            
+            else if(type ==1 and viscol[idx] == 0){             
                
-                sum += row * value;
-                Colvis.insert(idx);
-                col --;
+                int value= queries[i][2];
+                
+                sum+= col * value;
+                viscol[idx]= 1;            // this col is changed so dont visit it again
+                row--;
             }
         }
-    }
-
-    return sum;
-
+        
+        return sum;
     }
 };
