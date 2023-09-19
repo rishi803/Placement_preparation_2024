@@ -2,26 +2,26 @@ class Solution {
 public:
     long long maxMatrixSum(vector<vector<int>>& matrix) {
         
-        long long sum= 0;
-        int neg_cnt=0, smallest= INT_MAX;
+        long long ans= 0;
+        
+        int smallest= INT_MAX;
+        int neg_cnt= 0;
         
         for(int i=0; i<matrix.size(); i++){
             for(int j=0; j<matrix[0].size(); j++){
                 
-                sum+= abs(matrix[i][j]);        // man liya sare number +ve ho gaye h
+                ans+= abs(matrix[i][j]);
                 
-                smallest= min(smallest, abs(matrix[i][j])); // agr last me -ve ka cnt odd times raha to sabse choti value ko sum me se hatana hoga jisse max sum mile ab is smallest num ko bhi sum me add kiya tha isliye isko hatane ke liye (2*smallestnumber) krenge
+                smallest= min(smallest, abs(matrix[i][j]));
                 
                 if(matrix[i][j] < 0) neg_cnt++;
                 
-                
             }
+            
         }
         
-        if(neg_cnt % 2 == 0) return sum;
+        if(neg_cnt % 2 ==0)  return ans;      // even cnt -ve
         
-        return sum - (2*smallest);
-        
-        
+        return ans - (smallest*2);
     }
 };
