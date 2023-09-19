@@ -2,7 +2,7 @@ class Solution {
 public:
     long long matrixSumQueries(int n, vector<vector<int>>& queries) {
         
-        unordered_map<int,int>visrow,viscol;
+        vector<int>visrow(n),viscol(n);
         
         reverse(queries.begin(), queries.end());
         
