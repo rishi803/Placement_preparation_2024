@@ -7,10 +7,12 @@ public:
         long long cnt= 0;
         
         for(head=0; head<nums.size(); head++){
+            
+            cnt+= mp[nums[head]];
             mp[nums[head]]++;
             
-         if(mp[nums[head]] == 2) cnt+=1;
-         if(mp[nums[head]] > 2) cnt+=mp[nums[head]] - 1;
+         // if(mp[nums[head]] == 2) cnt+=1;
+         // if(mp[nums[head]] > 2) cnt+=mp[nums[head]] - 1;
             
             // cout<<head<<" "<<cnt<<endl;
             
