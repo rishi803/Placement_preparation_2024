@@ -22,9 +22,10 @@ public:
                 int nextpair= pair - 1;
                 cnt+= (nextpair * (nextpair - 1)) / 2;
                 
+                if(mp[nums[tail]] != 0)
                 mp[nums[tail]]--;
                 
-                if(mp[nums[tail]] == 0) mp.erase(nums[tail]);
+                // if(mp[nums[tail]] == 0) mp.erase(nums[tail]);
                 
                 ans+= nums.size() - head;
                 tail++;
