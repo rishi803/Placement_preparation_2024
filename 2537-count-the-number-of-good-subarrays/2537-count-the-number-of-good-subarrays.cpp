@@ -1,30 +1,37 @@
-
-
 class Solution {
 public:
-   long long countGood(vector<int>& nums, int k) {
-       
-        int head = 0, tail = 0 , n = nums.size();
-        unordered_map<int,int> mp;
-        long long int cnt = 0 , ans = 0;
-       
-        for(head=0;head<nums.size();head++){
-            
-            
-            cnt += mp[nums[head]]  ;        // calculating subarrays
+    long long countGood(vector<int>& nums, int k) {
+        
+        unordered_map<int,int>mp;
+        long long head=0, tail=0, ans= 0;
+        long long cnt= 0;
+        
+        for(head=0; head<nums.size(); head++){
             mp[nums[head]]++;
             
+         if(mp[nums[head]] == 2) cnt+=1;
+         if(mp[nums[head]] > 2) cnt+=mp[nums[head]] - 1;
             
-                 // ------------- if(cnt>=k go inside while loop) -----  (this right part will also be our answer since it also satisfy cnt>=k, inside while loop shift tail pointer forward to check whether it still satisfying the cnt>=k then left part is the answer but right remaining part will also contribute to the answer)
+            // cout<<head<<" "<<cnt<<endl;
             
-			while(tail < head and cnt >= k){
-				ans += n - head;
-				mp[nums[tail]]--;
-				cnt -= mp[nums[tail]];          // decrementing subarrays
-				tail++;
-			}
-            
+            while(cnt >= k) {
+                
+                int pair= mp[nums[tail]];
+                cnt-= (pair * (pair-1))/ 2;
+                
+                int nextpair= pair - 1;
+                cnt+= (nextpair * (nextpair - 1)) / 2;
+                
+                mp[nums[tail]]--;
+                
+                if(mp[nums[tail]] == 0) mp.erase(nums[tail]);
+                
+                ans+= nums.size() - head;
+                tail++;
+            }
         }
+        
         return ans;
+        
     }
 };
