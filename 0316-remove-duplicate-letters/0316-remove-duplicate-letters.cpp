@@ -1,31 +1,53 @@
 class Solution {
 public:
     string removeDuplicateLetters(string s) {
-             string ans;
-        vector<int>availabel(26);
-        vector<bool>include(26,false);
-    
-        for(auto &i:s) availabel[i-'a']++;
         
-        for(int i=0;i<s.size();i++){
+        string ans;
+        
+        stack<char>st;
+        unordered_map<char,int>freq;
+        unordered_map<char,int>seen;
+        
+        for(auto i:s){
+            freq[i]++;
+        }
+        
+        // for(auto &[key,val]:freq) cout<<key<<" "<<val<<endl;
+        
+        for(int i=0; i<s.size(); i++){
             
-            availabel[s[i]-'a']--;
+            freq[s[i]]--;
             
-            if(include[s[i]-'a']==true) continue; // if a character is already included no need to include it at current("addbbcbdaadbdaadcaabbab")
+            if(seen[s[i]] == 1) continue;
             
-            while(ans.size() and availabel[ans.back()-'a']>0 and ans.back()>s[i]){
-                include[ans.back()-'a']=false;
-                ans.pop_back();
+            while(!st.empty() and st.top() > s[i] and freq[st.top()] > 0){
+                seen[st.top()]= 0;
+                st.pop();
+                
+                // freq[st.top()]--;
             }
-            if(include[s[i]-'a']==false){
-                include[s[i]-'a']=true;
-                ans+=s[i];
+            
+            while(!st.empty() and st.top() == s[i]){
+                 seen[st.top()]= 0;
+                 st.pop();
+      
+            }
+            // cout<<seen[s[i]]<< " "<<s[i]<<endl;
+            
+            if(seen[s[i]] == 0){
+                // cout<<s[i];
+                 st.push(s[i]);
+                 seen[s[i]]= 1;
             }
            
-              // cout<<i<<" "<<ans<<endl;
-            // availabel[s[i]-'a']--;     (failing test case: "bcbcbcababa" output should be "bca" but "ab")
-            
         }
-        return ans;
+        
+        while(!st.empty()){
+            ans+=st.top();
+            st.pop();
+        }
+        reverse(ans.begin(),ans.end());
+       
+        return  ans;
     }
 };
