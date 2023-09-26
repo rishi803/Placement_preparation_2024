@@ -26,19 +26,11 @@ public:
                 
                 // freq[st.top()]--;
             }
+
             
-            while(!st.empty() and st.top() == s[i]){
-                 seen[st.top()]= 0;
-                 st.pop();
-      
-            }
-            // cout<<seen[s[i]]<< " "<<s[i]<<endl;
-            
-            if(seen[s[i]] == 0){
-                // cout<<s[i];
                  st.push(s[i]);
                  seen[s[i]]= 1;
-            }
+            
            
         }
         
