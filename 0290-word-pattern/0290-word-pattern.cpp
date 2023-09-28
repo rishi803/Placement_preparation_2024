@@ -2,13 +2,27 @@ class Solution {
 public:
     bool wordPattern(string pattern, string s) {
         
-        stringstream ss(s);
+        // stringstream ss(s);
         vector<string>word;
-        string st;
+        int idx= 0;
+        // string st;
         
-        while(ss>>st){
-            word.push_back(st);
+        // while(ss>>st){
+        //     word.push_back(st);
+        // }
+        string temp;
+        while(idx < s.size())
+        {
+            if(s[idx]==' '){
+                word.push_back(temp);
+                temp="";
+            }
+            else{
+                temp+=s[idx];
+            }
+            idx++;
         }
+        word.push_back(temp);
         
         if(pattern.size()!=word.size()) return false;
         unordered_map<char,string>mp;
