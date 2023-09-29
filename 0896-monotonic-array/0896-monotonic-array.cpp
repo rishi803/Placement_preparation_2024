@@ -20,12 +20,11 @@ public:
          for(int i=1; i<nums.size(); i++){
          
             if(nums[i] <= nums[i-1]){
-                if(decreasing==false and md == false) return false;
+                if( decreasing==false ) return false;
                 md= true;
             }
             else{
                 decreasing= false;
-                md= false;
             }
         }
         
