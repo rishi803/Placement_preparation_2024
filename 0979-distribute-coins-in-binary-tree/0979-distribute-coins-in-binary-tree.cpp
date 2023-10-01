@@ -2,21 +2,32 @@
 class Solution {
 public:
     
-    int cnt= 0;
+    int ans= 0;
+    
     int help(TreeNode* root){
         if(!root) return 0;
         
-        int left= help(root->left);
-        int right=help(root->right);
+        root->val+= help(root->left);
+        root->val+=help(root->right);
         
-        cnt+= abs(left) + abs(right);
+        int remain= root->val - 1;
         
-        return root->val + (left + right) - 1;
+        ans+= abs(remain);
+        
+        return remain;
+        
+//         int left= help(root->left);
+//         int right= help(root->right);
+        
+//         ans+= abs(left) + abs(right);
+        
+//         return root->val + left + right - 1;
+        
     }
     
     int distributeCoins(TreeNode* root) {
         
          help(root);
-        return cnt;
+        return ans;
     }
 };
