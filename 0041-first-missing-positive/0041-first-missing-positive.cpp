@@ -4,16 +4,16 @@ public:
         
         for(int i=0; i<nums.size(); i++){
             
-            while(nums[i] >= 0 and nums[i] < nums.size() and nums[i] != i and nums[i] != nums[nums[i]]){
-                swap(nums[i], nums[nums[i]]);
+            while(nums[i] > 0 and nums[i] <= nums.size() and nums[i] != i+1 and nums[i] != nums[nums[i]-1]){
+                swap(nums[i], nums[nums[i]-1]);
             }
             
         }
         
-        for(int i=1; i<nums.size(); i++){
-            if(nums[i] != i) return i;
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] != i+1) return i+1;
         }
         
-        return nums[0]!=nums.size() ? nums.size() : nums.size()+1;
+        return nums.size() + 1;
     }
 };
