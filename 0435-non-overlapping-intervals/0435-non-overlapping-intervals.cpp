@@ -16,12 +16,12 @@ public:
                if(intervals[i][0] < prevend){    // if overlapping remove which have less range
                    remove++; 
                    
-                   // prevst= max(prevst,intervals[i][0]);      
+                   prevst= max(prevst,intervals[i][0]);      
                    prevend= min(prevend,intervals[i][1]);
                }
                
               else{
-                   // prevst= intervals[i][0];
+                   prevst= intervals[i][0];
                    prevend=intervals[i][1];
               }
                // cout<<prevst<<" "<<prevend<<endl;
