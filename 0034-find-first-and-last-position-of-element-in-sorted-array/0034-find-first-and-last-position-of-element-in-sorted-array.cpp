@@ -1,13 +1,14 @@
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-      auto lb=lower_bound(nums.begin(),nums.end(),target);
-      auto ub=upper_bound(nums.begin(),nums.end(),target);
-        
-    if(lb==ub) return {-1,-1};
-        int l=lb-nums.begin();
-        int u=ub-nums.begin();
-   return {l,u-1};
-        
+        if(nums.empty()) return {-1,-1};
+        vector<int>ans;
+        int idx=lower_bound(nums.begin(),nums.end(),target)-nums.begin();
+        int udx=upper_bound(nums.begin(),nums.end(),target)-nums.begin();
+        if(idx<nums.size() and nums[idx]==target)ans.push_back(idx);
+        else ans.push_back(-1);
+        if(udx>0 and nums[udx-1]==target) ans.push_back(udx-1);
+        else ans.push_back(-1);
+        return ans;
     }
 };
