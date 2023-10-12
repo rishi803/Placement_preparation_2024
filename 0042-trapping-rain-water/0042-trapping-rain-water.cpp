@@ -17,7 +17,7 @@ public:
             
             mx= max(mx,height[i]);
             
-            if(height[i] < mx and height[i] < suffix[i]) water+= (min(mx,suffix[i]) - height[i]);
+            if(height[i] < mx and height[i] < suffix[i]) water+= (min(mx,suffix[i]) - height[i]); // this water only be counted if its value is less than left boundary (mx) and rightboundary (suffix[i])
             
             // cout<<suffix[i]<<" "<<height[i]<<" "<<water<<endl;
         }
