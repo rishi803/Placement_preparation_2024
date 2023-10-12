@@ -2,33 +2,26 @@ class Solution {
 public:
     int trap(vector<int>& height) {
         
-        int mxleft=height[0],mxright=height[height.size()-1];
-        int left=0, right= height.size()-2;
-        int ans=0;
+        int sz= height.size();
+        vector<int>suffix(sz);
+        suffix[sz-1]= 0;
+        int mxx= 0;
+        for(int i= sz-2; i>=0; i--){
+             mxx= max(mxx,height[i+1]);
+            suffix[i]= mxx;
+        }
         
-       while(left<=right)
-       {
-           if(mxleft < mxright){   // water will trap according to left vala bar
-               
-               if(height[left] > mxleft) {
-                   mxleft= height[left];
-               }
-               else{
-                   ans+= (mxleft - height[left]);
-               }
-               left++;
-           }
-           
-           else{          // water will trap according to right vala bar
-               if(height[right] > mxright) {
-                   mxright= height[right];
-               }
-               else{
-                   ans+= (mxright-height[right]);
-               }
-               right--;
-           }
-       }
-        return ans;
+        int water=0, mx=height[0];
+        
+        for(int i=1; i<height.size(); i++){
+            
+            mx= max(mx,height[i]);
+            
+            if(height[i] < mx and height[i] < suffix[i]) water+= (min(mx,suffix[i]) - height[i]);
+            
+            // cout<<suffix[i]<<" "<<height[i]<<" "<<water<<endl;
+        }
+        
+        return water;
     }
 };
