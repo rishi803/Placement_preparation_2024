@@ -27,13 +27,15 @@ public:
 
         for (int i = 1; i < n; i++) {
             for (int j = 0; j < i; j++) {
+                
                 if (groups[j] != groups[i] && words[j].size() == words[i].size()) {  // checking the condition given in problem
                     
                     int hamDist = calculate_ham_dist(words[i], words[j]);
-                    
-
-                    if (hamDist == 1) {           // if all condition satisfied
-                        if (dp[j].size() + 1 > dp[i].size()) {    // and check whether from this index you are getting max length subsequence
+                
+                    if (hamDist == 1)  // if all condition satisfied
+                    {           
+                        if (dp[j].size() + 1 > dp[i].size())   // and check whether from this index you are getting max length subsequence
+                        {   
                             dp[i] = dp[j]; // Copy the longest subsequence found so far  
                             dp[i].push_back(words[i]);
                             maxLength = max(maxLength, int(dp[i].size()));
@@ -44,8 +46,10 @@ public:
         }
 
         vector<string> longestSubsequence;
-        for (int i = 0; i < n; i++) {
-            if (dp[i].size() == maxLength) {             
+        for (int i = 0; i < n; i++) 
+        {
+            if (dp[i].size() == maxLength) 
+            {             
                 longestSubsequence = dp[i];
                 break; // Break when the first longest subsequence is found
             }
