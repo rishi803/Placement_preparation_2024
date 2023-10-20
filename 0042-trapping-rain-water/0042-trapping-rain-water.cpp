@@ -3,25 +3,34 @@ public:
     int trap(vector<int>& height) {
         
         int sz= height.size();
+        vector<int>prefix(sz);
         vector<int>suffix(sz);
+        
+        prefix[0]= 0;
         suffix[sz-1]= 0;
-        int mxx= 0;
+        
+        for(int i=1; i<sz; i++){
+            prefix[i]= max(prefix[i-1], height[i-1]);
+        }
+        
         for(int i= sz-2; i>=0; i--){
-             mxx= max(mxx,height[i+1]);
-            suffix[i]= mxx;
+            suffix[i]= max(suffix[i+1], height[i+1]);
         }
         
-        int water=0, mx=height[0];
+        int area= 0;
         
-        for(int i=1; i<height.size(); i++){
+        for(int i=1; i<(sz-1); i++){
             
-            mx= max(mx,height[i]);
+            if(height[i] < prefix[i] and height[i] < suffix[i]){
             
-            if(height[i] < mx and height[i] < suffix[i]) water+= (min(mx,suffix[i]) - height[i]); // this water only be counted if its value is less than left boundary (mx) and rightboundary (suffix[i])
-            
-            // cout<<suffix[i]<<" "<<height[i]<<" "<<water<<endl;
+                int pani= min(prefix[i], suffix[i]);
+                area= area + (pani-height[i]);
+            }
+            // cout<<height[i]<<" "<<prefix[i]<<" "<<suffix[i]<<endl;
         }
         
-        return water;
+        return area;
+        
+        
     }
 };
