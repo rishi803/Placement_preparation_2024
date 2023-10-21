@@ -1,19 +1,31 @@
 class Solution {
 public:
     vector<int> goodIndices(vector<int>& nums, int time) {
+       int sz= nums.size();
         
-        int sz=nums.size();
-        vector<int>pref(sz,1),suff(sz,1),ans;
-      
-        for(int i=sz-2;i>=0;i--){
-            if(nums[i+1]<=nums[i]) pref[i]=pref[i+1]+1;
+        vector<int>prefix(sz,1),suffix(sz,1);
+        
+        for(int i=1; i<sz; i++){
+            if(nums[i] <= nums[i-1]) prefix[i]= 1+prefix[i-1];
         }
-        for(int i=1;i<sz;i++){
-            if(nums[i]>=nums[i-1]) suff[i]=suff[i-1]+1;
+        
+        for(int i=sz-2; i>=0; i--){
+            if(nums[i] <= nums[i+1]) suffix[i]= 1+suffix[i+1];
         }
-        for(int i=time;i<sz-time;i++){
-          if(pref[i-time]>=time and suff[i+time]>=time) ans.push_back(i);
+        
+        vector<int>ans;
+        
+        for(int i=1; i<sz-1; i++){
+            
+            int decreasing= prefix[i-1];
+            int increasing= suffix[i+1];
+            
+            // cout<<i<<" "<<decreasing<<" "<<increasing<<endl;
+            
+            if(decreasing >= time and increasing >= time) ans.push_back(i);
         }
-        return ans; 
+        
+        return ans;
+        
     }
 };
