@@ -5,8 +5,12 @@ public:
         int seats=0;
         
         for(auto &i:bookings){
-            mp[i[0]]+=i[2];
-            mp[i[1]+1]-=i[2];
+            
+            int start= i[0];
+            int end= i[1];
+            
+            mp[start]+=i[2];
+            mp[end+1]-=i[2];
         }
         vector<int>ans;
         
