@@ -2,25 +2,28 @@ class MyCalendar {
 public:
     
     map<int,int>mp;
+    
     MyCalendar() {
         
     }
     
     bool book(int start, int end) {
+        mp[start]++;
+        mp[end]--;
         
-      auto it=mp.lower_bound(start);
+        int overlap= 0;
         
-      if(it!=mp.end() and it->second<end) return false;
-        
-       mp[end-1]=start;
+        for(auto [key,value]:mp){
+            overlap+=value;
+            
+            if(overlap >= 2){     // do not book this (do not add this in map)
+                mp[start]--;
+                mp[end]++;
+                return false;
+            }
+        }
         
         return true;
-       
     }
 };
 
-/**
- * Your MyCalendar object will be instantiated and called as such:
- * MyCalendar* obj = new MyCalendar();
- * bool param_1 = obj->book(start,end);
- */
