@@ -4,9 +4,8 @@ public:
         
         bool modification= false;
         
-        for(int i=0; i<nums.size(); i++){
+        for(int i=1; i<nums.size(); i++){
             
-            if(i>=1){
                  if(nums[i] < nums[i-1]){
                      
                      if(modification) return false;
@@ -23,7 +22,6 @@ public:
                          nums[i-1]= nums[i];
                          modification= true;
                      }
-            }
             }
            
         }
