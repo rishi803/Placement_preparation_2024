@@ -1,9 +1,7 @@
 class Solution {
 public:
     
-    int help(int number, int resultant){
-        return number ^ resultant;
-    }
+  
     vector<int> findArray(vector<int>& pref) {
         
         vector<int>ans;
@@ -13,9 +11,8 @@ public:
         
         for(int i=1; i<pref.size(); i++)
         {
-            int result= help(pref[i-1], pref[i]);
             
-            ans.push_back(result);
+            ans.push_back(pref[i-1] ^ pref[i]);
         }
         
         return ans;
