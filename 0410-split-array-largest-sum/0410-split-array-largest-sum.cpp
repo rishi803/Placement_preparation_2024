@@ -1,30 +1,41 @@
 class Solution {
 public:
     
-    int dp[1001][51];
-    
-    int help(vector<int>&nums, int k, int idx){
+    bool isvalid(vector<int>&nums,int subarrays, int cansum){
         
-        if(k < 0) return INT_MAX;
-        if(idx >= nums.size() and k==0) return 0;
-        if(idx >= nums.size()) return INT_MAX;
-        if(dp[idx][k] != -1) return dp[idx][k];
+        int sum= 0;
+        int subarray= 1;
         
-        int ans= INT_MAX, currsum= 0;
-        
-        for(int i=idx; i<nums.size(); i++){
-            currsum+= nums[i];
-            int nextsum= help(nums, k-1, i+1);
+        for(int i=0; i<nums.size(); i++){
+            sum+= nums[i];
             
-            ans= min(ans, max(currsum, nextsum));
+            if(sum > cansum){
+                sum= nums[i];
+                subarray++;
+            }
         }
         
-        return dp[idx][k]= ans;
+        return subarray <= subarrays;
     }
+    
     int splitArray(vector<int>& nums, int k) {
         
-        // dp.resize(nums.size(), vector<int>(k+1,-1));
-        memset(dp, -1, sizeof(dp));
-         return help(nums, k, 0);
+        int low=  *max_element(nums.begin(), nums.end());
+        int high= 1e9;
+        int ans= 0;
+        
+        while(low <= high){
+            int mid= low+(high - low)/2;
+            
+            if(isvalid(nums,k,mid)){
+                ans= mid;
+                high= mid-1;
+            }
+            else{
+                low= mid+1;
+            }
+        }
+        
+        return ans;
     }
 };
