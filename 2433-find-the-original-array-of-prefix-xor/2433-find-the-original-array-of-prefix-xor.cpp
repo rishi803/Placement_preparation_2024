@@ -2,27 +2,7 @@ class Solution {
 public:
     
     int help(int number, int resultant){
-        
-        int requirednum= 0;
-        
-        
-        for(int i=31; i>=0; i--){
-            int numberbit= number & (1<<i);
-            int resultantbit= resultant & (1<<i);
-            
-            if(numberbit > 0) numberbit = 1;
-            if(resultantbit > 0) resultantbit= 1;
-            
-            
-            if(resultantbit == 0){
-                requirednum= requirednum * 2 + numberbit;
-            }
-            else{
-                 requirednum= requirednum * 2 + !numberbit;
-            }
-        }
-        
-        return requirednum;
+        return number ^ resultant;
     }
     vector<int> findArray(vector<int>& pref) {
         
