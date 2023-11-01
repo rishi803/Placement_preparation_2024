@@ -1,58 +1,41 @@
 class Solution {
 public:
     int maximumSwap(int num) {
-        vector<int >v;
-            
-        while(num)
-        {
-            int r = num%10;
-           v.push_back(r);
+        vector<int>temp;
+        
+        while(num > 0){
+            temp.push_back(num % 10);
             num/=10;
         }
+        reverse(temp.begin(), temp.end());
         
-        reverse(v.begin(),v.end());
+        int sz= temp.size();
+        vector<pair<int,int>>suffix(sz);
         
+        suffix[sz-1]= {temp[sz-1], sz-1};
         
-        int n= v.size();
-        
-        vector<pair<int,int>>smax(n);
-        smax[n-1].first = v[n-1];
-        smax[n-1].second = n-1;
-        
-       
-        
-        for(int i = n-2; i>=0; i--)
-        {
-            if(v[i] <= smax[i+1].first){
-                smax[i]=smax[i+1];
+        for(int i=sz-2; i>=0; i--){
+            if(temp[i] > suffix[i+1].first){
+                suffix[i]= {temp[i], i};
             }
-            else
-                smax[i]={v[i],i};
+            
+            else suffix[i]= suffix[i+1];
         }
-        
-        // for(auto i:smax){
-        //     cout<<i.first<<" "<<i.second<<endl;
-        // }
-        
-        
-        for(int i =0;i<n;i++)
-        {
-            if(smax[i].first > v[i])
-            {
-                int swapidx= smax[i].second;
-                
-                swap(v[swapidx], v[i]);
+       
+      
+         for(int i= 0; i< sz; i++){
+            if(temp[i] < suffix[i].first){
+                swap(temp[i], temp[suffix[i].second]);
                 break;
             }
-        }
-        int numi= 0;
+          
+         }
+        int ans= 0;
         
-        for(int i=0; i<v.size(); i++){
-            numi= numi * 10 + v[i];
-        }
-        
-        
-        return numi;
-        
+          for(auto i:temp) {
+              // cout<<i;
+              ans= ans*10+i;
+          }
+        return ans;
     }
 };
