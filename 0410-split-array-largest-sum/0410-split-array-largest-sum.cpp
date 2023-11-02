@@ -5,12 +5,12 @@ public:
     
     int help(vector<int>&nums, int k, int idx){
         
-         
+         if(k == 0 or idx >= nums.size()-1) return 0;
+        
          if(k == 1){
            return accumulate(nums.begin()+idx, nums.end(), 0);
         }
-        
-        if(idx >= nums.size()-1) return INT_MIN;
+     
         if(dp[idx][k] != -1) return dp[idx][k];
        
         int sum= 0, ans= INT_MAX;
