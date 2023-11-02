@@ -1,70 +1,29 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+
 class Solution {
 public:
-//     pair<int,int>help(TreeNode* root,int &cnt){
-//        if(!root) return {0,0};  
-       
-       
-//         auto left= help(root->left,cnt);
-//         auto right=help(root->right,cnt);
-//         int valans=left.first+right.first+root->val;
-//         int countans=left.second+right.second+1;
-//        if(((valans)/(countans))==root->val) cnt++;
-        
-//         return {valans,countans};
-        
-        
-//     }
     
-     int ans = 0;
-//     pair<int,int> solve(TreeNode* root){
-//         if(root==NULL) return {0,0};
-        
-//         auto left = solve(root->left);
-//         int l_sum = left.first; // sum of nodes present in left sub tree
-//         int l_cnt = left.second; // no. of nodes present in left sub tree
-        
-//         auto right = solve(root->right);
-//         int r_sum = right.first; // sum of nodes present in right sub tree
-//         int r_cnt = right.second; // no. of nodes present in left sub tree
-        
-//         int sum = root->val+l_sum+r_sum;
-//         int cnt = l_cnt+r_cnt+1;
-        
-//         if(root->val == sum/cnt) ans++;
-//         return {sum,cnt};
-//     }
+    int ans= 0;
     
-      pair<int,int> solve(TreeNode* root){
+    pair<int,int> help(TreeNode* root){
+        if(!root) return {0,0};
         
-       if(!root) return {0,0};
-       auto left=solve(root->left);
-       auto right=solve(root->right);
-       int sum=root->val+left.first+right.first;
-       int cnt=left.second+right.second+1;
-       if(root->val==(sum)/cnt) ans++;
-       return {sum,cnt};
+        // if(!root->left and !root->right) return {root->val, 1};
+        
+        pair<int,int>left= help(root->left);
+        pair<int,int>right= help(root->right);
+        
+        int totalsum= root->val + left.first + right.first;
+        int totalnodes= 1 + left.second + right.second;
+        
+        // cout<<totalsum<<" "<<totalnodes<<endl;
+        
+        if((totalsum/totalnodes) == root->val) ans++;
+        
+        return {totalsum, totalnodes};
     }
     
     int averageOfSubtree(TreeNode* root) {
-        solve(root);
+        help(root);
         return ans;
     }
-    
-//     int averageOfSubtree(TreeNode* root) {
-//       int cnt=0;
-//          help(root,cnt);
-//         return cnt;
-      
-//     }
 };
