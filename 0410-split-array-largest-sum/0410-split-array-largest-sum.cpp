@@ -1,41 +1,33 @@
 class Solution {
 public:
     
-    bool isvalid(vector<int>&nums,int subarrays, int cansum){
+   int dp[1002][51];
+    
+    int help(vector<int>&nums, int k, int idx){
         
-        int sum= 0;
-        int subarray= 1;
-        
-        for(int i=0; i<nums.size(); i++){
-            sum+= nums[i];
-            
-            if(sum > cansum){
-                sum= nums[i];
-                subarray++;
-            }
+         
+         if(k == 1){
+           return accumulate(nums.begin()+idx, nums.end(), 0);
         }
         
-        return subarray <= subarrays;
+        if(idx >= nums.size()-1) return INT_MIN;
+        if(dp[idx][k] != -1) return dp[idx][k];
+       
+        int sum= 0, ans= INT_MAX;
+        
+        for(int i= idx; i<nums.size()-1; i++){
+            sum+= nums[i];
+            int mn= max(sum, help(nums, k-1, i+1));
+            ans= min(ans, mn);
+        }
+        
+        return dp[idx][k]= ans;
+        
     }
     
     int splitArray(vector<int>& nums, int k) {
         
-        int low=  *max_element(nums.begin(), nums.end());
-        int high= accumulate(nums.begin(), nums.end(), 0);
-        int ans= 0;
-        
-        while(low <= high){
-            int mid= low+(high - low)/2;
-            
-            if(isvalid(nums,k,mid)){
-                ans= mid;
-                high= mid-1;
-            }
-            else{
-                low= mid+1;
-            }
-        }
-        
-        return ans;
+        memset(dp, -1, sizeof(dp));
+        return help(nums, k, 0);
     }
 };
