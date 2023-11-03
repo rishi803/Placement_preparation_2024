@@ -1,22 +1,23 @@
 class Solution {
 public:
     
-    int help(vector<vector<int>>&costs,int cangoA,int cangoB,int idx,vector<vector<int>>&dp){
-        if(idx==costs.size()) return 0;
-        if(dp[cangoA][cangoB]!=-1) return dp[cangoA][cangoB];
+    int dp[101][5001];
+    
+    int help(int idx, vector<vector<int>>&costs, int ap, int bp, int n){
         
-        int cost1=INT_MAX,cost2=INT_MAX;
+        if(ap > n/2 or bp > n/2) return INT_MAX-1000;
+        if(idx >= costs.size()) return 0;
+        if(dp[idx][ap] != -1) return dp[idx][ap];
         
-        if(cangoA) cost1= costs[idx][0]+help(costs,cangoA-1,cangoB,idx+1,dp);
-        
-        if(cangoB) cost2=costs[idx][1]+help(costs,cangoA,cangoB-1,idx+1,dp);
-        
-        return dp[cangoA][cangoB]=min(cost1,cost2);
+        int takea= costs[idx][0] + help(idx+1, costs, ap+1, bp, n);
+        int takeb= costs[idx][1] + help(idx+1, costs, ap, bp+1, n);
+            
+        return dp[idx][ap]= min(takea, takeb);
     }
+    
     int twoCitySchedCost(vector<vector<int>>& costs) {
         
-        vector<vector<int>>dp(costs.size()/2+1,vector<int>(costs.size()/2+1,-1));
-         
-        return help(costs,costs.size()/2,costs.size()/2,0,dp);
+        memset(dp, -1, sizeof(dp));
+        return help(0, costs, 0, 0, costs.size());
     }
 };
