@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    int dp[101][5001];
+    int dp[101][101];
     
     int help(int idx, vector<vector<int>>&costs, int ap, int bp, int n){
         
