@@ -1,3 +1,7 @@
+// Actually I have converted this problem as a Sliding window so that you can relate my all 
+// previous approx 40+ problems on same template 
+
+
 class Solution {
 public:
     const int mod= int(1e9+7);
