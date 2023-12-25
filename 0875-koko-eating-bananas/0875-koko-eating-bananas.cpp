@@ -3,7 +3,7 @@ public:
     
     bool isvalid(int midbanana, vector<int>&piles, int h){
         
-        int cnt= 0;
+        long long cnt= 0;
         
         for(int i=0; i<piles.size(); i++){
             
@@ -26,13 +26,13 @@ public:
     
     int minEatingSpeed(vector<int>& piles, int h) {
         
-        long long low=   1;                // sabse best scenario
-        long long high= accumulate(piles.begin(), piles.end(),0ll);               // sabse wordst scenario
+        int low=   1;                // sabse best scenario
+        int high= *max_element(piles.begin(), piles.end());             // sabse wordst scenario
         int ans= 0;
         
         while(low<=high){
             
-            long long mid= low + (high-low)/2;
+        int  mid= low + (high-low)/2;
             
             if(isvalid(mid, piles, h)){
                 ans= mid;
