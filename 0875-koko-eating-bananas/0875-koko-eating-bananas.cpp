@@ -1,42 +1,48 @@
 class Solution {
 public:
     
-    bool isvalid(int banana, vector<int>&piles, int hour){
+    bool isvalid(int midbanana, vector<int>&piles, int h){
         
         int cnt= 0;
         
-        for(int i=0; i<piles.size(); i++)
-        {
-            if(piles[i] > banana){
-                cnt+= piles[i]/banana;
-                if(piles[i] % banana != 0) cnt++;
+        for(int i=0; i<piles.size(); i++){
+            
+            if(piles[i] > midbanana){
+                int times= piles[i]/ midbanana;
+                if(piles[i] % midbanana != 0) times++;
+                
+                cnt= cnt + times;
             }
-            else cnt++;
+            
+            else{
+                cnt= cnt + 1;
+            }
+            
+            
         }
         
-        return cnt<=hour;
+        return cnt<=h;
     }
     
     int minEatingSpeed(vector<int>& piles, int h) {
         
-        long long low= 1;        // sabse best condition me
-        long long high= accumulate(piles.begin(), piles.end(),0ll);   // sabse worst condition me
+        long long low=   1;                // sabse best scenario
+        long long high= accumulate(piles.begin(), piles.end(),0ll);               // sabse wordst scenario
+        int ans= 0;
         
-        int ans= -1;
-        
-        while(low <= high){
-            long long mid_can= low + (high-low)/2;
+        while(low<=high){
             
-            if(isvalid(mid_can, piles, h)){
-                ans= mid_can;
-                high= mid_can-1;                      // minimize the maximum answer
+            long long mid= low + (high-low)/2;
+            
+            if(isvalid(mid, piles, h)){
+                ans= mid;
+                high= mid-1;
             }
-            
             else{
-                low= mid_can+1;
+                low= mid+1;
             }
         }
-       
+        
         return ans;
     }
 };
