@@ -1,49 +1,42 @@
 class Solution {
 public:
     
-    bool isvalid(vector<int>&nums, int speed, int given_hour){
+    bool isvalid(int banana, vector<int>&piles, int hour){
         
-        long long hour= 0;
+        int cnt= 0;
         
-        for(int i=0; i<nums.size(); i++){
-            
-            if(nums[i] >= speed){
-                int current_time= (nums[i] / speed);
-                
-                if((nums[i] % speed) != 0)
-                current_time ++;
-                
-                hour= hour + current_time;
+        for(int i=0; i<piles.size(); i++)
+        {
+            if(piles[i] > banana){
+                cnt+= piles[i]/banana;
+                if(piles[i] % banana != 0) cnt++;
             }
-            
-            else{
-                hour++;
-            }
+            else cnt++;
         }
-        return hour <= given_hour;
+        
+        return cnt<=hour;
     }
     
     int minEatingSpeed(vector<int>& piles, int h) {
-      
-        int low= 1;
-        long long high= 1e9;
         
-       
+        long long low= 1;
+        long long high= accumulate(piles.begin(), piles.end(),0ll);
         
-        int ans= 0;
+        int ans= -1;
         
         while(low <= high){
-            int midspeed= low+(high-low)/2;
+            long long mid_can= low + (high-low)/2;
             
-            if(isvalid(piles,midspeed, h)){
-                ans= midspeed;
-                high= midspeed-1;
+            if(isvalid(mid_can, piles, h)){
+                ans= mid_can;
+                high= mid_can-1;
             }
+            
             else{
-                low= midspeed+1;
+                low= mid_can+1;
             }
         }
-        
+       
         return ans;
     }
 };
