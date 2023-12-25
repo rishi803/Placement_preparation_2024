@@ -19,8 +19,8 @@ public:
     
     int minEatingSpeed(vector<int>& piles, int h) {
         
-        long long low= 1;
-        long long high= accumulate(piles.begin(), piles.end(),0ll);
+        long long low= 1;        // sabse best condition me
+        long long high= accumulate(piles.begin(), piles.end(),0ll);   // sabse worst condition me
         
         int ans= -1;
         
@@ -29,7 +29,7 @@ public:
             
             if(isvalid(mid_can, piles, h)){
                 ans= mid_can;
-                high= mid_can-1;
+                high= mid_can-1;                      // minimize the maximum answer
             }
             
             else{
