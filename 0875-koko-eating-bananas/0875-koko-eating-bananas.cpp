@@ -27,7 +27,7 @@ public:
     int minEatingSpeed(vector<int>& piles, int h) {
         
         int low=   1;                // sabse best scenario
-        int high= *max_element(piles.begin(), piles.end());             // sabse wordst scenario
+        int high=  1e9;          // sabse wordst scenario
         int ans= 0;
         
         while(low<=high){
