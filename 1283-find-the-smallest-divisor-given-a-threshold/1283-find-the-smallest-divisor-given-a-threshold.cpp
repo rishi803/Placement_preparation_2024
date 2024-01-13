@@ -1,40 +1,39 @@
 class Solution {
 public:
     
-    bool isvalid(int mid,vector<int>&nums,int threshold){
+    bool isvalid(vector<int>&nums, int mid, int threshold){
+           int sum= 0;
         
-        int cnt=0;
-        for(int i=0;i<nums.size();i++){
+        for(int i=0; i<nums.size(); i++){
+            int times= nums[i] / mid;
             
-//             cnt+=nums[i]/mid;
+            if(nums[i] % mid != 0) times++;
             
-//             if((nums[i]/mid)*mid!=nums[i]) cnt++;
-            
-           cnt+=((nums[i]-1)/mid)+1;        // this is trick for above two line
+            sum+= times;
         }
-        return cnt<=threshold;
+        
+        return sum <= threshold;
     }
     
     int smallestDivisor(vector<int>& nums, int threshold) {
         
-        sort(nums.begin(),nums.end());
-        int low=1;
-        int high=*max_element(nums.begin(),nums.end());
+        int low= 1;
+        int high= *max_element(nums.begin(), nums.end());
+        int ans= 0;
         
-        int ans=-1;
-        
-        while(low<=high){
+        while(low <= high){
+            int mid= low + (high-low)/2;
             
-            int mid= low+(high-low)/2;
-            if(isvalid(mid,nums,threshold)){
-                ans=mid;
-                high=mid-1;
+            if(isvalid(nums,mid,threshold)){
+                ans= mid;
+                high= mid-1;
             }
             
             else{
-                low=mid+1;
+                low= mid+1;
             }
         }
+        
         return ans;
     }
 };
