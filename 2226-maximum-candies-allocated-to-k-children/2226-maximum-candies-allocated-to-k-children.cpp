@@ -26,13 +26,13 @@ public:
         while(low <= high){
             int mid= low + (high-low) / 2;
             
-           if (isvalid(candies, mid, k)){
+           if (isvalid(candies, mid, k)){         // maximize the minimum answer
                 ans= mid;
                 low= mid+1;
             }
             
             else{
-                high= mid-1;
+                high= mid-1;            
             }
         }
         
