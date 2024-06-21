@@ -9,12 +9,12 @@ public:
              count[s[head] - 'a']++;              // do operation (store frequency)
             
              while (count[0]>0 && count[1]>0 && count[2]>0){
-                 count[s[tail]-'a']--;
+                 count[s[tail]-'a']--;           // remove elements from tail to get out of while loop
                  tail++;
              }
                 
-            ans+=tail;
+            ans+=tail;       // store the answer
         }
-        return ans;
+        return ans;         // return the answer
     }
 };
