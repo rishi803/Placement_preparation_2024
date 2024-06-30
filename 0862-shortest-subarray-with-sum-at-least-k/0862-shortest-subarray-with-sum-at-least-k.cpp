@@ -4,7 +4,7 @@ public:
         
         int head=0,tail=0;
         long long sum= 0;
-        priority_queue< pair<long long,int>, vector<pair<long long,int>>, greater<pair<long long,int>>>pq;
+        priority_queue< pair<long long,int>, vector<pair<long long,int>>, greater<pair<long long,int>>>pq; // small on top  (try to store lowest sum on top ---> monotonic increasing sum to apply sliding window)
         
         int ans= nums.size()+1;
         
@@ -18,7 +18,7 @@ public:
             
             while(pq.size() and sum - (pq.top().first) >= k){
                 // cout<<sum<<" "<<pq.top().first<<endl;
-                ans= min(ans, head-pq.top().second);
+                ans= min(ans, head-pq.top().second); // check current sum - (lowest prev sum) [4,-3,3,3,5] target = 5
                 pq.pop();
             }
             
