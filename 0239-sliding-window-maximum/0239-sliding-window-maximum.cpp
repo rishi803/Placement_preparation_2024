@@ -1,33 +1,23 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        
-        unordered_map<int,int>mp;
-        priority_queue<int>pq;
+        map<int,int,greater<int>>mp;
         vector<int>ans;
         
-        int head=0, tail=0;
-        
-        for(head= 0; head<k; head++){
-            pq.push(nums[head]);
+        for(int i=0; i<k; i++){
+            mp[nums[i]]++;
         }
         
-        ans.push_back(pq.top());
+        ans.push_back(mp.begin()->first);
         
-        for(head= k; head<nums.size(); head++){
+        for(int i=k; i<nums.size(); i++){
+            mp[nums[i-k]]--;
+            if(mp[nums[i-k]]==0) mp.erase(nums[i-k]);
             
-            mp[nums[head-k]]++;
+            mp[nums[i]]++;
             
-            while(pq.size() and mp[pq.top()] > 0){
-                  mp[pq.top()] --;
-                pq.pop();
-              
-            }
-             pq.push(nums[head]);
-         
-            ans.push_back(pq.top());
+            ans.push_back(mp.begin()->first);
         }
-        
         return ans;
     }
 };
