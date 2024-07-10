@@ -10,9 +10,14 @@ public:
         
         
         long long ans=INT_MAX;
-        for(int i=idx+1; i<= (idx + nums[idx]);i++){
-             ans=min(ans,1+help(i,nums));              // we need minimum ans from root to leaf
+        for(int i=1;i<=nums[idx];i++){
+             ans=min(ans,1+help(idx+i,nums));              // we need minimum ans from root to leaf
         }                                             // it give minimum ans at each root from all its below child
+         
+        //   long long ans=INT_MAX;
+        // for(int i=idx+1; i<= (idx + nums[idx]);i++){
+        //      ans=min(ans,1+help(i,nums));              // we need minimum ans from root to leaf
+        // }          
         
         return dp[idx]=ans;
     }
