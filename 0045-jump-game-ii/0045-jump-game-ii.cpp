@@ -4,6 +4,8 @@ public:
      long long help(int idx,vector<int>&nums){
          
         if(idx>=nums.size()-1) return 0;
+         if(nums[idx] == 0) return INT_MAX;
+         
         if(dp[idx]!=-1) return dp[idx];
         
         
