@@ -2,8 +2,8 @@ class Solution {
 public:
  vector<long long>dp;
      long long help(int idx,vector<int>&nums){
-         if(idx>=nums.size()) return INT_MAX;
-        if(idx==nums.size()-1) return 0;
+         
+        if(idx>=nums.size()-1) return 0;
         if(dp[idx]!=-1) return dp[idx];
         
         
