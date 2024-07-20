@@ -63,8 +63,9 @@ public:
                 q.pop();
                 
                 for(auto &child : graph[cur_node]){
-                    if(cost[child.first] < abhi_tak_cost + child.second) continue;
-                    if(child.first == dst) ans= min(ans, abhi_tak_cost + child.second);
+                    if(cost[child.first] < abhi_tak_cost + child.second) continue;  // agar is node par phle se koi choti cost ka rasta tha to aj isse jyada cost se kun jaye vapas lauto
+                    
+                    if(child.first == dst) ans= min(ans, abhi_tak_cost + child.second); // answer utha lo agar destination yhi h isse age vaise bhi nhi jana 
                     
                     else{
                         cost[child.first]= abhi_tak_cost + child.second;
