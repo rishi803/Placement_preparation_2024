@@ -49,43 +49,38 @@ public:
         cost[src]=0;
         queue<pair<int, int>> q;                       
         q.push({src, 0});                      // q<pair<dest,initial_cost>>
-        int stops=0;
-        while(stops<=k && !q.empty()) {
-            int sz=q.size();
-            while(sz--) {
-                int cur_node=q.front().first;
-                int cur_cost=q.front().second;
+        
+        int stops= 0;
+        
+        while(!q.empty() and stops <= k){
+            
+            int sz= q.size();
+            
+            while(sz--){
+                
+                int cur_node= q.front().first;
+                int abhi_tak_cost= q.front().second;
                 q.pop();
                 
-                // if(cur_cost>cost[cur_node]) continue;
-                
-                // cost[cur_node]=cur_cost;
-                for(auto &child : graph[cur_node]) {                  // TRAVERSING EACH CHILD OF CUR NODE
-                    // if(child.second+cur_cost>ans) continue;
-                   
-                    // cout<<child.first<<" "<<child.second+cur_cost<<endl;
-                    if(child.second+cur_cost<cost[child.first]){             // DIJIKSTRA ALGORITHM
-                        cost[child.first]=child.second+cur_cost;
-                        q.push({child.first, cost[child.first]});
+                for(auto &child : graph[cur_node]){
+                    if(cost[child.first] < abhi_tak_cost + child.second) continue;
+                    if(child.first == dst) ans= min(ans, abhi_tak_cost + child.second);
+                    
+                    else{
+                        cost[child.first]= abhi_tak_cost + child.second;
+                        q.push({child.first, abhi_tak_cost + child.second});
                     }
                     
-                     if(child.first==dst) ans=cost[child.first];  // IF REACHED DESTINATION
                     
                 }
                 
-                // for(auto &child:graph[cur_node]){      perform same task as above
-                
-                //     if(child.second+cur_cost>cost[child.first]) continue;
-                //     cost[child.first]=child.second+cur_cost;
-                //     if(child.first==dst) ans=min(ans,cost[child.first]);
-                //     q.push({child.first,child.second+cur_cost});
-                
-                // }
             }
+            
             stops++;
+                
         }
-        if(ans==INT_MAX)
-            return -1;
+        
+        if(ans == INT_MAX) return -1;
         return ans;
     }
 };
